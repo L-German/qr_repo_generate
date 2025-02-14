@@ -15528,7 +15528,7 @@ var app;
     function initShowExamples() {
         const EXAMPLES = [
             ["Пользовательский текст", "", ErrorCorrectionLevel.LOW, 1, -1],
-            ["Kubstu", "https://kubstu.ru/", ErrorCorrectionLevel.LOW, 2, -1],
+            ["Kubstu", "https://kubstu.ru/", ErrorCorrectionLevel.MEDIUM, 2, -1],
             ["Буквенно-цифровое кодирование", "HELLO", ErrorCorrectionLevel.LOW, 1, 3],
             ["Цифровое кодирование", "0123456789", ErrorCorrectionLevel.LOW, 1, 0],
           ];
