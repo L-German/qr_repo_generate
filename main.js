@@ -15596,7 +15596,7 @@ var app;
             onChange();
             label.append(stepStr);
             let button = document.createElement("button");
-            button.textContent = "Hide";
+            button.textContent = "Спрятать";
             button.onclick = () => {
                 checkbox.checked = false;
                 onChange();
