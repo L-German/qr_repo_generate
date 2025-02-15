@@ -15719,7 +15719,7 @@ var app;
         const data = [
             ["Цифровое ", allNumeric],
             ["Буквенно-цифровое", allAlphanum],
-            ["Побайтовое ", true],
+            ["Байтовое ", true],
             ["Кандзи", allKanji],
         ];
         for (const row of data) {
