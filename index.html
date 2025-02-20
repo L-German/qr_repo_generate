@@ -280,11 +280,11 @@ article #select-best-mask td {
 		<tbody>
 			<tr>
 				<td><label for="show-example">Примеры:</label></td>
-				<td><select id="show-example"></select></td>
+				<td><select id="show-example"  class="form-control"></select></td>
 			</tr>
 			<tr>
 				<td><label for="input-text">Текстовое поле:</label></td>
-				<td><textarea id="input-text" placeholder="Введите текст"></textarea></td>
+				<td><textarea id="input-text" placeholder="Введите текст"  class="form-control"></textarea></td>
 			</tr>
 			<tr>
 				<td>Уровень коррекции:</td>
@@ -311,8 +311,9 @@ article #select-best-mask td {
 			<tr>
 				<td><label for="force-mask-pattern">Маска:</label></td>
 				<td>
-					<input type="number" min="-1" max="7" step="1" value="-1" id="force-mask-pattern"/>
+					<input style="width: 4em;" min="-1" max="7" value="-1" id="force-mask-pattern"/>
 					(−1 автоматическое определение)
+					<input style="width: 12em; position: relative; top: 10px;" type="range" class="form-range" min="-1" max="7" step="1" id="customRange4">
 				</td>
 			</tr>
 			<tr>
@@ -326,14 +327,24 @@ article #select-best-mask td {
 </form>
 <script>
     // Получаем элементы по их идентификаторам
-    const forceMinVersion = document.getElementById("force-min-version");
-    const customRange = document.getElementById("customRange3");
+	const forceMinVersion = document.getElementById("force-min-version");
+const forceMaskPattern = document.getElementById("force-mask-pattern");
 
-    // Добавляем обработчик события input для слайдера
-    customRange.addEventListener('input', function() {
-        // Обновляем значение input number в соответствии со значением слайдера
-        forceMinVersion.value = customRange.value;
-    });
+const customRange = document.getElementById("customRange3");
+const customMask = document.getElementById("customRange4");
+
+// Добавляем обработчик события input для слайдеров
+function updateInputValue(event) {
+    const slider = event.target;
+    if (slider === customRange) {
+        forceMinVersion.value = slider.value;
+    } else if (slider === customMask) {
+        forceMaskPattern.value = slider.value;
+    }
+}
+
+customRange.addEventListener('input', updateInputValue);
+customMask.addEventListener('input', updateInputValue);
 </script>
 <h2 id="Qr-code_output"></h2>
 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="output-qr-code" class="qrcode"></svg>

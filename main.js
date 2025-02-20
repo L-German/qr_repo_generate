@@ -15540,9 +15540,12 @@ var app;
             const [_, text, ecl, minVer, mask] = EXAMPLES[selectElem.selectedIndex];
             getElem("input-text").value = text;
             getElem("Qr-code_output").textContent = "QR-код " + getElem("input-text").value;
-            getElem("customRange3").value = minVer;
+           
             getInput("force-min-version").value = minVer.toString();
             getInput("force-mask-pattern").value = mask.toString();
+            
+          
+
             if (ecl == ErrorCorrectionLevel.LOW)
                 getInput("errcorlvl-low").checked = true;
             else if (ecl == ErrorCorrectionLevel.MEDIUM)
@@ -15731,7 +15734,7 @@ var app;
         let result;
         if (text.length == 0){
             result = SegmentMode.BYTE;
-            getElem("chosen-segment-mode").textContent = 'побайтовый';}
+            getElem("chosen-segment-mode").textContent = 'байтовый';}
         else if (allNumeric){
             result = SegmentMode.NUMERIC;
             getElem("chosen-segment-mode").textContent = 'цифровой';
@@ -15746,7 +15749,7 @@ var app;
             }
         else {
             result = SegmentMode.BYTE;
-            getElem("chosen-segment-mode").textContent = 'побайтовый';
+            getElem("chosen-segment-mode").textContent = 'байтовый';
             getElem("description").textContent = 'Переведем каждый символ в биты. В байтовом режиме, символы кодируются в 8, 16, 24 или 32 бита.';
             }
 
