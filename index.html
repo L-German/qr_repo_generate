@@ -329,6 +329,18 @@ article #select-best-mask td {
 				</td>
 				
 			</tr>
+			
+			<tr>
+				<td>Рамка:</td>
+				<td>
+					<div class="form-check form-switch">
+						<input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
+						<label class="form-check-label" for="flexSwitchCheckDefault">Включить</label>
+					  </div>
+				</td>
+				
+			</tr>
+
 			<tr>
 				<td></td>
 				<td>
@@ -338,32 +350,25 @@ article #select-best-mask td {
 		</tbody>
 	</table>
 </form>
-<script>
-	
-    // Получаем элементы по их идентификаторам
-	const forceMinVersion = document.getElementById("force-min-version");
-const forceMaskPattern = document.getElementById("force-mask-pattern");
 
-const customRange = document.getElementById("customRange3");
-const customMask = document.getElementById("customRange4");
-
-// Добавляем обработчик события input для слайдеров
-function updateInputValue(event) {
-    const slider = event.target;
-    if (slider === customRange) {
-        forceMinVersion.value = slider.value;
-    } else if (slider === customMask) {
-        forceMaskPattern.value = slider.value;
-    }
-}
-
-customRange.addEventListener('input', updateInputValue);
-customMask.addEventListener('input', updateInputValue);
-</script>
 <h2 id="Qr-code_output"></h2>
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="output-qr-code" class="qrcode"></svg>
+<!--<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="output-qr-code" class="qrcode"></svg>-->
+<canvas id="qrcode-canvas" style="background-color:#E8E8E8"></canvas>
 <hr/>
+<script>
+	document.addEventListener('DOMContentLoaded', function() {
+    const checkbox = document.getElementById('flexSwitchCheckDefault');
+    const canvas = document.getElementById('qrcode-canvas');
 
+    checkbox.addEventListener('change', function() {
+        if (checkbox.checked) {
+            canvas.style.padding = '1em'; // Добавляем отступ
+        } else {
+            canvas.style.padding = '0'; // Убираем отступ
+        }
+    });
+});
+</script>
 <h2>Пошаговый процесс генерации QR-кода</h2>
 <p id="show-hide-steps" style="max-width:unset">Показать/спрятать шаг: </p>
 <section>
@@ -760,6 +765,8 @@ customMask.addEventListener('input', updateInputValue);
 
 <script src="res/jscolor.min.js"></script>
 <script src="main.js" async="async"></script>
+<script src="qrcodegen.js"></script>
+<script src="qr_generate.js"></script>
 <script>window.dataLayer=window.dataLayer||[]; function gtag(){dataLayer.push(arguments);} gtag("js",new Date()); gtag("config","UA-23532931-1");</script>
 </body>
 </html>

@@ -1,7 +1,7 @@
-let app
+let app1
 
 
-;(function(_app) {
+;(function(_app1) {
   function initialize() {
     
     
@@ -29,11 +29,17 @@ let app
       } else if (slider === customMask) {
         forceMaskPattern.value = slider.value;
       }
-      redrawQrCode(); // Вызов функции перерисовки QR-кода
+      //redrawQrCode(); // Вызов функции перерисовки QR-кода
     }
     
     customRange.addEventListener('input', updateInputValue);
     customMask.addEventListener('input', updateInputValue);
+
+    const generateButton = document.querySelector('button[type="submit"]');
+    generateButton.addEventListener('click', function(event) {
+      event.preventDefault(); // Отменяем стандартное поведение кнопки
+      redrawQrCode(); // Вызываем функцию перерисовки QR-кода
+    });
   }
 
 
@@ -165,7 +171,7 @@ let app
     redrawQrCode()
   }
 
-  _app.handleVersionMinMax = handleVersionMinMax
+  _app1.handleVersionMinMax = handleVersionMinMax
 
   function getElem(id) {
     const result = document.getElementById(id)
@@ -180,4 +186,4 @@ let app
   }
 
   initialize()
-})(app || (app = {}))
+})(app1 || (app1 = {}))
