@@ -9,8 +9,7 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1"/>
 	<link rel="stylesheet" href="res/bootstrap.min.css">
 	<link rel="stylesheet" href="res/style/style.css" type="text/css"/>
-	<link rel="preload" href="res/style/avenir-lt-std-roman.otf" as="font" type="font/otf" crossorigin="crossorigin"/>
-	<link rel="canonical" href="https://www.nayuki.io/page/creating-a-qr-code-step-by-step"/>
+	
 	<script src="res/bootstrap.bundle.min.js"></script>
 	<script type="text/javascript" src="/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=2DxnEIGubVDa65OvDVn1ABADiywUbO6_ZSAfn4NBslGZt-Z-lf6xAQo6XxGxu4KRc_6sKs5D1yQyHCsHaDo6jGXrL1oUx-c-CscCEQo90zQ" charset="UTF-8"></script><link rel="stylesheet" crossorigin="anonymous" href="/E3E8934C-235A-4B0E-825A-35A08381A191/abn/main.css?attr=aHR0cHM6Ly93d3cubmF5dWtpLmlvL3BhZ2UvY3JlYXRpbmctYS1xci1jb2RlLXN0ZXAtYnktc3RlcA"/><style type="text/css">
 article #input-table {
@@ -59,7 +58,6 @@ article #show-hide-steps label > input[type=checkbox] {
 	margin-right: 0.2em;
 }
 /*-- Common --*/
-
 article section {
 	margin-top: 1.0em;
 	padding: 1.0em 1.5em;
@@ -305,7 +303,7 @@ article #select-best-mask td {
 				<td>
 					<input style="width: 4em;" min="1" max="40"  value="1" id="force-min-version"/>
 					(от 1 до 40)
-					<input style="width: 12em; position: relative; top: 10px;" type="range" class="form-range" min="1" max="40" step="1" id="customRange3">
+					<input style="width: 12em; position: relative; top: 10px;" type="range" class="form-range" min="1" max="40" step="1" value="2" id="customRange3">
 				</td>
 			</tr>
 			<tr>
@@ -313,8 +311,23 @@ article #select-best-mask td {
 				<td>
 					<input style="width: 4em;" min="-1" max="7" value="-1" id="force-mask-pattern"/>
 					(−1 автоматическое определение)
-					<input style="width: 12em; position: relative; top: 10px;" type="range" class="form-range" min="-1" max="7" step="1" id="customRange4">
+					<input style="width: 12em; position: relative; top: 10px;" type="range" class="form-range" min="-1" max="7" step="1" value="-1" id="customRange4">
 				</td>
+			</tr>
+			<tr>
+				<td>Цвет фона:</td>
+				<td>
+					<input type="text" value="#FFFFFF" data-jscolor="{}" id="light-color-input" style="width:8em">
+					
+				</td>
+				
+			</tr>
+			<tr>
+				<td>Цвет модулей:</td>
+				<td>
+					<input type="text" value="#000000" data-jscolor="{}" id="dark-color-input" style="width:8em">
+				</td>
+				
 			</tr>
 			<tr>
 				<td></td>
@@ -326,6 +339,7 @@ article #select-best-mask td {
 	</table>
 </form>
 <script>
+	
     // Получаем элементы по их идентификаторам
 	const forceMinVersion = document.getElementById("force-min-version");
 const forceMaskPattern = document.getElementById("force-mask-pattern");
@@ -596,16 +610,16 @@ customMask.addEventListener('input', updateInputValue);
 	<p>Данные про все блоки:</p>
 	<table id="block-stats">
 		<tbody>
-			<tr><td>Number of data codewords:      </td><td></td></tr>
+			<tr><td>Блоков данных:      </td><td></td></tr>
 			<tr><td>Количество блоков:              </td><td></td></tr>
-			<tr><td>Data codewords per short block:</td><td></td></tr>
-			<tr><td>Data codewords per long block: </td><td></td></tr>
-			<tr><td>ECC codewords per any block:   </td><td></td></tr>
+			<tr><td>Кол-во данных в коротком блоке:</td><td></td></tr>
+			<tr><td>Кол-во данных в длинном блоке: </td><td></td></tr>
+			<tr><td>Блоков коррекции:   </td><td></td></tr>
 			<tr><td>Коротких блоков:        </td><td></td></tr>
 			<tr><td>Длинных блоков:         </td><td></td></tr>
 		</tbody>
 	</table>
-	<p>Split the sequence of data codewords (green background) into short and long blocks; then for each block, compute the ECC codewords (blue) and append them to the end of the block:</p>
+<!-- <p>Split the sequence of data codewords (green background) into short and long blocks; then for each block, compute the ECC codewords (blue) and append them to the end of the block:</p>-->
 	<div style="overflow-x:auto">
 		<table id="blocks-and-ecc" class="possibly-long">
 			<thead>
@@ -744,7 +758,7 @@ customMask.addEventListener('input', updateInputValue);
 </div>
 
 
-
+<script src="res/jscolor.min.js"></script>
 <script src="main.js" async="async"></script>
 <script>window.dataLayer=window.dataLayer||[]; function gtag(){dataLayer.push(arguments);} gtag("js",new Date()); gtag("config","UA-23532931-1");</script>
 </body>

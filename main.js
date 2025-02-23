@@ -15934,7 +15934,7 @@ var app;
             let tbody = clearChildren("#blocks-and-ecc tbody");
             let verticalTh = document.createElement("th");
             verticalTh.rowSpan = shortBlockLen; // Not final value; work around Firefox bug
-            let div = appendNewElem(verticalTh, "div", "Codeword index within block");
+            let div = appendNewElem(verticalTh, "div", "Индекс");
             for (let i = 0; i < shortBlockLen + 1; i++) {
                 const isDataRow = i < shortBlockLen + 1 - blockEccLen;
                 let tr = appendNewElem(tbody, "tr");
