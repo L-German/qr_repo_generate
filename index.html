@@ -67,7 +67,7 @@ article section {
 }
 article section > button:first-child {
 	float: right;
-	margin-left: 2.5em;
+	margin-left: 3.5em;
 	margin-bottom: 1.5em;
 }
 article section > h3 {
@@ -356,13 +356,13 @@ article #select-best-mask td {
 			<tr>
 				<td></td>
 				<td>
-					<button type="submit" class="btn btn-primary" id="generateButton" style="width: 12em; font-size: 1rem;">Сгенерировать код</button>
+					<button type="submit" class="btn btn-primary" id="generateButton" style=" font-size: 1rem;">Сгенерировать код</button>
 				</td>
 			</tr>
 			<tr>
 				<td></td>
 				<td>
-					<button type="button" class="btn btn-primary" id="scanButton" style="width: 12em; font-size: 1rem;">Сканировать код</button>
+					<button type="button" class="btn btn-primary" id="scanButton" style=" font-size: 1rem;">Сканировать код</button>
 				</td>
 			</tr>
 		</tbody>
@@ -371,7 +371,17 @@ article #select-best-mask td {
 
 <h2 id="Qr-code_output"></h2>
 <!--<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="output-qr-code" class="qrcode"></svg>-->
+
 <canvas id="qrcode-canvas" style="background-color:#E8E8E8"></canvas>
+
+
+	
+	
+		<button style="margin-right: 90em;" id="download-btn" class="btn btn-outline-primary">Скачать <img width="58" height="58" src="https://img.icons8.com/external-sbts2018-outline-color-sbts2018/58/external-png-basic-ui-elements-2.2-sbts2018-outline-color-sbts2018.png" alt="external-png-basic-ui-elements-2.2-sbts2018-outline-color-sbts2018"/></button>
+		
+		
+	
+
 
 <div id="reader" ></div>
 
@@ -385,7 +395,7 @@ document.getElementById('generateButton').addEventListener('click', function() {
 	// Показываем элементы для генерации QR-кода
 	document.getElementById('Qr-code_output').style.display = 'block';
 	document.getElementById('qrcode-canvas').style.display = 'block';
-
+	document.getElementById('download-btn').style.display = 'block';
 	// Скрываем элементы для сканирования
 	document.getElementById('reader').style.display = 'none';
 	document.getElementById('result').style.display = 'none';
@@ -401,11 +411,11 @@ document.getElementById('scanButton').addEventListener('click', function() {
 	// Показываем элементы для сканирования
 	document.getElementById('reader').style.display = 'block';
 	document.getElementById('result').style.display = 'block';
-
+	
 	// Скрываем элементы для генерации
 	document.getElementById('Qr-code_output').style.display = 'none';
 	document.getElementById('qrcode-canvas').style.display = 'none';
-
+	document.getElementById('download-btn').style.display = 'none';
 	// Инициализация сканера
 	scanner = new Html5QrcodeScanner('reader', { 
 		qrbox: {
@@ -433,7 +443,28 @@ function error(err) {
 	console.error(err);
 	// Выводим ошибки в консоль
 }
-	
+
+const canvas = document.getElementById('qrcode-canvas');
+const ctx = canvas.getContext('2d');
+
+// Пример рисования на canvas (вы можете заменить это своим QR-кодом)
+ctx.fillStyle = 'blue';
+ctx.fillRect(50, 50, 200, 200);
+
+// Функция для скачивания изображения
+document.getElementById('download-btn').addEventListener('click', function() {
+    // Получаем текст из textarea
+    const inputText = document.getElementById('input-text').value.trim();
+    
+    // Если текст пустой, используем стандартное имя файла
+    const fileName = inputText ? `QR_${inputText}.png` : 'qrcode.png';
+
+    // Создаем ссылку для скачивания
+    const link = document.createElement('a');
+    link.download = fileName; // Имя файла
+    link.href = canvas.toDataURL(); // Получаем изображение в формате PNG
+    link.click(); // Симулируем клик по ссылке
+});
 
 	document.addEventListener('DOMContentLoaded', function() {
     const checkbox = document.getElementById('flexSwitchCheckDefault');
@@ -449,7 +480,7 @@ function error(err) {
 });
 </script>
 <h2>Пошаговый процесс генерации QR-кода</h2>
-<p id="show-hide-steps" style="max-width:unset">Показать/спрятать шаг: </p>
+
 <section>
 	<h3>0. Анализ текста</h3>
 	<p>Количество символов в текстовом поле: <span id="num-code-points"></span></p>
@@ -574,7 +605,7 @@ function error(err) {
 		<li><p >Количество данных — это количество кодируемых символов, а для 
 			побайтового — количество байт. <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal">Зависит кодировки и версии</a></p></li>
 		
-		<li><p>Терминатор в QR-коде — это битовый шаблон, состоящий из нулевых битов, используемый для индикации окончания двоичной строки, представляющей данные.</p></li>
+		<li><p>Терминатор в QR-коде — это битовый шаблон, состоящий из нулей, используемый для индикации окончания двоичной строки, представляющей данные.</p></li>
 		<li><p>Дополнение битами составляет от нуля до семи «нулевых» битов для заполнения всех неиспользуемых битов в последнем байте.</p></li>
 		<li><p>Дополнение байтами состоит из чередующихся (в шестнадцатеричном формате)  <span class="binary-value">EC</span> и <span class="binary-value">11</span> до достижения максимальной ёмкости.</p></li>
 	</ul>

@@ -13993,30 +13993,8 @@ var app;
     }
     function initShowHideSteps() {
         let headings = document.querySelectorAll("article section h3");
-        let showHideP = getElem("show-hide-steps");
-        for (let heading of headings) {
-            let parent = heading.parentNode;
-            const stepStr = /^\d+(?=\. )/.exec(heading.textContent)[0];
-            let label = appendNewElem(showHideP, "label");
-            let checkbox = appendNewElem(label, "input");
-            checkbox.type = "checkbox";
-            checkbox.checked = true;
-            checkbox.id = "step" + stepStr;
-            let onChange = () => {
-                parent.hidden = !checkbox.checked;
-                label.classList.toggle("checked", checkbox.checked);
-            };
-            checkbox.onchange = onChange;
-            onChange();
-            label.append(stepStr);
-            let button = document.createElement("button");
-            button.textContent = "Спрятать";
-            button.onclick = () => {
-                checkbox.checked = false;
-                onChange();
-            };
-            parent.insertBefore(button, heading);
-        }
+       // let showHideP = getElem("show-hide-steps");
+        
     }
     let maskShower;
     (function (maskShower) {
