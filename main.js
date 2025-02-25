@@ -13927,6 +13927,7 @@ var app;
         initShowHideSteps();
         initShowExamples();
        // alert("1");
+       getElem("Qr-code_output").textContent = "QR-код " + getElem("input-text").value;
          getElem("input-text").addEventListener("input", doGenerate);
          getElem("force-min-version").addEventListener("input", doGenerate);
          
@@ -13973,6 +13974,8 @@ var app;
                 getInput("errcorlvl-quartile").checked = true;
             else if (ecl == ErrorCorrectionLevel.HIGH)
                 getInput("errcorlvl-high").checked = true;    
+
+            getElem("Qr-code_output").textContent = "QR-код " + getElem("input-text").value;
             doGenerate();
             
         }
@@ -14060,6 +14063,7 @@ var app;
     const generateButton = document.querySelector('button[type="submit"]');
     generateButton.addEventListener('click', function(event) {
       event.preventDefault(); // Отменяем стандартное поведение кнопки
+      getElem("Qr-code_output").textContent = "QR-код " + getElem("input-text").value;
       doGenerate(); // Вызываем функцию перерисовки QR-кода
     });
 
@@ -14070,6 +14074,7 @@ var app;
         //alert(parseInt(getInput("force-min-version").value, 10));
         const minVer = parseInt(getInput("force-min-version").value, 10);
         const forceMask = parseInt(getInput("force-mask-pattern").value, 10);
+       
         let errCorrLvl;
         if (getInput("errcorlvl-low").checked)
             errCorrLvl = ErrorCorrectionLevel.LOW;
@@ -14107,6 +14112,7 @@ var app;
         getInput("customRange3").value=version
        
     }
+    getElem("Qr-code_output").textContent = "QR-код " + getElem("input-text").value;
     app.doGenerate = doGenerate;
     function doStep0(text) {
         getElem("num-code-points").textContent = text.length.toString();

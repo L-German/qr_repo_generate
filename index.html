@@ -9,7 +9,8 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1"/>
 	<link rel="stylesheet" href="res/bootstrap.min.css">
 	<link rel="stylesheet" href="res/style/style.css" type="text/css"/>
-	
+	<script src="html5-qrcode.js"></script>
+
 	<script src="res/bootstrap.bundle.min.js"></script>
 	<script type="text/javascript" src="/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=2DxnEIGubVDa65OvDVn1ABADiywUbO6_ZSAfn4NBslGZt-Z-lf6xAQo6XxGxu4KRc_6sKs5D1yQyHCsHaDo6jGXrL1oUx-c-CscCEQo90zQ" charset="UTF-8"></script><link rel="stylesheet" crossorigin="anonymous" href="/E3E8934C-235A-4B0E-825A-35A08381A191/abn/main.css?attr=aHR0cHM6Ly93d3cubmF5dWtpLmlvL3BhZ2UvY3JlYXRpbmctYS1xci1jb2RlLXN0ZXAtYnktc3RlcA"/><style type="text/css">
 article #input-table {
@@ -261,6 +262,13 @@ article table.dark-light-balance td:nth-child(2) {
 article #select-best-mask td {
 	text-align: right;
 }
+#reader {
+        width: 400px;
+    }
+    #result {
+        text-align: center;
+        font-size: 1.5rem;
+    }
 </style>
 </head>
 
@@ -274,6 +282,7 @@ article #select-best-mask td {
 
 <h2>Ввод данных:</h2>
 <form onsubmit="event.preventDefault(); app.doGenerate();">
+	
 	<table id="input-table" class="noborder">
 		<tbody>
 			<tr>
@@ -347,13 +356,13 @@ article #select-best-mask td {
 			<tr>
 				<td></td>
 				<td>
-					<button type="submit" class="btn btn-primary">Сгенерировать код</button>
+					<button type="submit" class="btn btn-primary" id="generateButton" style="width: 12em; font-size: 1rem;">Сгенерировать код</button>
 				</td>
 			</tr>
 			<tr>
 				<td></td>
 				<td>
-					<!--<button type="submit" class="btn btn-primary">Сканирование кода</button>-->
+					<button type="button" class="btn btn-primary" id="scanButton" style="width: 12em; font-size: 1rem;">Сканировать код</button>
 				</td>
 			</tr>
 		</tbody>
@@ -363,8 +372,69 @@ article #select-best-mask td {
 <h2 id="Qr-code_output"></h2>
 <!--<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="output-qr-code" class="qrcode"></svg>-->
 <canvas id="qrcode-canvas" style="background-color:#E8E8E8"></canvas>
+
+<div id="reader" ></div>
+
+<div id="result"></div>
 <hr/>
 <script>
+	  let scanner;
+
+// Обработчик для кнопки "Сгенерировать код"
+document.getElementById('generateButton').addEventListener('click', function() {
+	// Показываем элементы для генерации QR-кода
+	document.getElementById('Qr-code_output').style.display = 'block';
+	document.getElementById('qrcode-canvas').style.display = 'block';
+
+	// Скрываем элементы для сканирования
+	document.getElementById('reader').style.display = 'none';
+	document.getElementById('result').style.display = 'none';
+
+	// Здесь можно добавить логику генерации QR-кода
+	// Например, установить текст в Qr-code_output
+	document.getElementById('Qr-code_output').innerText = '';
+	// Добавьте код для генерации QR-кода на canvas
+});
+
+// Обработчик для кнопки "Сканирование кода"
+document.getElementById('scanButton').addEventListener('click', function() {
+	// Показываем элементы для сканирования
+	document.getElementById('reader').style.display = 'block';
+	document.getElementById('result').style.display = 'block';
+
+	// Скрываем элементы для генерации
+	document.getElementById('Qr-code_output').style.display = 'none';
+	document.getElementById('qrcode-canvas').style.display = 'none';
+
+	// Инициализация сканера
+	scanner = new Html5QrcodeScanner('reader', { 
+		qrbox: {
+			width: 250,
+			height: 250,
+		},
+		fps: 20,
+	});
+
+	// Запускаем сканер
+	scanner.render(success, error);
+});
+
+function success(result) {
+	document.getElementById('result').innerHTML = `
+		Результат: <a href="${result}" target="_blank">${result}</a>
+	`;
+	
+	
+	// Останавливаем сканер
+	scanner.clear();
+}
+
+function error(err) {
+	console.error(err);
+	// Выводим ошибки в консоль
+}
+	
+
 	document.addEventListener('DOMContentLoaded', function() {
     const checkbox = document.getElementById('flexSwitchCheckDefault');
     const canvas = document.getElementById('qrcode-canvas');
@@ -384,7 +454,7 @@ article #select-best-mask td {
 	<h3>0. Анализ текста</h3>
 	<p>Количество символов в текстовом поле: <span id="num-code-points"></span></p>
 	<p>Информация о каждом символе и его возможной кодировке:</p>
-	<table id="character-analysis" class="possibly-long"  >
+	<table id="character-analysis" class="possibly-long table table-striped"  >
 		<thead>
 			<tr>
 				<th>Индекс</th>
@@ -399,7 +469,7 @@ article #select-best-mask td {
 		<tbody></tbody>
 	</table>
 	<p>Может ли каждый символ быть закодирован:</p>
-	<table id="character-mode-summary">
+	<table id="character-mode-summary" class= "table table-striped">
 		<thead>
 			<tr>
 				<th>Кодирование</th>
@@ -414,7 +484,7 @@ article #select-best-mask td {
 <section>
 	<h3>1. Создание сегмента данных</h3>
 	<p id="description">Переведем каждый символ в двоичное число. For numeric and alphanumeric modes, consecutive characters are grouped together before being encoded into bits. </p>
-	<table id="data-segment-chars" class="possibly-long">
+	<table id="data-segment-chars" class="possibly-long table table-striped">
 		<thead>
 			<tr>
 				<th>Индех</th>
@@ -468,7 +538,7 @@ article #select-best-mask td {
 	
 	<!--<p>(Note: A codeword is defined as 8 bits, also known as a byte.)</p>-->
 	<p>Ёмкость QR-кода в кодовых словах для каждой версии и уровня исправления ошибок, а также соответствие данных (зелёный/красный фон):</p>
-	<table id="codewords-per-version" class="possibly-long">
+	<table id="codewords-per-version" class="possibly-long table table-striped">
 		<thead>
 			<tr>
 				<th>Версия</th>
@@ -487,7 +557,7 @@ article #select-best-mask td {
 <section>
 	<h3>3. Объединение строк </h3>
 	<!--<p>Добавление служебной информации:</p>-->
-	<table id="segment-and-padding-bits">
+	<table id="segment-and-padding-bits" class="table table-striped">
 		<thead>
 			<tr>
 				<th>Поле</th>
@@ -622,7 +692,7 @@ article #select-best-mask td {
 <section>
 	<h3>4. Разбиение на блоки</h3>
 	<p>Данные про все блоки:</p>
-	<table id="block-stats">
+	<table id="block-stats"  class="table table-striped">
 		<tbody>
 			<tr><td>Блоков данных:      </td><td></td></tr>
 			<tr><td>Количество блоков:              </td><td></td></tr>
@@ -695,7 +765,7 @@ article #select-best-mask td {
 	<p> <strong>Шаблон маски</strong> (влияет только на нефункциональные модули):</p>
 	
 	<p>Если модуль маски черный, то при наложение темный модуль QR-кода становиться белым, белый модуль - черным.<a href="" data-bs-toggle="modal" data-bs-target="#exampleModal3"> Операция XOR </a>:</p>
-	<table>
+	<table  class="table table-striped">
 		<tr>
 			<th style="text-align: center;">Шаблон маски:</th>
 			<th><svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="mask-pattern" class="qrcode"></svg></th>
@@ -730,7 +800,7 @@ article #select-best-mask td {
 	<p>Вертикальные поисковые узоры:</p>
 	<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="vertical-false-finders" class="qrcode"></svg>
 	<p>Характеристика маски:</p>
-	<table id="dark-light-balance" class="section-bottom">
+	<table id="dark-light-balance" class="section-bottom table table-striped">
 		<tbody>
 			<tr><td>Длина стороны:        </td><td></td></tr>
 			<tr><td>Общее количество модулей:	      </td><td></td></tr>
@@ -744,7 +814,7 @@ article #select-best-mask td {
 
 <section>
 	<h3>9. Выбор лучшей маски</h3>
-	<table>
+	<table  class="table table-striped">
 		<thead>
 			<tr>
 				<th>№ Маски</th>
