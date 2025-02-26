@@ -345,54 +345,83 @@
 		}
 
 		#character-analysis {
-    width: 100%; /* Заставляем таблицу занимать 100% ширины контейнера */
-    overflow-x: auto; /* Добавляем прокрутку по горизонтали, если таблица слишком широка */
-}
+			width: 100%;
+			/* Заставляем таблицу занимать 100% ширины контейнера */
+			overflow-x: auto;
+			/* Добавляем прокрутку по горизонтали, если таблица слишком широка */
+		}
 
-@media (max-width: 768px) {
-	#character-analysis th:nth-child(1),
-    #character-analysis td:nth-child(1) {
-        display: none; /* Скрываем первый столбец (Индекс) */
-    }
-	#codewords-per-version th, #href_vers{
-		font-size: 0.92em;
-	}
-	#segment-and-padding-bits{
-		
-		vertical-align: middle;
-		font-size: 0.85em;
-	}
-	#mask_table th{
-		font-size: 0.95em;
-	}
-    #mask_table svg.qrcode {
-      
-			display: inline-flex;
-			width: 12em;
-			height: 12em;
-		
-    }
-	#mask_compare_table th{
-		
-		font-size: 0.6em;
-	}
-	.modal-content {
-                width: 90%; /* Уменьшаем ширину модального окна */
-                font-size: 0.9rem; /* Уменьшаем размер шрифта */
-            }
-}
-.modal-dialog {
-    position: relative;
-    top: 10%; /* Отступ сверху */
-    left: 10%; /* Центрирование по горизонтали */
-    transform: translateX(-50%); /* Смещение на половину ширины окна */
-}
-.modal-content {
-                width: 90%; /* Уменьшаем ширину модального окна */
-            }
-            .modal-title {
-                font-size: 1.2rem; /* Уменьшаем размер шрифта заголовка */
-            }
+		@media (max-width: 768px) {
+
+			#character-analysis th:nth-child(1),
+			#character-analysis td:nth-child(1) {
+				display: none;
+				/* Скрываем первый столбец (Индекс) */
+			}
+
+			#codewords-per-version th,
+			#href_vers {
+				font-size: 0.92em;
+			}
+
+			#segment-and-padding-bits {
+
+				vertical-align: middle;
+				font-size: 0.85em;
+			}
+
+			#mask_table th {
+				font-size: 0.95em;
+			}
+
+			#mask_table svg.qrcode {
+
+				display: inline-flex;
+				width: 12em;
+				height: 12em;
+
+			}
+
+			#mask_compare_table th {
+
+				font-size: 0.6em;
+			}
+
+			.modal-content {
+				width: 90%;
+				/* Уменьшаем ширину модального окна */
+				font-size: 0.9rem;
+				/* Уменьшаем размер шрифта */
+			}
+
+			#modal_table {
+				font-size: 0.9em;
+			}
+
+			
+
+
+		}
+
+		.modal-dialog {
+			position: relative;
+			top: 10%;
+			/* Отступ сверху */
+			left: 10%;
+			/* Центрирование по горизонтали */
+			transform: translateX(-50%);
+			/* Смещение на половину ширины окна */
+		}
+
+		.modal-content {
+			width: 90%;
+			/* Уменьшаем ширину модального окна */
+		}
+
+		.modal-title {
+			font-size: 1.2rem;
+			/* Уменьшаем размер шрифта заголовка */
+		}
 	</style>
 </head>
 
@@ -586,19 +615,33 @@
 					ctx.fillStyle = 'blue';
 					ctx.fillRect(50, 50, 200, 200);
 
-					// Функция для скачивания изображения
 					document.getElementById('download-btn').addEventListener('click', function () {
-						// Получаем текст из textarea
-						const inputText = document.getElementById('input-text').value.trim();
+    // Получаем текст из textarea
+    const inputText = document.getElementById('input-text').value.trim();
 
-						// Если текст пустой, используем стандартное имя файла
-						const fileName = inputText ? `QR_${inputText}.png` : 'qrcode.png';
+    // Если текст пустой, используем стандартное имя файла
+    const fileName = inputText ? `QR_${inputText}.png` : 'qrcode.png';
 
-						// Получаем изображение в формате PNG
-						canvas.toBlob(function (blob) {
-							saveAs(blob, fileName); // Используем FileSaver.js для сохранения файла
-						}, 'image/png');
-					});
+    // Получаем изображение в формате PNG
+    canvas.toBlob(function (blob) {
+        // Создаем ссылку для скачивания
+        const link = document.createElement('a');
+        link.href = URL.createObjectURL(blob);
+        link.download = fileName;
+
+        // Добавляем ссылку в DOM (необходимо для некоторых браузеров)
+        document.body.appendChild(link);
+
+        // Имитируем клик по ссылке
+        link.click();
+
+        // Удаляем ссылку из DOM
+        document.body.removeChild(link);
+
+        // Освобождаем объект URL
+        URL.revokeObjectURL(link.href);
+    }, 'image/png');
+});
 
 					document.addEventListener('DOMContentLoaded', function () {
 						const checkbox = document.getElementById('flexSwitchCheckDefault');
@@ -833,74 +876,64 @@
 
 					<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
 						aria-hidden="true">
-						<div class="modal-dialog">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h5 class="modal-title" id="exampleModalLabel">Длина поля количества данных</h5>
-									<button type="button" class="btn-close" data-bs-dismiss="modal"
-										aria-label="Close"></button>
-								</div>
-								<div class="modal-body">
-									<table>
-										<tbody>
-											<tr>
-												<td>Кодировка</td>
-												<td>Версия 1–9</td>
-												<td>Версия 10–26</td>
-												<td>Версия 27–40</td>
-											</tr>
-											<tr>
-												<td>Цифровое</td>
-												<td>10 бит</td>
-												<td>12 бит</td>
-												<td>14 бит</td>
-											</tr>
-											<tr>
-												<td>Буквенно-цифровое</td>
-												<td>9 бит</td>
-												<td>11 бит</td>
-												<td>13 бит</td>
-											</tr>
-											<tr>
-												<td>Байтовое</td>
-												<td>8 бит</td>
-												<td>16 бит</td>
-												<td>16 бит</td>
-											</tr>
-										</tbody>
-									</table>
-								</div>
+						<div class="modal-dialog modal-dialog-centered">
+							<div class="modal-dialog"
+								style="position: absolute;width: 350px; left: 50%;top: 30%; transform: translate(-50%, -30%);">
+								<div class="modal-content">
+									<div class="modal-header">
+										<h5 class="modal-title" id="exampleModalLabel">Длина поля количества данных</h5>
+										<button type="button" class="btn-close" data-bs-dismiss="modal"
+											aria-label="Close"></button>
+									</div>
+									<div class="modal-body">
+										<div class="table-responsive">
+											<table id="modal_table">
+												<tbody>
+													<tr>
+														<td>Кодировка</td>
+														<td>Версия 1–9</td>
+														<td>Версия 10–26</td>
+														<td>Версия 27–40</td>
+													</tr>
+													<tr>
+														<td>Цифровое</td>
+														<td>10 бит</td>
+														<td>12 бит</td>
+														<td>14 бит</td>
+													</tr>
+													<tr>
+														<td>Буквенно-цифровое</td>
+														<td>9 бит</td>
+														<td>11 бит</td>
+														<td>13 бит</td>
+													</tr>
+													<tr>
+														<td>Байтовое</td>
+														<td>8 бит</td>
+														<td>16 бит</td>
+														<td>16 бит</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
+									</div>
 
+								</div>
 							</div>
 						</div>
 					</div>
-					<div class="modal fade" id="exampleModal2" tabindex="-1" aria-labelledby="exampleModalLabel"
-						aria-hidden="true">
-						<div class="modal-dialog"  style="position: absolute; left: 50%;top: 30%; transform: translate(-50%, -30%);">
-							<div class="modal-content" style="width: 600px;">
-								<div class="modal-header" ">
-		  <h5 class=" modal-title" id="exampleModalLabel">Из чего состоит QR-код:</h5>
-									<button type="button" class="btn-close" data-bs-dismiss="modal"
-										aria-label="Close"></button>
-								</div>
-								<div class="modal-body">
-									<img src="res/qr-code.png" alt="">
-								</div>
-
-							</div>
-						</div>
-					</div>
+					
 					<div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel"
 						aria-hidden="true">
-						<div class="modal-dialog" style="position: absolute; left: 50%;top: 30%; transform: translate(-50%, -30%);">
-							<div class="modal-content " >
+						<div class="modal-dialog"
+							style="position: absolute; left: 50%;top: 30%; transform: translate(-50%, -30%);">
+							<div class="modal-content ">
 								<div class="modal-header" ">
-		  <h5 class=" modal-title" id="exampleModalLabel" >Исключающее ИЛИ:</h5>
+		  <h5 class=" modal-title" id="exampleModalLabel">Исключающее ИЛИ:</h5>
 									<button type="button" class="btn-close" data-bs-dismiss="modal"
 										aria-label="Close"></button>
 								</div>
-								<div class="modal-body" 
-									style="display: flex; justify-content: center;">
+								<div class="modal-body" style="display: flex; justify-content: center;">
 									<table style="text-align: center; ">
 										<tbody>
 											<tr>
@@ -938,10 +971,10 @@
 
 					<div class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel"
 						aria-hidden="true">
-						<div class="modal-dialog-centered">
+						<div class="modal-dialog">
 							<div class="modal-content" style="width: 300px;">
-								<div class="modal-header" ">
-		  <h5 class=" modal-title" id="exampleModalLabel">Сочетание ЧБЧЧЧБЧ:</h5>
+								<div class="modal-header">
+									<h5 class=" modal-title" id="exampleModalLabel">Сочетание ЧБЧЧЧБЧ:</h5>
 									<button type="button" class="btn-close" data-bs-dismiss="modal"
 										aria-label="Close"></button>
 								</div>
@@ -1034,21 +1067,19 @@
 						<div id="panelsStayOpen-collapseSix" class="accordion-collapse collapse show"
 							aria-labelledby="panelsStayOpen-headingSix">
 							<div class="accordion-body">
-								<p> Нарисуем горизонтальные и вертикальные <a href="" data-bs-toggle="modal"
-										data-bs-target="#exampleModal2"> <strong>полосы синхронизации</strong> </a>(в
+								<p> Нарисуем горизонтальные и вертикальные <strong>полосы синхронизации</strong> (в
 									строке 6 и
 									столбце 6, начиная с 0 в левом верхнем углу):</p>
 								<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="timing-patterns"
 									class="qrcode"></svg>
-								<p>Выделим <a href="" data-bs-toggle="modal"
-										data-bs-target="#exampleModal2"><strong>поисковые
-											узоры</strong></a> в трех углах, каждый из которых имеет размер 8×8, включая
+								<p>Выделим <strong>поисковые
+											узоры</strong> в трех углах, каждый из которых имеет размер 8×8, включая
 									разделительное поле:</p>
 								<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="finder-patterns"
 									class="qrcode"></svg>
 								<div id="alignment-patterns-container">
-									<p>Нарисуем сетку <a href="" data-bs-toggle="modal" data-bs-target="#exampleModal2">
-											<strong>выравнивающих узоров</strong></a>, каждый из которых имеет размер
+									<p>Нарисуем сетку 
+											<strong>выравнивающих узоров</strong>, каждый из которых имеет размер
 										5×5. Они
 										помогают исправлять искажения, возникающие при сканировании кода под углом или
 										на
@@ -1056,16 +1087,16 @@
 									<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="alignment-patterns"
 										class="qrcode"></svg>
 								</div>
-								<p>Разместим пустые поля (рядом с поисковыми узорами) для указания <a href=""
-										data-bs-toggle="modal" data-bs-target="#exampleModal2"> <strong>кода маски и
+								<p>Разместим пустые поля (рядом с поисковыми узорами) для указания  <strong>кода маски и
 											уровня
-											коррекции</strong></a>:</p>
+											коррекции</strong>:</p>
 								<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="dummy-format-bits"
 									class="qrcode"></svg>
 								<div id="version-information-container">
 									<p>Нарисуйте два блока 6×3 (рядом с поисковыми узорами), которые содержат
 										<strong>информацию
-											о версии</strong>:</p>
+											о версии</strong>:
+									</p>
 									<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="version-information"
 										class="qrcode"></svg>
 								</div>
@@ -1135,11 +1166,12 @@
 								<table id="mask_table" class="table table-striped">
 									<tr>
 										<th style="text-align: center; vertical-align: middle;">Шаблон маски:</th>
-										<th><svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="mask-pattern"  
+										<th><svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="mask-pattern"
 												class="qrcode"></svg></th>
 									</tr>
 									<tr>
-										<th style="text-align: center; vertical-align: middle;">Без наложения маски:</th>
+										<th style="text-align: center; vertical-align: middle;">Без наложения маски:
+										</th>
 										<th><svg xmlns="http://www.w3.org/2000/svg" version="1.1"
 												id="codewords-and-remainder1" class="qrcode"></svg></th>
 									</tr>
@@ -1183,12 +1215,14 @@
 									очка:</p>
 								<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="two-by-two-boxes"
 									class="qrcode"></svg>
-								<p>Горизонтальные последовательности<a href="" data-bs-toggle="modal" data-bs-target="#exampleModal4">
-									ЧБЧЧЧБЧ</a>:</p>
+								<p>Горизонтальные последовательности<a href="" data-bs-toggle="modal"
+										data-bs-target="#exampleModal4">
+										ЧБЧЧЧБЧ</a>:</p>
 								<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="horizontal-false-finders"
 									class="qrcode"></svg>
-								<p>Вертикальные последовательности<a href="" data-bs-toggle="modal" data-bs-target="#exampleModal4">
-									ЧБЧЧЧБЧ</a>:</p>
+								<p>Вертикальные последовательности<a href="" data-bs-toggle="modal"
+										data-bs-target="#exampleModal4">
+										ЧБЧЧЧБЧ</a>:</p>
 								<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="vertical-false-finders"
 									class="qrcode"></svg>
 								<p>Характеристика маски:</p>
@@ -1264,8 +1298,9 @@
 											по 3
 											очка.</p>
 									</li>
-									<li>Правило 3. За каждую последовательность модулей .<a href="" data-bs-toggle="modal" data-bs-target="#exampleModal4">
-										ЧБЧЧЧБЧ:</a>, с 4-мя белыми
+									<li>Правило 3. За каждую последовательность модулей .<a href=""
+											data-bs-toggle="modal" data-bs-target="#exampleModal4">
+											ЧБЧЧЧБЧ:</a>, с 4-мя белыми
 										модулями с
 										одной из сторон (или с 2-х сразу), добавляется 40 очков (по вертикали или
 										горизонтали)
