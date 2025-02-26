@@ -535,7 +535,7 @@
 				<h2 id="Qr-code_output"></h2>
 				<!--<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="output-qr-code" class="qrcode"></svg>-->
 
-				<canvas id="qrcode-canvas" style="background-color:#E8E8E8"></canvas>
+				<canvas id="qrcode-canvas" style="background-color:#E8E8E8" download="cool_pic.jpg"></canvas>
 
 				<div style="display: flex; justify-content:left">
 					<button style="width: 12em;" id="download-btn" class="btn btn-outline-primary"><img width="26"
@@ -624,22 +624,33 @@
 
     // Получаем изображение в формате PNG
     canvas.toBlob(function (blob) {
-        // Создаем ссылку для скачивания
-        const link = document.createElement('a');
-        link.href = URL.createObjectURL(blob);
-        link.download = fileName;
+        // Проверяем, поддерживается ли метод `saveAs` (например, на iOS он не поддерживается)
+        if (typeof navigator.msSaveBlob !== 'undefined') {
+            // Для Internet Explorer
+            navigator.msSaveBlob(blob, fileName);
+        } else if (typeof navigator.saveBlob !== 'undefined') {
+            // Для старых версий Safari
+            navigator.saveBlob(blob, fileName);
+        } else {
+            // Для современных браузеров и iOS
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = fileName;
 
-        // Добавляем ссылку в DOM (необходимо для некоторых браузеров)
-        document.body.appendChild(link);
+            // Открываем изображение в новой вкладке для iOS
+            if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
+                link.target = '_blank'; // Открываем в новой вкладке
+                link.click(); // Имитируем клик
+            } else {
+                // Для других устройств скачиваем файл
+                document.body.appendChild(link);
+                link.click();
+                document.body.removeChild(link);
+            }
 
-        // Имитируем клик по ссылке
-        link.click();
-
-        // Удаляем ссылку из DOM
-        document.body.removeChild(link);
-
-        // Освобождаем объект URL
-        URL.revokeObjectURL(link.href);
+            // Освобождаем объект URL
+            URL.revokeObjectURL(link.href);
+        }
     }, 'image/png');
 });
 
