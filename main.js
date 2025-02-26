@@ -13927,7 +13927,7 @@ var app;
         initShowHideSteps();
         initShowExamples();
        // alert("1");
-       getElem("Qr-code_output").textContent = "QR-код " + getElem("input-text").value;
+       getElem("Qr-code_output").textContent = getElem("input-text").value;
          getElem("input-text").addEventListener("input", doGenerate);
          getElem("force-min-version").addEventListener("input", doGenerate);
          
@@ -13948,7 +13948,7 @@ var app;
         function selectChanged() {
             const [_, text, ecl, minVer, mask] = EXAMPLES[selectElem.selectedIndex];
             getElem("input-text").value = text;
-            getElem("Qr-code_output").textContent = "QR-код " + getElem("input-text").value;
+            getElem("Qr-code_output").textContent =getElem("input-text").value;
            
             getInput("force-min-version").value = minVer.toString();
             getInput("force-mask-pattern").value = mask.toString();
@@ -13975,7 +13975,7 @@ var app;
             else if (ecl == ErrorCorrectionLevel.HIGH)
                 getInput("errcorlvl-high").checked = true;    
 
-            getElem("Qr-code_output").textContent = "QR-код " + getElem("input-text").value;
+            getElem("Qr-code_output").textContent = getElem("input-text").value;
             doGenerate();
             
         }
@@ -14041,7 +14041,7 @@ var app;
     const generateButton = document.querySelector('button[type="submit"]');
     generateButton.addEventListener('click', function(event) {
       event.preventDefault(); // Отменяем стандартное поведение кнопки
-      getElem("Qr-code_output").textContent = "QR-код " + getElem("input-text").value;
+      getElem("Qr-code_output").textContent = getElem("input-text").value;
       doGenerate(); // Вызываем функцию перерисовки QR-кода
     });
 
@@ -14090,7 +14090,7 @@ var app;
         getInput("customRange3").value=version
        
     }
-    getElem("Qr-code_output").textContent = "QR-код " + getElem("input-text").value;
+    getElem("Qr-code_output").textContent = getElem("input-text").value;
     app.doGenerate = doGenerate;
     function doStep0(text) {
         getElem("num-code-points").textContent = text.length.toString();
