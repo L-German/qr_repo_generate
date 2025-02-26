@@ -616,46 +616,30 @@
 					ctx.fillRect(50, 50, 200, 200);
 
 					document.getElementById('download-btn').addEventListener('click', function () {
-						// Получаем текст из textarea
-						const inputText = document.getElementById('input-text').value.trim();
+    const inputText = document.getElementById('input-text').value.trim();
+    const fileName = inputText ? `QR_${inputText}.png` : 'qrcode.png';
 
-						// Если текст пустой, используем стандартное имя файла
-						const fileName = inputText ? `QR_${inputText}.png` : 'qrcode.png';
+    // Получаем изображение в формате Base64
+    const imageBase64 = canvas.toDataURL('image/png');
 
-						// Получаем изображение в формате PNG
-						canvas.toBlob(function (blob) {
-							// Проверяем, поддерживается ли метод `saveAs` (например, на iOS он не поддерживается)
-							if (typeof navigator.msSaveBlob !== 'undefined') {
-								// Для Internet Explorer
-								navigator.msSaveBlob(blob, fileName);
-							} else if (typeof navigator.saveBlob !== 'undefined') {
-								// Для старых версий Safari
-								navigator.saveBlob(blob, fileName);
-							} else {
-								// Для современных браузеров и iOS
-								const link = document.createElement('a');
-								link.href = URL.createObjectURL(blob);
-								link.download = fileName;
+    // Проверяем, является ли устройство мобильным (iOS/Android)
+    const isMobile = /iPad|iPhone|iPod|Android/.test(navigator.userAgent) && !window.MSStream;
 
-								// Открываем изображение в новой вкладке для iOS
-								if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
-									link.target = '_blank'; // Открываем в новой вкладке
-									const newWindow = window.open();
-    newWindow.document.write(`<img src="${imageBase64}" alt="${fileName}" style="max-width:100%;"/>`);
-    newWindow.document.close();
-									link.click(); // Имитируем клик
-								} else {
-									// Для других устройств скачиваем файл
-									document.body.appendChild(link);
-									link.click();
-									document.body.removeChild(link);
-								}
-
-								// Освобождаем объект URL
-								URL.revokeObjectURL(link.href);
-							}
-						}, 'image/png');
-					});
+    if (isMobile) {
+        // Для мобильных устройств открываем изображение в новой вкладке
+        const newWindow = window.open();
+        newWindow.document.write(`<img src="${imageBase64}" alt="${fileName}" style="max-width:100%;"/>`);
+        newWindow.document.close();
+    } else {
+        // Для компьютеров скачиваем файл
+        const link = document.createElement('a');
+        link.href = imageBase64;
+        link.download = fileName;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
+});
 
 					document.addEventListener('DOMContentLoaded', function () {
 						const checkbox = document.getElementById('flexSwitchCheckDefault');
