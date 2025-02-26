@@ -620,26 +620,51 @@
     const fileName = inputText ? `QR_${inputText}.png` : 'qrcode.png';
 
     // Получаем изображение в формате Base64
-    canvas.toBlob(function(blob) {
-        // Проверяем, является ли устройство мобильным (iOS/Android)
-        const isMobile = /iPad|iPhone|iPod|Android/.test(navigator.userAgent) && !window.MSStream;
+    const imageBase64 = canvas.toDataURL('image/png');
 
-        if (isMobile) {
-            // Для мобильных устройств открываем изображение в новой вкладке
-            const newWindow = window.open();
-            const url = URL.createObjectURL(blob);
-            newWindow.document.write(`<img src="${url}" alt="${fileName}" style="max-width:100%;"/>`);
-            newWindow.document.close();
-        } else {
-            // Для компьютеров скачиваем файл
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = fileName;
-            document.body.appendChild(link);
-            link.click();
-            document.body.removeChild(link);
-        }
-    }, 'image/png');
+    // Проверяем, является ли устройство мобильным (iOS/Android)
+    const isMobile = /iPad|iPhone|iPod|Android/.test(navigator.userAgent) && !window.MSStream;
+
+    if (isMobile) {
+        // Для мобильных устройств отображаем изображение на текущей странице
+        const imageContainer = document.createElement('div');
+        imageContainer.style.position = 'fixed';
+        imageContainer.style.top = '0';
+        imageContainer.style.left = '0';
+        imageContainer.style.width = '100%';
+        imageContainer.style.height = '100%';
+        imageContainer.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+        imageContainer.style.display = 'flex';
+        imageContainer.style.justifyContent = 'center';
+        imageContainer.style.alignItems = 'center';
+        imageContainer.style.zIndex = '1000';
+
+        const imageElement = document.createElement('img');
+        imageElement.src = imageBase64;
+        imageElement.style.maxWidth = '90%';
+        imageElement.style.maxHeight = '90%';
+        imageElement.style.borderRadius = '10px';
+
+        // Добавляем изображение в контейнер
+        imageContainer.appendChild(imageElement);
+        document.body.appendChild(imageContainer);
+
+        // Закрываем контейнер при клике
+        imageContainer.addEventListener('click', function () {
+            document.body.removeChild(imageContainer);
+        });
+
+        // Уведомление для пользователя
+        alert('Нажмите и удерживайте изображение, чтобы сохранить его.');
+    } else {
+        // Для компьютеров скачиваем файл
+        const link = document.createElement('a');
+        link.href = imageBase64;
+        link.download = fileName;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+    }
 });
 
 
