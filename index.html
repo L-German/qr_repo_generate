@@ -620,26 +620,28 @@
     const fileName = inputText ? `QR_${inputText}.png` : 'qrcode.png';
 
     // Получаем изображение в формате Base64
-    const imageBase64 = canvas.toDataURL('image/png');
+    canvas.toBlob(function(blob) {
+        // Проверяем, является ли устройство мобильным (iOS/Android)
+        const isMobile = /iPad|iPhone|iPod|Android/.test(navigator.userAgent) && !window.MSStream;
 
-    // Проверяем, является ли устройство мобильным (iOS/Android)
-    const isMobile = /iPad|iPhone|iPod|Android/.test(navigator.userAgent) && !window.MSStream;
-
-    if (isMobile) {
-        // Для мобильных устройств открываем изображение в новой вкладке
-        const newWindow = window.open();
-        newWindow.document.write(`<img src="${imageBase64}" alt="${fileName}" style="max-width:100%;"/>`);
-        newWindow.document.close();
-    } else {
-        // Для компьютеров скачиваем файл
-        const link = document.createElement('a');
-        link.href = imageBase64;
-        link.download = fileName;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    }
+        if (isMobile) {
+            // Для мобильных устройств открываем изображение в новой вкладке
+            const newWindow = window.open();
+            const url = URL.createObjectURL(blob);
+            newWindow.document.write(`<img src="${url}" alt="${fileName}" style="max-width:100%;"/>`);
+            newWindow.document.close();
+        } else {
+            // Для компьютеров скачиваем файл
+            const link = document.createElement('a');
+            link.href = URL.createObjectURL(blob);
+            link.download = fileName;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        }
+    }, 'image/png');
 });
+
 
 					document.addEventListener('DOMContentLoaded', function () {
 						const checkbox = document.getElementById('flexSwitchCheckDefault');
