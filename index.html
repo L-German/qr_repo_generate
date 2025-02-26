@@ -398,7 +398,7 @@
 				font-size: 0.9em;
 			}
 
-			
+
 
 
 		}
@@ -616,43 +616,46 @@
 					ctx.fillRect(50, 50, 200, 200);
 
 					document.getElementById('download-btn').addEventListener('click', function () {
-    // Получаем текст из textarea
-    const inputText = document.getElementById('input-text').value.trim();
+						// Получаем текст из textarea
+						const inputText = document.getElementById('input-text').value.trim();
 
-    // Если текст пустой, используем стандартное имя файла
-    const fileName = inputText ? `QR_${inputText}.png` : 'qrcode.png';
+						// Если текст пустой, используем стандартное имя файла
+						const fileName = inputText ? `QR_${inputText}.png` : 'qrcode.png';
 
-    // Получаем изображение в формате PNG
-    canvas.toBlob(function (blob) {
-        // Проверяем, поддерживается ли метод `saveAs` (например, на iOS он не поддерживается)
-        if (typeof navigator.msSaveBlob !== 'undefined') {
-            // Для Internet Explorer
-            navigator.msSaveBlob(blob, fileName);
-        } else if (typeof navigator.saveBlob !== 'undefined') {
-            // Для старых версий Safari
-            navigator.saveBlob(blob, fileName);
-        } else {
-            // Для современных браузеров и iOS
-            const link = document.createElement('a');
-            link.href = URL.createObjectURL(blob);
-            link.download = fileName;
+						// Получаем изображение в формате PNG
+						canvas.toBlob(function (blob) {
+							// Проверяем, поддерживается ли метод `saveAs` (например, на iOS он не поддерживается)
+							if (typeof navigator.msSaveBlob !== 'undefined') {
+								// Для Internet Explorer
+								navigator.msSaveBlob(blob, fileName);
+							} else if (typeof navigator.saveBlob !== 'undefined') {
+								// Для старых версий Safari
+								navigator.saveBlob(blob, fileName);
+							} else {
+								// Для современных браузеров и iOS
+								const link = document.createElement('a');
+								link.href = URL.createObjectURL(blob);
+								link.download = fileName;
 
-            // Открываем изображение в новой вкладке для iOS
-            if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
-                link.target = '_blank'; // Открываем в новой вкладке
-                link.click(); // Имитируем клик
-            } else {
-                // Для других устройств скачиваем файл
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-            }
+								// Открываем изображение в новой вкладке для iOS
+								if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
+									link.target = '_blank'; // Открываем в новой вкладке
+									const newWindow = window.open();
+    newWindow.document.write(`<img src="${imageBase64}" alt="${fileName}" style="max-width:100%;"/>`);
+    newWindow.document.close();
+									link.click(); // Имитируем клик
+								} else {
+									// Для других устройств скачиваем файл
+									document.body.appendChild(link);
+									link.click();
+									document.body.removeChild(link);
+								}
 
-            // Освобождаем объект URL
-            URL.revokeObjectURL(link.href);
-        }
-    }, 'image/png');
-});
+								// Освобождаем объект URL
+								URL.revokeObjectURL(link.href);
+							}
+						}, 'image/png');
+					});
 
 					document.addEventListener('DOMContentLoaded', function () {
 						const checkbox = document.getElementById('flexSwitchCheckDefault');
@@ -666,6 +669,8 @@
 							}
 						});
 					});
+
+					
 				</script>
 				<h2>Пошаговый процесс генерации QR-кода</h2>
 				<div class="accordion">
@@ -933,7 +938,7 @@
 							</div>
 						</div>
 					</div>
-					
+
 					<div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel"
 						aria-hidden="true">
 						<div class="modal-dialog"
@@ -1084,23 +1089,24 @@
 								<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="timing-patterns"
 									class="qrcode"></svg>
 								<p>Выделим <strong>поисковые
-											узоры</strong> в трех углах, каждый из которых имеет размер 8×8, включая
+										узоры</strong> в трех углах, каждый из которых имеет размер 8×8, включая
 									разделительное поле:</p>
 								<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="finder-patterns"
 									class="qrcode"></svg>
 								<div id="alignment-patterns-container">
-									<p>Нарисуем сетку 
-											<strong>выравнивающих узоров</strong>, каждый из которых имеет размер
+									<p>Нарисуем сетку
+										<strong>выравнивающих узоров</strong>, каждый из которых имеет размер
 										5×5. Они
 										помогают исправлять искажения, возникающие при сканировании кода под углом или
 										на
-										неровной поверхности<span id="alignment-patterns-overlap-timing"></span>:</p>
+										неровной поверхности<span id="alignment-patterns-overlap-timing"></span>:
+									</p>
 									<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="alignment-patterns"
 										class="qrcode"></svg>
 								</div>
-								<p>Разместим пустые поля (рядом с поисковыми узорами) для указания  <strong>кода маски и
-											уровня
-											коррекции</strong>:</p>
+								<p>Разместим пустые поля (рядом с поисковыми узорами) для указания <strong>кода маски и
+										уровня
+										коррекции</strong>:</p>
 								<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="dummy-format-bits"
 									class="qrcode"></svg>
 								<div id="version-information-container">
