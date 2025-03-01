@@ -482,7 +482,14 @@
 										class="form-range" min="-1" max="7" step="1" value="-1" id="customRange4">
 								</td>
 							</tr>
-
+							<tr>
+								<td><label for="force-size">Размер:</label></td>
+								<td>
+									<input style="width: 4em;" min="1" max="8" value="5" id="force-size" />
+									(от 1 до 8)
+									<input style="width: 12em; position: relative; top: 10px;" type="range" class="form-range" min="1" max="8" step="0.5" value="5" id="customRange5">
+								</td>
+							</tr>
 							<tr>
 								<td>Рамка:</td>
 								<td>
@@ -493,7 +500,16 @@
 								</td>
 
 							</tr>
+							<tr>
+								<td>Градиент:</td>
+								<td>
+									<div class="form-check form-switch">
+										<input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault1">
+										<label class="form-check-label" for="flexSwitchCheckDefault1">Включить</label>
+									</div>
+								</td>
 
+							</tr>
 							<tr>
 								<td>Цвет фона:</td>
 								<td>
@@ -511,7 +527,15 @@
 								</td>
 
 							</tr>
+							<tr style="display: none;" id="gradient-color-row">
+								<td>Второй цвет:</td>
+								<td>
+									<input type="text" value="#000000" data-jscolor="{}" id="s_light-color-input"
+										style="width:8em">
 
+								</td>
+
+							</tr>
 
 
 							<tr>
@@ -537,7 +561,7 @@
 
 				<canvas id="qrcode-canvas" style="background-color:#E8E8E8" download="cool_pic.jpg"></canvas>
 
-				<div style="display: none; justify-content:left" >
+				<div style="display: none; justify-content:left">
 					<button style="width: 12em;" id="download-btn" class="btn btn-outline-primary"><img width="26"
 							height="26" src="https://img.icons8.com/metro/52/download.png" alt="download" />
 
@@ -552,6 +576,39 @@
 				<div id="result"></div>
 				<hr />
 				<script>
+  document.getElementById('customRange5').addEventListener('input', function () {
+            document.getElementById('force-size').value = this.value;
+        });
+
+        document.getElementById('force-size').addEventListener('input', function () {
+            document.getElementById('customRange5').value = this.value;
+        });
+
+
+					document.getElementById('flexSwitchCheckDefault1').addEventListener('change', function () {
+						const gradientColorRow = document.getElementById('gradient-color-row');
+						const secondColorInput = document.getElementById('s_light-color-input');
+
+						if (this.checked) {
+							// Если чекбокс включен, показываем строку и устанавливаем значение по умолчанию
+							gradientColorRow.style.display = 'table-row';
+							secondColorInput.value = '#000000'; // Устанавливаем значение по умолчанию
+							if (secondColorInput.jscolor) {
+								secondColorInput.jscolor.fromString('#000000');
+							}
+						} else {
+							// Если чекбокс выключен, скрываем строку и меняем значение на #FFFFFF
+							gradientColorRow.style.display = 'none';
+							secondColorInput.value = document.getElementById('dark-color-input').value; // Устанавливаем значение #FFFFFF
+							if (secondColorInput.jscolor) {
+								secondColorInput.jscolor.fromString(document.getElementById('dark-color-input').value);
+							}
+						}
+					});
+
+
+
+					
 					let scanner;
 
 					// Обработчик для кнопки "Сгенерировать код"
@@ -616,56 +673,56 @@
 					ctx.fillRect(50, 50, 200, 200);
 
 					document.getElementById('download-btn').addEventListener('click', function () {
-    const inputText = document.getElementById('input-text').value.trim();
-    const fileName = inputText ? `QR_${inputText}.png` : 'qrcode.png';
+						const inputText = document.getElementById('input-text').value.trim();
+						const fileName = inputText ? `QR_${inputText}.png` : 'qrcode.png';
 
-    // Получаем изображение в формате Base64
-    const imageBase64 = canvas.toDataURL('image/png');
+						// Получаем изображение в формате Base64
+						const imageBase64 = canvas.toDataURL('image/png');
 
-    // Проверяем, является ли устройство мобильным (iOS/Android)
-    const isMobile = /iPad|iPhone|iPod|Android/.test(navigator.userAgent) && !window.MSStream;
+						// Проверяем, является ли устройство мобильным (iOS/Android)
+						const isMobile = /iPad|iPhone|iPod|Android/.test(navigator.userAgent) && !window.MSStream;
 
-    if (isMobile) {
-        // Для мобильных устройств отображаем изображение на текущей странице
-        const imageContainer = document.createElement('div');
-        imageContainer.style.position = 'fixed';
-        imageContainer.style.top = '0';
-        imageContainer.style.left = '0';
-        imageContainer.style.width = '100%';
-        imageContainer.style.height = '100%';
-        imageContainer.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
-        imageContainer.style.display = 'flex';
-        imageContainer.style.justifyContent = 'center';
-        imageContainer.style.alignItems = 'center';
-        imageContainer.style.zIndex = '1000';
+						if (isMobile) {
+							// Для мобильных устройств отображаем изображение на текущей странице
+							const imageContainer = document.createElement('div');
+							imageContainer.style.position = 'fixed';
+							imageContainer.style.top = '0';
+							imageContainer.style.left = '0';
+							imageContainer.style.width = '100%';
+							imageContainer.style.height = '100%';
+							imageContainer.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
+							imageContainer.style.display = 'flex';
+							imageContainer.style.justifyContent = 'center';
+							imageContainer.style.alignItems = 'center';
+							imageContainer.style.zIndex = '1000';
 
-        const imageElement = document.createElement('img');
-        imageElement.src = imageBase64;
-        imageElement.style.maxWidth = '90%';
-        imageElement.style.maxHeight = '90%';
-        imageElement.style.borderRadius = '10px';
+							const imageElement = document.createElement('img');
+							imageElement.src = imageBase64;
+							imageElement.style.maxWidth = '90%';
+							imageElement.style.maxHeight = '90%';
+							imageElement.style.borderRadius = '10px';
 
-        // Добавляем изображение в контейнер
-        imageContainer.appendChild(imageElement);
-        document.body.appendChild(imageContainer);
+							// Добавляем изображение в контейнер
+							imageContainer.appendChild(imageElement);
+							document.body.appendChild(imageContainer);
 
-        // Закрываем контейнер при клике
-        imageContainer.addEventListener('click', function () {
-            document.body.removeChild(imageContainer);
-        });
+							// Закрываем контейнер при клике
+							imageContainer.addEventListener('click', function () {
+								document.body.removeChild(imageContainer);
+							});
 
-        // Уведомление для пользователя
-        alert('Нажмите и удерживайте изображение, чтобы сохранить его.');
-    } else {
-        // Для компьютеров скачиваем файл
-        const link = document.createElement('a');
-        link.href = imageBase64;
-        link.download = fileName;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-    }
-});
+							// Уведомление для пользователя
+							alert('Нажмите и удерживайте изображение, чтобы сохранить его.');
+						} else {
+							// Для компьютеров скачиваем файл
+							const link = document.createElement('a');
+							link.href = imageBase64;
+							link.download = fileName;
+							document.body.appendChild(link);
+							link.click();
+							document.body.removeChild(link);
+						}
+					});
 
 
 					document.addEventListener('DOMContentLoaded', function () {
@@ -680,8 +737,8 @@
 							}
 						});
 					});
-					
-					
+
+
 				</script>
 				<h2>Пошаговый процесс генерации QR-кода</h2>
 				<div class="accordion">
@@ -1353,7 +1410,7 @@
 		<script src="res/jscolor.min.js"></script>
 		<script src="main.js" async="async"></script>
 		<script src="qrcodegen.js"></script>
-		<script src="qr_generate-min.js"></script>
+		<script src="qr_generate-min1.js"></script>
 
 		<script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag("js", new Date()); gtag("config", "UA-23532931-1");</script>
 </body>
