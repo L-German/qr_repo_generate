@@ -575,7 +575,7 @@
 				<!--<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="output-qr-code" class="qrcode"></svg>-->
 
 				<canvas id="qrcode-canvas" style="background-color:#E8E8E8" download="cool_pic.jpg"></canvas>
-
+				
 				<div style="display: none; justify-content:left">
 					<button style="width: 12em;" id="download-btn" class="btn btn-outline-primary"><img width="26"
 							height="26" src="https://img.icons8.com/metro/52/download.png" alt="download" />
@@ -591,6 +591,48 @@
 				<div id="result"></div>
 				<hr />
 				<script>
+document.addEventListener("DOMContentLoaded", function() {
+    const darkColorInput = document.getElementById('dark-color-input');
+    const lightColorInput = document.getElementById('s_light-color-input');
+    const gradientColorRow = document.getElementById('gradient-color-row');
+
+    // Функция для обновления второго цвета
+    function updateLightColor() {
+        if (gradientColorRow.style.display === "none") {
+            lightColorInput.value = darkColorInput.value; // Устанавливаем значение второго цвета равным первому
+        }
+    }
+
+    // Обработчик события для изменения цвета модулей
+    darkColorInput.addEventListener('input', updateLightColor);
+
+    // Вызываем функцию при загрузке страницы, чтобы установить начальное значение
+    updateLightColor();
+});
+
+
+					document.getElementById('flexSwitchCheckDefault1').addEventListener('change', function () {
+						const gradientColorRow = document.getElementById('gradient-color-row');
+						const secondColorInput = document.getElementById('s_light-color-input');
+
+						if (this.checked) {
+							// Если чекбокс включен, показываем строку и устанавливаем значение по умолчанию
+							gradientColorRow.style.display = 'table-row';
+							secondColorInput.value = '#000000'; // Устанавливаем значение по умолчанию
+							if (secondColorInput.jscolor) {
+								secondColorInput.jscolor.fromString('#000000');
+							}
+							
+						} else {
+							// Если чекбокс выключен, скрываем строку и меняем значение на #FFFFFF
+							gradientColorRow.style.display = 'none';
+							secondColorInput.value = document.getElementById('dark-color-input').value; // Устанавливаем значение #FFFFFF
+							if (secondColorInput.jscolor) {
+								secondColorInput.jscolor.fromString(document.getElementById('dark-color-input').value);
+							}
+						}
+					});
+
 function toggleDesign() {
 	const rows = document.querySelectorAll('.design-row');
         const icon = document.getElementById('design-icon');
@@ -658,26 +700,7 @@ function toggleDesign() {
         });
 
 
-					document.getElementById('flexSwitchCheckDefault1').addEventListener('change', function () {
-						const gradientColorRow = document.getElementById('gradient-color-row');
-						const secondColorInput = document.getElementById('s_light-color-input');
-
-						if (this.checked) {
-							// Если чекбокс включен, показываем строку и устанавливаем значение по умолчанию
-							gradientColorRow.style.display = 'table-row';
-							secondColorInput.value = '#000000'; // Устанавливаем значение по умолчанию
-							if (secondColorInput.jscolor) {
-								secondColorInput.jscolor.fromString('#000000');
-							}
-						} else {
-							// Если чекбокс выключен, скрываем строку и меняем значение на #FFFFFF
-							gradientColorRow.style.display = 'none';
-							secondColorInput.value = document.getElementById('dark-color-input').value; // Устанавливаем значение #FFFFFF
-							if (secondColorInput.jscolor) {
-								secondColorInput.jscolor.fromString(document.getElementById('dark-color-input').value);
-							}
-						}
-					});
+					
 
 
 
