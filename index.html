@@ -447,7 +447,14 @@
 								<td><textarea id="input-text" placeholder="Введите текст"
 										class="form-control"></textarea></td>
 							</tr>
-							<tr>
+							<tr id="params-header">
+								<td><button onclick="toggleParams()" class="btn btn-outline-primary"> <img id="params-icon" src="res/picture/caret-down-fill.svg">Параметры:</button></td>
+
+								<td>
+									
+								</td>
+							</tr>
+							<tr class="params-row">
 								<td>Уровень коррекции:</td>
 								<td>
 									<label><input type="radio" name="errcorlvl" id="errcorlvl-low"
@@ -462,8 +469,9 @@
 
 							</tr>
 
+							
 
-							<tr>
+							<tr class="params-row">
 								<td><label for="force-min-version">Версия:</label></td>
 
 								<td>
@@ -473,7 +481,7 @@
 										class="form-range" min="1" max="40" step="1" value="2" id="customRange3">
 								</td>
 							</tr>
-							<tr>
+							<tr class="params-row">
 								<td><label for="force-mask-pattern">Маска:</label></td>
 								<td>
 									<input style="width: 4em;" min="-1" max="7" value="-1" id="force-mask-pattern" />
@@ -482,7 +490,7 @@
 										class="form-range" min="-1" max="7" step="1" value="-1" id="customRange4">
 								</td>
 							</tr>
-							<tr>
+							<tr class="params-row" >
 								<td><label for="force-size">Размер:</label></td>
 								<td>
 									<input style="width: 4em;" min="1" max="8" value="5" id="force-size" />
@@ -490,7 +498,14 @@
 									<input style="width: 12em; position: relative; top: 10px;" type="range" class="form-range" min="1" max="8" step="0.5" value="5" id="customRange5">
 								</td>
 							</tr>
-							<tr>
+							<tr class="design-header">
+								<td><button onclick="toggleDesign()" class="btn btn-outline-primary"> <img id="design-icon" src="res/picture/caret-down-fill.svg">Дизайн:</button></td>
+
+								<td>
+									
+								</td>
+							</tr>
+							<tr class="design-row">
 								<td>Рамка:</td>
 								<td>
 									<div class="form-check form-switch">
@@ -500,7 +515,7 @@
 								</td>
 
 							</tr>
-							<tr>
+							<tr class="design-row">
 								<td>Градиент:</td>
 								<td>
 									<div class="form-check form-switch">
@@ -510,7 +525,7 @@
 								</td>
 
 							</tr>
-							<tr>
+							<tr class="design-row">
 								<td>Цвет фона:</td>
 								<td>
 									<input type="text" value="#FFFFFF" data-jscolor="{}" id="light-color-input"
@@ -519,7 +534,7 @@
 								</td>
 
 							</tr>
-							<tr>
+							<tr class="design-row">
 								<td>Цвет модулей:</td>
 								<td>
 									<input type="text" value="#000000" data-jscolor="{}" id="dark-color-input"
@@ -576,6 +591,64 @@
 				<div id="result"></div>
 				<hr />
 				<script>
+function toggleDesign() {
+	const rows = document.querySelectorAll('.design-row');
+        const icon = document.getElementById('design-icon');
+        const gradientColorRow = document.getElementById('gradient-color-row');
+
+        // Переключаем видимость строк
+        rows.forEach(row => {
+            if (row.style.display === 'none') {
+                row.style.display = ''; // Показываем строку
+            } else {
+                row.style.display = 'none'; // Скрываем строку
+            }
+        });
+
+        // Закрываем все чекбоксы
+        const checkboxes = document.querySelectorAll('.form-check-input');
+        checkboxes.forEach(checkbox => {
+            checkbox.checked = false; // Сбрасываем состояние чекбокса
+        });
+
+        // Скрываем второй цвет, если он открыт
+        gradientColorRow.style.display = 'none';
+
+        // Меняем иконку
+        if (icon.src.includes('caret-down-fill.svg')) {
+            icon.src = 'res/picture/caret-right-fill.svg'; // Меняем на caret-right-fill.svg
+        } else {
+            icon.src = 'res/picture/caret-down-fill.svg'; // Меняем обратно на caret-down-fill.svg
+        }
+    }
+
+    function toggleGradientColorRow() {
+        const gradientColorRow = document.getElementById('gradient-color-row');
+        const checkbox = document.getElementById('flexSwitchCheckDefault1');
+
+        // Если чекбокс включен, показываем второй цвет, иначе скрываем
+        gradientColorRow.style.display = checkbox.checked ? '' : 'none';
+    }
+	function toggleParams() {
+        const rows = document.querySelectorAll('.params-row');
+        const icon = document.getElementById('params-icon');
+
+        // Переключаем видимость строк
+        rows.forEach(row => {
+            if (row.style.display === 'none') {
+                row.style.display = ''; // Показываем строку
+            } else {
+                row.style.display = 'none'; // Скрываем строку
+            }
+        });
+
+        // Меняем иконку
+        if (icon.src.includes('caret-down-fill.svg')) {
+            icon.src = 'res/picture/caret-right-fill.svg'; // Меняем на caret-right-fill.svg
+        } else {
+            icon.src = 'res/picture/caret-down-fill.svg'; // Меняем обратно на caret-down-fill.svg
+        }
+    }
   document.getElementById('customRange5').addEventListener('input', function () {
             document.getElementById('force-size').value = this.value;
         });
