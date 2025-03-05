@@ -422,6 +422,34 @@
 			font-size: 1.2rem;
 			/* Уменьшаем размер шрифта заголовка */
 		}
+		.logo-row, .params-row, .design-row {
+    transition: opacity 0.3s ease, max-height 0.3s ease;
+    opacity: 1;
+    max-height: 1000px; /* Достаточно большое значение, чтобы вместить содержимое */
+    overflow: hidden;
+}
+
+.logo-row.hidden, .params-row.hidden, .design-row.hidden {
+    opacity: 0;
+    max-height: 0;
+}
+
+/* Анимация для иконки */
+#logo-icon, #params-icon, #design-icon {
+    transition: transform 0.3s ease;
+}
+
+#logo-icon.rotated, #params-icon.rotated, #design-icon.rotated {
+    transform: rotate(90deg);
+}
+.accordion-button:not(.collapsed)::after {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-dash' viewBox='0 0 16 16'%3E%3Cpath d='M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z'/%3E%3C/svg%3E");
+}
+.accordion-button::after {
+  transition: all 0.6s;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-plus' viewBox='0 0 16 16'%3E%3Cpath d='M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z'/%3E%3C/svg%3E");
+}
+
 	</style>
 </head>
 
@@ -448,7 +476,7 @@
 										class="form-control"></textarea></td>
 							</tr>
 							<tr id="params-header">
-								<td><button onclick="toggleParams()" class="btn btn-outline-primary"> <img id="params-icon" src="res/picture/caret-down-fill.svg">Параметры:</button></td>
+								<td><button onclick="toggleParams()" class="btn btn-outline-primary"> <img id="params-icon" src="res/picture/caret-down-fill.svg">Параметры <img id="img_icons1" src="res/picture/gear.svg">:</button></td>
 
 								<td>
 									
@@ -493,13 +521,13 @@
 							<tr class="params-row" >
 								<td><label for="force-size">Размер:</label></td>
 								<td>
-									<input style="width: 4em;" min="1" max="8" value="5" id="force-size" />
-									(от 1 до 8)
-									<input style="width: 12em; position: relative; top: 10px;" type="range" class="form-range" min="1" max="8" step="0.5" value="5" id="customRange5">
+									<input style="width: 4em;" min="1" max="10" value="5" id="force-size" />
+									(от 1 до 10)
+									<input style="width: 12em; position: relative; top: 10px;" type="range" class="form-range" min="1" max="10" step="0.5" value="5" id="customRange5">
 								</td>
 							</tr>
 							<tr class="design-header">
-								<td><button onclick="toggleDesign()" class="btn btn-outline-primary"> <img id="design-icon" src="res/picture/caret-down-fill.svg">Дизайн:</button></td>
+								<td><button onclick="toggleDesign()" class="btn btn-outline-primary"> <img id="design-icon" src="res/picture/caret-down-fill.svg">Дизайн <img id="img_icons2" src="res/picture/brush.svg" alt="">:</button></td>
 
 								<td>
 									
@@ -551,20 +579,43 @@
 								</td>
 
 							</tr>
+							
+							<tr class="logo-header" style="display: none;">
+								<td><button onclick="toggleLogo()" class="btn btn-outline-primary"> <img id="logo-icon" src="res/picture/caret-down-fill.svg">Логотип <img id="img_icons3" src="res/picture/image.svg" alt="">:</button></td>
+								<td>
+								</td>
+							</tr>
 
+							<tr class="logo-row" style="display: none;">
+								<td>Изображение:</td>
+								<td>
+									<input type="file" id="qr-image-input" accept="image/*">
+									<button onclick="toggleButton_Logo()" id ="logo_button" ><img src="res/picture/Logo_Kubstu.png" alt="" style="width: 50px; height: 50px;"></button>
+								</td>
+							</tr>
+							<tr class="logo-row" style="display: none;">
+								<td>Убрать фон:</td>
+								<td>
+									<div class="form-check form-switch">
+										<input class="form-check-input" type="checkbox" id="remove-background">
+										<label class="form-check-label" for="flexSwitchCheckDefault3"></label>
+									</div>
+								</td>
 
+							</tr>
+						</div>
 							<tr>
 								<td></td>
 								<td>
 									<button type="submit" class="btn btn-primary" id="generateButton"
-										style=" font-size: 1rem;">Сгенерировать код</button>
+										style=" font-size: 1rem;">Сгенерировать код </button>
 								</td>
 							</tr>
 							<tr>
 								<td></td>
 								<td>
 									<button type="button" class="btn btn-primary" id="scanButton"
-										style=" font-size: 1rem;">Сканировать код</button>
+										style=" font-size: 1rem;">Сканировать код </button>
 								</td>
 							</tr>
 						</tbody>
@@ -591,6 +642,7 @@
 				<div id="result"></div>
 				<hr />
 				<script>
+
 document.addEventListener("DOMContentLoaded", function() {
     const darkColorInput = document.getElementById('dark-color-input');
     const lightColorInput = document.getElementById('s_light-color-input');
@@ -632,20 +684,44 @@ document.addEventListener("DOMContentLoaded", function() {
 							}
 						}
 					});
+					function toggleButton_Logo() {
+    const imageInput = document.getElementById('qr-image-input');
+
+    // Создаем объект File из URL
+    fetch('res/picture/Logo_Kubstu.png')
+        .then(response => response.blob())
+        .then(blob => {
+            const file = new File([blob], 'Logo_Kubstu.png', { type: blob.type });
+            const dataTransfer = new DataTransfer();
+            dataTransfer.items.add(file);
+            imageInput.files = dataTransfer.files; // Устанавливаем файлы в input
+        })
+        .catch(error => console.error('Ошибка при загрузке файла:', error));
+}
 
 function toggleDesign() {
 	const rows = document.querySelectorAll('.design-row');
         const icon = document.getElementById('design-icon');
         const gradientColorRow = document.getElementById('gradient-color-row');
-
+		
         // Переключаем видимость строк
         rows.forEach(row => {
-            if (row.style.display === 'none') {
-                row.style.display = ''; // Показываем строку
-            } else {
-                row.style.display = 'none'; // Скрываем строку
-            }
-        });
+        if (row.classList.contains('hidden')) {
+            // Если строка скрыта, показываем её
+            row.classList.remove('hidden');
+            row.style.display = ''; // Восстанавливаем display (например, table-row)
+        } else {
+            // Если строка видима, скрываем её
+            row.classList.add('hidden');
+            // Ждём завершения анимации, затем скрываем строку полностью
+            row.addEventListener('transitionend', () => {
+                if (row.classList.contains('hidden')) {
+                    row.style.display = 'none';
+                }
+            }, { once: true });
+        }
+    });
+
 
         // Закрываем все чекбоксы
         const checkboxes = document.querySelectorAll('.form-check-input');
@@ -655,10 +731,12 @@ function toggleDesign() {
 
         // Скрываем второй цвет, если он открыт
         gradientColorRow.style.display = 'none';
-
+		
         // Меняем иконку
         if (icon.src.includes('caret-down-fill.svg')) {
             icon.src = 'res/picture/caret-right-fill.svg'; // Меняем на caret-right-fill.svg
+
+
         } else {
             icon.src = 'res/picture/caret-down-fill.svg'; // Меняем обратно на caret-down-fill.svg
         }
@@ -677,12 +755,21 @@ function toggleDesign() {
 
         // Переключаем видимость строк
         rows.forEach(row => {
-            if (row.style.display === 'none') {
-                row.style.display = ''; // Показываем строку
-            } else {
-                row.style.display = 'none'; // Скрываем строку
-            }
-        });
+        if (row.classList.contains('hidden')) {
+            // Если строка скрыта, показываем её
+            row.classList.remove('hidden');
+            row.style.display = ''; // Восстанавливаем display (например, table-row)
+        } else {
+            // Если строка видима, скрываем её
+            row.classList.add('hidden');
+            // Ждём завершения анимации, затем скрываем строку полностью
+            row.addEventListener('transitionend', () => {
+                if (row.classList.contains('hidden')) {
+                    row.style.display = 'none';
+                }
+            }, { once: true });
+        }
+    });
 
         // Меняем иконку
         if (icon.src.includes('caret-down-fill.svg')) {
@@ -691,6 +778,37 @@ function toggleDesign() {
             icon.src = 'res/picture/caret-down-fill.svg'; // Меняем обратно на caret-down-fill.svg
         }
     }
+	function toggleLogo() {
+    const rows = document.querySelectorAll('.logo-row');
+    const icon = document.getElementById('logo-icon');
+
+    rows.forEach(row => {
+        if (row.classList.contains('hidden')) {
+            // Если строка скрыта, показываем её
+            row.classList.remove('hidden');
+            row.style.display = ''; // Восстанавливаем display (например, table-row)
+        } else {
+            // Если строка видима, скрываем её
+            row.classList.add('hidden');
+            // Ждём завершения анимации, затем скрываем строку полностью
+            row.addEventListener('transitionend', () => {
+                if (row.classList.contains('hidden')) {
+                    row.style.display = 'none';
+                }
+            }, { once: true });
+        }
+    });
+
+    // Меняем иконку
+   // icon.classList.toggle('rotated');
+
+    // Меняем src иконки
+    if (icon.src.includes('caret-down-fill.svg')) {
+        icon.src = 'res/picture/caret-right-fill.svg';
+    } else {
+        icon.src = 'res/picture/caret-down-fill.svg';
+    }
+}
   document.getElementById('customRange5').addEventListener('input', function () {
             document.getElementById('force-size').value = this.value;
         });
@@ -844,13 +962,13 @@ function toggleDesign() {
 							<button class="accordion-button" type="button" data-bs-toggle="collapse"
 								data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
 								aria-controls="panelsStayOpen-collapseOne">
-								<h3>1. Анализ текста</h3>
+								<h3>1. Анализ текста </h3>
 							</button>
 						</h2>
 						<div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
 							aria-labelledby="panelsStayOpen-headingOne">
 							<div class="accordion-body">
-								<p>Количество символов в текстовом поле: <span id="num-code-points"></span></p>
+								<p>Количество символов в текстовом поле: <span id="num-code-points"></span> <img src="res/picture/file-text.svg" alt=""></p>
 								<p>Информация о каждом символе и его возможной кодировке:</p>
 								<table id="character-analysis" class="possibly-long table table-striped ">
 									<thead>
