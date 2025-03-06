@@ -547,7 +547,7 @@
 								<td>Градиент:</td>
 								<td>
 									<div class="form-check form-switch">
-										<input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault1">
+										<input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault1" checked>
 										<label class="form-check-label" for="flexSwitchCheckDefault1">Включить</label>
 									</div>
 								</td>
@@ -570,7 +570,7 @@
 								</td>
 
 							</tr>
-							<tr style="display: none;" id="gradient-color-row">
+							<tr  id="gradient-color-row">
 								<td>Второй цвет:</td>
 								<td>
 									<input type="text" value="#000000" data-jscolor="{}" id="s_light-color-input"
@@ -580,17 +580,28 @@
 
 							</tr>
 							
-							<tr class="logo-header" style="display: none;">
+							<tr class="logo-header" >
 								<td><button onclick="toggleLogo()" class="btn btn-outline-primary"> <img id="logo-icon" src="res/picture/caret-down-fill.svg">Логотип <img id="img_icons3" src="res/picture/image.svg" alt="">:</button></td>
 								<td>
 								</td>
 							</tr>
 
-							<tr class="logo-row" style="display: none;">
+							<tr class="logo-row" >
 								<td>Изображение:</td>
 								<td>
-									<input type="file" id="qr-image-input" accept="image/*">
-									<button onclick="toggleButton_Logo()" id ="logo_button" ><img src="res/picture/Logo_Kubstu.png" alt="" style="width: 50px; height: 50px;"></button>
+									
+										
+										<input type="file" class="form-control" id="qr-image-input" accept="image/*">
+									 
+									
+									
+								</td>
+							</tr>
+							<tr class="logo-row" >
+								<td></td>
+								<td>
+									<button class="btn btn-outline-primary"  onclick="toggleButton_Logo()" id ="logo_button" >
+										<img src="res/picture/logo.jpg" alt="" style="width: 50px; height: 50px;"></button>
 								</td>
 							</tr>
 							<tr class="logo-row" style="display: none;">
@@ -686,9 +697,9 @@ document.addEventListener("DOMContentLoaded", function() {
 					});
 					function toggleButton_Logo() {
     const imageInput = document.getElementById('qr-image-input');
-
+	document.getElementById('errcorlvl-high').checked = true;
     // Создаем объект File из URL
-    fetch('res/picture/Logo_Kubstu.png')
+    fetch('res/picture/logo.jpg')
         .then(response => response.blob())
         .then(blob => {
             const file = new File([blob], 'Logo_Kubstu.png', { type: blob.type });
