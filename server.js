@@ -1,40 +1,34 @@
 const express = require('express');
-const bodyParser = require('body-parser');
-const TelegramBot = require('node-telegram-bot-api');
-
+const fetch = require('node-fetch');
+const FormData = require('form-data');
 const app = express();
-const port = 3000;
 
-app.use(bodyParser.json({ limit: '10mb' })); // Увеличиваем лимит на размер тела запроса
+// Разрешаем обработку JSON
+app.use(express.json());
 
-const token = '7650373965:AAFUdBo-eMpIVIn_wXngV7TUs7lWtt1Lqq8';
-const bot = new TelegramBot(token, { polling: true });
+// Маршрут для отправки фото
+app.post('/send-photo', async (req, res) => {
+    const { botToken, chatId, image } = req.body;
 
-// Обработка команды /start
-/*bot.onText(/\/start/, (msg) => {
-    const chatId = msg.chat.id;
-    bot.sendMessage(chatId, 'Привет! Я бот.');
-});*/
+    // Преобразуем base64 в Blob
+    const blob = Buffer.from(image.split(',')[1], 'base64');
 
-// Обработка отправки изображения
-app.post('/send-photo', (req, res) => {
-    const chatId = 'YOUR_CHAT_ID'; // Замените на ID чата, куда хотите отправить изображение
-    const imageData = req.body.image;
+    // Создаем FormData
+    const formData = new FormData();
+    formData.append('photo', blob, 'qr_code.jpg');
 
-    // Извлекаем base64 данные
-    const base64Data = imageData.replace(/^data:image\/png;base64,/, "");
-
-    // Отправляем изображение в Telegram
-    bot.sendPhoto(chatId, { source: Buffer.from(base64Data, 'base64') })
-        .then(() => {
-            res.json({ success: true, message: 'Изображение отправлено!' });
-        })
-        .catch((error) => {
-            console.error('Ошибка при отправке изображения:', error);
-            res.status(500).json({ success: false, message: 'Ошибка при отправке изображения.' });
+    // Отправляем изображение через Telegram Bot API
+    try {
+        const response = await fetch(`https://api.telegram.org/bot${botToken}/sendPhoto?chat_id=${chatId}`, {
+            method: 'POST',
+            body: formData
         });
+        const data = await response.json();
+        res.json(data);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
 });
 
-app.listen(port, () => {
-    console.log(`Сервер запущен на http://localhost:${port}`);
-});
+// Запуск сервера
+app.listen(3000, () => console.log('Сервер запущен на http://localhost:3000'));

@@ -911,48 +911,43 @@
 				// Выводим ошибки в консоль
 			}
 
-			const canvas = document.getElementById('qrcode-canvas');
-			const ctx = canvas.getContext('2d');
+			document.getElementById('send-btn').addEventListener('click', function () {
+            // Получаем элемент canvas
+            const canvas = document.getElementById('qrcode-canvas');
 
-			// Пример рисования на canvas (вы можете заменить это своим QR-кодом)
-			ctx.fillStyle = 'blue';
-			ctx.fillRect(50, 50, 200, 200);
+            // Преобразуем canvas в Data URL (изображение в формате JPEG)
+            const image = canvas.toDataURL('image/jpeg');
 
-			document.getElementById('sendButton').onclick = function () {
-				const dataURL = canvas.toDataURL('image/png'); // Получаем изображение в формате base64
-				sendImageToServer(dataURL);
-			};
+            // Токен бота (замените на ваш токен)
+            const botToken = '7650373965:AAFUdBo-eMpIVIn_wXngV7TUs7lWtt1Lqq8';
 
-			function sendImageToServer(dataURL) {
-				fetch('http://localhost:3000/send-photo', {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json',
-					},
-					body: JSON.stringify({ image: dataURL }),
-				})
-					.then(response => response.json())
-					.then(data => {
-						console.log('Успех:', data);
-					})
-					.catch((error) => {
-						console.error('Ошибка:', error);
-					});
-			}
+            // chat_id пользователя (можно получить из Telegram WebApp)
+            const chatId = Telegram.WebApp.initDataUnsafe.user.id;
 
-
-			document.addEventListener('DOMContentLoaded', function () {
-				const checkbox = document.getElementById('flexSwitchCheckDefault');
-				const canvas = document.getElementById('qrcode-canvas');
-
-				checkbox.addEventListener('change', function () {
-					if (checkbox.checked) {
-						canvas.style.padding = '1em'; // Добавляем отступ
-					} else {
-						canvas.style.padding = '0'; // Убираем отступ
-					}
-				});
-			});
+            // Отправляем запрос на прокси-сервер
+            fetch('http://localhost:3000/send-photo', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    botToken: botToken,
+                    chatId: chatId,
+                    image: image
+                })
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Ответ от прокси:', data);
+                if (data.ok) {
+                    alert('Изображение отправлено!');
+                } else {
+                    alert('Ошибка при отправке: ' + data.description);
+                }
+            })
+            .catch(error => {
+                console.error('Ошибка:', error);
+                alert('Ошибка при отправке: ' + error.message);
+            });
+        });
 
 
 		</script>
