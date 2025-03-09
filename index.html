@@ -928,12 +928,12 @@
 
 					//alert('Ошибка: не удалось получить chat_id пользователя.');
 					const canvas = document.getElementById('qrcode-canvas');
-					const dataURL = canvas.toDataURL('image/jpeg'); // Вы можете изменить формат на 'image/png', если нужно
+					const dataURL = canvas.toDataURL('image/png'); 
 
 					// Создаем временную ссылку
 					const link = document.createElement('a');
 					link.href = dataURL;
-					link.download =document.getElementById('input-text').value+'.jpg'; // Имя файла при скачивании
+					link.download =document.getElementById('input-text').value+'.png'; // Имя файла при скачивании
 
 					// Программно кликаем по ссылке, чтобы инициировать скачивание
 					document.body.appendChild(link);
