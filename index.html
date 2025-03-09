@@ -926,27 +926,17 @@
 			
             // Отправляем запрос на прокси-сервер
             fetch('http://localhost:3000/send-photo', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    botToken: botToken,
-                    chatId: chatId,
-                    image: image
-                })
-            })
-            .then(response => response.json())
-            .then(data => {
-                console.log('Ответ от прокси:', data);
-                if (data.ok) {
-                    alert('Изображение отправлено!');
-                } else {
-                    alert('Ошибка при отправке1: ' + data.description);
-                }
-            })
-            .catch(error => {
-                console.error('Ошибка:', error);
-                alert('Ошибка при отправке2: ' + error.message);
-            });
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+        botToken: 'YOUR_BOT_TOKEN',
+        chatId: Telegram.WebApp.initDataUnsafe.user?.id || 'CHAT_ID', // Проверьте, что chatId корректен
+        image: canvas.toDataURL('image/jpeg') // Преобразуем canvas в base64
+    })
+})
+.then(response => response.json())
+.then(data => console.log('Ответ от прокси:', data))
+.catch(error => console.error('Ошибка:', error));
         });
 
 

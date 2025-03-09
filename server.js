@@ -10,19 +10,21 @@ app.use(express.json());
 app.post('/send-photo', async (req, res) => {
     const { botToken, chatId, image } = req.body;
 
-    // Преобразуем base64 в Blob
-    const blob = Buffer.from(image.split(',')[1], 'base64');
+    // Преобразуем base64 в Buffer
+    const buffer = Buffer.from(image.split(',')[1], 'base64');
 
     // Создаем FormData
     const formData = new FormData();
-    formData.append('photo', blob, 'qr_code.jpg');
+    formData.append('photo', buffer, { filename: 'qr_code.jpg' });
 
     // Отправляем изображение через Telegram Bot API
     try {
         const response = await fetch(`https://api.telegram.org/bot${botToken}/sendPhoto?chat_id=${chatId}`, {
             method: 'POST',
-            body: formData
+            body: formData,
+            headers: formData.getHeaders() // Добавляем заголовки FormData
         });
+
         const data = await response.json();
         res.json(data);
     } catch (error) {
