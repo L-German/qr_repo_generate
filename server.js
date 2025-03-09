@@ -9,6 +9,7 @@ async function sendToTelegramBot(dataURL) {
         if (err) throw err;
 
         // Отправляем изображение в Telegram
+        alert("1")
         const chatId = '1685702823'; // Замените на ваш chat_id
         const token = '7650373965:AAFUdBo-eMpIVIn_wXngV7TUs7lWtt1Lqq8'; // Замените на ваш токен бота
 
