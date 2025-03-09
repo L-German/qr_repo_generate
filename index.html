@@ -940,12 +940,12 @@
                 if (data.ok) {
                     alert('Изображение отправлено!');
                 } else {
-                    alert('Ошибка при отправке: ' + data.description);
+                    alert('Ошибка при отправке1: ' + data.description);
                 }
             })
             .catch(error => {
                 console.error('Ошибка:', error);
-                alert('Ошибка при отправке: ' + error.message);
+                alert('Ошибка при отправке2: ' + error.message);
             });
         });
 
