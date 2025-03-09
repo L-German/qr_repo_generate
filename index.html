@@ -660,8 +660,8 @@
 		<canvas id="qrcode-canvas" style="background-color:#E8E8E8" download="qr_code_d.jpg"></canvas>
 
 		<div>
-			<button style="width: 12em; font-size: 0.9em;" id="send-btn" class="btn btn-outline-primary">Получить изображение <img 
-					src="res/picture/send.svg" alt="download" />
+			<button style="width: 12em; font-size: 0.9em;" id="send-btn" class="btn btn-outline-primary">Получить
+				изображение <img src="res/picture/send.svg" alt="download" />
 
 			</button>
 		</div>
@@ -911,59 +911,72 @@
 				// Выводим ошибки в консоль
 			}
 			function getChatId() {
-    // Получаем данные пользователя
-    const initData = new URLSearchParams(Telegram.WebApp.initData);
+				// Получаем данные пользователя
+				const initData = new URLSearchParams(Telegram.WebApp.initData);
 
-    // Извлекаем user.id
-    const user = JSON.parse(initData.get('user'));
-    return user?.id;
-}
-
-
-function sendImageToTelegram(dataURL) {
-    const token = '7650373965:AAFUdBo-eMpIVIn_wXngV7TUs7lWtt1Lqq8'; // Замените на ваш токен бота
-    const chatId = getChatId(); // Получаем chat_id текущего пользователя
-
-    if (!chatId) {
-        alert('Ошибка: не удалось получить chat_id пользователя.');
-        return;
-    }
-
-    // Преобразуем data URL в Blob
-    fetch(dataURL)
-        .then(res => res.blob())
-        .then(blob => {
-            const formData = new FormData();
-            formData.append('photo', blob, 'qr_code.jpg');
-
-            return fetch(`https://api.telegram.org/bot${token}/sendPhoto?chat_id=${chatId}`, {
-                method: 'POST',
-                body: formData,
-            });
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.ok) {
-                alert('QR-код успешно отправлен в Telegram!'); // Уведомление об успешной отправке
-            } else {
-                alert('Ошибка при отправке QR-кода: ' + data.description);
-            }
-        })
-        .catch(error => {
-            console.error('Ошибка:', error);
-            alert('Ошибка при отправке QR-кода: ' + error.message);
-        });
-}
+				// Извлекаем user.id
+				const user = JSON.parse(initData.get('user'));
+				return user?.id;
+			}
 
 
+			function sendImageToTelegram(dataURL) {
+				const token = '7650373965:AAFUdBo-eMpIVIn_wXngV7TUs7lWtt1Lqq8'; // Замените на ваш токен бота
+				const chatId = getChatId(); // Получаем chat_id текущего пользователя
 
-document.getElementById('send-btn').addEventListener('click', function() {
-    const canvas = document.getElementById('qrcode-canvas');
-    const dataURL = canvas.toDataURL('image/jpeg'); // Получаем изображение в формате JPEG
+				if (!chatId) {
 
-    // Отправляем изображение в Telegram-бота
-    sendImageToTelegram(dataURL);
-});
+					//alert('Ошибка: не удалось получить chat_id пользователя.');
+					const canvas = document.getElementById('qrcode-canvas');
+					const dataURL = canvas.toDataURL('image/jpeg'); // Вы можете изменить формат на 'image/png', если нужно
+
+					// Создаем временную ссылку
+					const link = document.createElement('a');
+					link.href = dataURL;
+					link.download =document.getElementById('input-text').value+'.jpg'; // Имя файла при скачивании
+
+					// Программно кликаем по ссылке, чтобы инициировать скачивание
+					document.body.appendChild(link);
+					link.click();
+					document.body.removeChild(link); // Удаляем ссылку после скачивания
+					return;
+				}
+
+				// Преобразуем data URL в Blob
+				fetch(dataURL)
+					.then(res => res.blob())
+					.then(blob => {
+						const formData = new FormData();
+						formData.append('photo', blob, 'qr_code.jpg');
+
+						return fetch(`https://api.telegram.org/bot${token}/sendPhoto?chat_id=${chatId}`, {
+							method: 'POST',
+							body: formData,
+						});
+					})
+					.then(response => response.json())
+					.then(data => {
+						if (data.ok) {
+							alert('QR-код успешно отправлен в Telegram!'); // Уведомление об успешной отправке
+						} else {
+							alert('Ошибка при отправке QR-кода: ' + data.description);
+						}
+					})
+					.catch(error => {
+						console.error('Ошибка:', error);
+						alert('Ошибка при отправке QR-кода: ' + error.message);
+					});
+			}
+
+
+
+			document.getElementById('send-btn').addEventListener('click', function () {
+				const canvas = document.getElementById('qrcode-canvas');
+				const dataURL = canvas.toDataURL('image/jpeg'); // Получаем изображение в формате JPEG
+
+				// Отправляем изображение в Telegram-бота
+				sendImageToTelegram(dataURL);
+			});
 
 
 
