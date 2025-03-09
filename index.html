@@ -638,7 +638,7 @@
 
 				<canvas id="qrcode-canvas" style="background-color:#E8E8E8" download="qr_code_d.jpg"></canvas>
 				
-				<div style="display: none; justify-content:left">
+				<div >
 					<button style="width: 12em;" id="download-btn" class="btn btn-outline-primary"><img width="26"
 							height="26" src="https://img.icons8.com/metro/52/download.png" alt="download" />
 
@@ -898,56 +898,16 @@ function toggleDesign() {
 					ctx.fillRect(50, 50, 200, 200);
 
 					document.getElementById('download-btn').addEventListener('click', function () {
-						const inputText = document.getElementById('input-text').value.trim();
-						const fileName = inputText ? `QR_${inputText}.png` : 'qrcode.png';
+    const canvas = document.getElementById('qrcode-canvas');
+    const link = document.createElement('a');
 
-						// Получаем изображение в формате Base64
-						const imageBase64 = canvas.toDataURL('image/png');
+    // Получаем данные изображения из canvas
+    link.href = canvas.toDataURL('image/jpeg'); // или 'image/png' для PNG-формата
+    link.download = 'qr_code_d.jpg'; // Имя файла, который будет сохранён
 
-						// Проверяем, является ли устройство мобильным (iOS/Android)
-						const isMobile = /iPad|iPhone|iPod|Android/.test(navigator.userAgent) && !window.MSStream;
-
-						if (isMobile) {
-							// Для мобильных устройств отображаем изображение на текущей странице
-							const imageContainer = document.createElement('div');
-							imageContainer.style.position = 'fixed';
-							imageContainer.style.top = '0';
-							imageContainer.style.left = '0';
-							imageContainer.style.width = '100%';
-							imageContainer.style.height = '100%';
-							imageContainer.style.backgroundColor = 'rgba(0, 0, 0, 0.8)';
-							imageContainer.style.display = 'flex';
-							imageContainer.style.justifyContent = 'center';
-							imageContainer.style.alignItems = 'center';
-							imageContainer.style.zIndex = '1000';
-
-							const imageElement = document.createElement('img');
-							imageElement.src = imageBase64;
-							imageElement.style.maxWidth = '90%';
-							imageElement.style.maxHeight = '90%';
-							imageElement.style.borderRadius = '10px';
-
-							// Добавляем изображение в контейнер
-							imageContainer.appendChild(imageElement);
-							document.body.appendChild(imageContainer);
-
-							// Закрываем контейнер при клике
-							imageContainer.addEventListener('click', function () {
-								document.body.removeChild(imageContainer);
-							});
-
-							// Уведомление для пользователя
-							alert('Нажмите и удерживайте изображение, чтобы сохранить его.');
-						} else {
-							// Для компьютеров скачиваем файл
-							const link = document.createElement('a');
-							link.href = imageBase64;
-							link.download = fileName;
-							document.body.appendChild(link);
-							link.click();
-							document.body.removeChild(link);
-						}
-					});
+    // Программно кликаем по ссылке для инициирования загрузки
+    link.click();
+});
 
 
 					document.addEventListener('DOMContentLoaded', function () {
@@ -979,7 +939,7 @@ function toggleDesign() {
 						<div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
 							aria-labelledby="panelsStayOpen-headingOne">
 							<div class="accordion-body">
-								<p>Количество символов в текстовом поле: <span id="num-code-points"></span> <img src="res/picture/file-text.svg" alt=""></p>
+								<p>Количество символов в текстовом поле<img src="res/picture/file-text.svg" alt="">: <span id="num-code-points"></span></p>
 								<p>Информация о каждом символе и его возможной кодировке:</p>
 								<table id="character-analysis" class="possibly-long table table-striped ">
 									<thead>
