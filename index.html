@@ -422,34 +422,45 @@
 			font-size: 1.2rem;
 			/* Уменьшаем размер шрифта заголовка */
 		}
-		.logo-row, .params-row, .design-row {
-    transition: opacity 0.3s ease, max-height 0.3s ease;
-    opacity: 1;
-    max-height: 1000px; /* Достаточно большое значение, чтобы вместить содержимое */
-    overflow: hidden;
-}
 
-.logo-row.hidden, .params-row.hidden, .design-row.hidden {
-    opacity: 0;
-    max-height: 0;
-}
+		.logo-row,
+		.params-row,
+		.design-row {
+			transition: opacity 0.3s ease, max-height 0.3s ease;
+			opacity: 1;
+			max-height: 1000px;
+			/* Достаточно большое значение, чтобы вместить содержимое */
+			overflow: hidden;
+		}
 
-/* Анимация для иконки */
-#logo-icon, #params-icon, #design-icon {
-    transition: transform 0.3s ease;
-}
+		.logo-row.hidden,
+		.params-row.hidden,
+		.design-row.hidden {
+			opacity: 0;
+			max-height: 0;
+		}
 
-#logo-icon.rotated, #params-icon.rotated, #design-icon.rotated {
-    transform: rotate(90deg);
-}
-.accordion-button:not(.collapsed)::after {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-dash' viewBox='0 0 16 16'%3E%3Cpath d='M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z'/%3E%3C/svg%3E");
-}
-.accordion-button::after {
- 
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-plus' viewBox='0 0 16 16'%3E%3Cpath d='M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z'/%3E%3C/svg%3E");
-}
+		/* Анимация для иконки */
+		#logo-icon,
+		#params-icon,
+		#design-icon {
+			transition: transform 0.3s ease;
+		}
 
+		#logo-icon.rotated,
+		#params-icon.rotated,
+		#design-icon.rotated {
+			transform: rotate(90deg);
+		}
+
+		.accordion-button:not(.collapsed)::after {
+			background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-dash' viewBox='0 0 16 16'%3E%3Cpath d='M4 8a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7A.5.5 0 0 1 4 8z'/%3E%3C/svg%3E");
+		}
+
+		.accordion-button::after {
+
+			background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-plus' viewBox='0 0 16 16'%3E%3Cpath d='M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z'/%3E%3C/svg%3E");
+		}
 	</style>
 </head>
 
@@ -476,10 +487,12 @@
 										class="form-control"></textarea></td>
 							</tr>
 							<tr id="params-header">
-								<td><button onclick="toggleParams()" class="btn btn-outline-primary"> <img id="params-icon" src="res/picture/caret-down-fill.svg">Параметры <img id="img_icons1" src="res/picture/gear.svg">:</button></td>
+								<td><button onclick="toggleParams()" class="btn btn-outline-primary"> <img
+											id="params-icon" src="res/picture/caret-down-fill.svg">Параметры <img
+											id="img_icons1" src="res/picture/gear.svg">:</button></td>
 
 								<td>
-									
+
 								</td>
 							</tr>
 							<tr class="params-row">
@@ -497,7 +510,7 @@
 
 							</tr>
 
-							
+
 
 							<tr class="params-row">
 								<td><label for="force-min-version">Версия:</label></td>
@@ -518,19 +531,22 @@
 										class="form-range" min="-1" max="7" step="1" value="-1" id="customRange4">
 								</td>
 							</tr>
-							<tr class="params-row" >
+							<tr class="params-row">
 								<td><label for="force-size">Размер:</label></td>
 								<td>
 									<input style="width: 4em;" min="1" max="10" value="5" id="force-size" />
 									(от 1 до 10)
-									<input style="width: 12em; position: relative; top: 10px;" type="range" class="form-range" min="1" max="10" step="0.5" value="5" id="customRange5">
+									<input style="width: 12em; position: relative; top: 10px;" type="range"
+										class="form-range" min="1" max="10" step="0.5" value="5" id="customRange5">
 								</td>
 							</tr>
 							<tr class="design-header">
-								<td><button onclick="toggleDesign()" class="btn btn-outline-primary"> <img id="design-icon" src="res/picture/caret-down-fill.svg">Дизайн <img id="img_icons2" src="res/picture/brush.svg" alt="">:</button></td>
+								<td><button onclick="toggleDesign()" class="btn btn-outline-primary"> <img
+											id="design-icon" src="res/picture/caret-down-fill.svg">Дизайн <img
+											id="img_icons2" src="res/picture/brush.svg" alt="">:</button></td>
 
 								<td>
-									
+
 								</td>
 							</tr>
 							<tr class="design-row">
@@ -547,7 +563,8 @@
 								<td>Градиент:</td>
 								<td>
 									<div class="form-check form-switch">
-										<input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault1" checked>
+										<input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault1"
+											checked>
 										<label class="form-check-label" for="flexSwitchCheckDefault1">Включить</label>
 									</div>
 								</td>
@@ -570,7 +587,7 @@
 								</td>
 
 							</tr>
-							<tr  id="gradient-color-row">
+							<tr id="gradient-color-row">
 								<td>Второй цвет:</td>
 								<td>
 									<input type="text" value="#000000" data-jscolor="{}" id="s_light-color-input"
@@ -579,32 +596,36 @@
 								</td>
 
 							</tr>
-							
-							<tr class="logo-header" >
-								<td><button onclick="toggleLogo()" class="btn btn-outline-primary"> <img id="logo-icon" src="res/picture/caret-down-fill.svg">Логотип <img id="img_icons3" src="res/picture/image.svg" alt="">:</button></td>
+
+							<tr class="logo-header">
+								<td><button onclick="toggleLogo()" class="btn btn-outline-primary"> <img id="logo-icon"
+											src="res/picture/caret-down-fill.svg">Логотип <img id="img_icons3"
+											src="res/picture/image.svg" alt="">:</button></td>
 								<td>
 								</td>
 							</tr>
 
-							<tr class="logo-row" >
+							<tr class="logo-row">
 								<td>Изображение:</td>
 								<td>
-									
-										
-										<input type="file" class="form-control" id="qr-image-input" accept="image/*">
-									 
-									
-									
+
+
+									<input type="file" class="form-control" id="qr-image-input" accept="image/*">
+
+
+
 								</td>
 							</tr>
-							<tr class="logo-row" >
+							<tr class="logo-row">
 								<td></td>
 								<td>
-									<button class="btn btn-outline-primary"  onclick="toggleButton_Logo()" id ="logo_button" >
-										<img src="res/picture/logo.jpg" alt="" style="width: 50px; height: 50px;"></button>
+									<button class="btn btn-outline-primary" onclick="toggleButton_Logo()"
+										id="logo_button">
+										<img src="res/picture/logo.jpg" alt=""
+											style="width: 50px; height: 50px;"></button>
 								</td>
 							</tr>
-							<tr class="logo-row" >
+							<tr class="logo-row">
 								<td>Убрать фон:</td>
 								<td>
 									<div class="form-check form-switch">
@@ -614,990 +635,1008 @@
 								</td>
 
 							</tr>
-						</div>
-							<tr>
-								<td></td>
-								<td>
-									<button type="submit" class="btn btn-primary" id="generateButton"
-										style=" font-size: 1rem;">Сгенерировать код </button>
-								</td>
-							</tr>
-							<tr>
-								<td></td>
-								<td>
-									<button type="button" class="btn btn-primary" id="scanButton"
-										style=" font-size: 1rem;">Сканировать код </button>
-								</td>
-							</tr>
-						</tbody>
-					</table>
-				</form>
+		</div>
+		<tr>
+			<td></td>
+			<td>
+				<button type="submit" class="btn btn-primary" id="generateButton"
+					style=" font-size: 1rem;">Сгенерировать код </button>
+			</td>
+		</tr>
+		<tr>
+			<td></td>
+			<td>
+				<button type="button" class="btn btn-primary" id="scanButton" style=" font-size: 1rem;">Сканировать код
+				</button>
+			</td>
+		</tr>
+		</tbody>
+		</table>
+		</form>
 
-				<h2 id="Qr-code_output"></h2>
-				<!--<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="output-qr-code" class="qrcode"></svg>-->
+		<h2 id="Qr-code_output"></h2>
+		<!--<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="output-qr-code" class="qrcode"></svg>-->
 
-				<canvas id="qrcode-canvas" style="background-color:#E8E8E8" download="qr_code_d.jpg"></canvas>
-				
-				<div >
-					<button style="width: 12em;" id="download-btn" class="btn btn-outline-primary"><img width="26"
-							height="26" src="https://img.icons8.com/metro/52/download.png" alt="download" />
+		<canvas id="qrcode-canvas" style="background-color:#E8E8E8" download="qr_code_d.jpg"></canvas>
 
-					</button>
-				</div>
+		<div>
+			<button style="width: 12em;" id="download-btn" class="btn btn-outline-primary"><img width="26" height="26"
+					src="https://img.icons8.com/metro/52/download.png" alt="download" />
 
-
+			</button>
+		</div>
 
 
-				<div id="reader"></div>
-
-				<div id="result"></div>
-				<hr />
-				<script>
-
-document.addEventListener("DOMContentLoaded", function() {
-    const darkColorInput = document.getElementById('dark-color-input');
-    const lightColorInput = document.getElementById('s_light-color-input');
-    const gradientColorRow = document.getElementById('gradient-color-row');
-
-    // Функция для обновления второго цвета
-    function updateLightColor() {
-        if (gradientColorRow.style.display === "none") {
-            lightColorInput.value = darkColorInput.value; // Устанавливаем значение второго цвета равным первому
-        }
-    }
-
-    // Обработчик события для изменения цвета модулей
-    darkColorInput.addEventListener('input', updateLightColor);
-
-    // Вызываем функцию при загрузке страницы, чтобы установить начальное значение
-    updateLightColor();
-});
 
 
-					document.getElementById('flexSwitchCheckDefault1').addEventListener('change', function () {
-						const gradientColorRow = document.getElementById('gradient-color-row');
-						const secondColorInput = document.getElementById('s_light-color-input');
+		<div id="reader"></div>
 
-						if (this.checked) {
-							// Если чекбокс включен, показываем строку и устанавливаем значение по умолчанию
-							gradientColorRow.style.display = 'table-row';
-							secondColorInput.value = '#000000'; // Устанавливаем значение по умолчанию
-							if (secondColorInput.jscolor) {
-								secondColorInput.jscolor.fromString('#000000');
+		<div id="result"></div>
+		<hr />
+		<script>
+
+			document.addEventListener("DOMContentLoaded", function () {
+				const darkColorInput = document.getElementById('dark-color-input');
+				const lightColorInput = document.getElementById('s_light-color-input');
+				const gradientColorRow = document.getElementById('gradient-color-row');
+
+				// Функция для обновления второго цвета
+				function updateLightColor() {
+					if (gradientColorRow.style.display === "none") {
+						lightColorInput.value = darkColorInput.value; // Устанавливаем значение второго цвета равным первому
+					}
+				}
+
+				// Обработчик события для изменения цвета модулей
+				darkColorInput.addEventListener('input', updateLightColor);
+
+				// Вызываем функцию при загрузке страницы, чтобы установить начальное значение
+				updateLightColor();
+			});
+
+
+			document.getElementById('flexSwitchCheckDefault1').addEventListener('change', function () {
+				const gradientColorRow = document.getElementById('gradient-color-row');
+				const secondColorInput = document.getElementById('s_light-color-input');
+
+				if (this.checked) {
+					// Если чекбокс включен, показываем строку и устанавливаем значение по умолчанию
+					gradientColorRow.style.display = 'table-row';
+					secondColorInput.value = '#000000'; // Устанавливаем значение по умолчанию
+					if (secondColorInput.jscolor) {
+						secondColorInput.jscolor.fromString('#000000');
+					}
+
+				} else {
+					// Если чекбокс выключен, скрываем строку и меняем значение на #FFFFFF
+					gradientColorRow.style.display = 'none';
+					secondColorInput.value = document.getElementById('dark-color-input').value; // Устанавливаем значение #FFFFFF
+					if (secondColorInput.jscolor) {
+						secondColorInput.jscolor.fromString(document.getElementById('dark-color-input').value);
+					}
+				}
+			});
+			function toggleButton_Logo() {
+				const imageInput = document.getElementById('qr-image-input');
+				document.getElementById('errcorlvl-high').checked = true;
+				// Создаем объект File из URL
+				fetch('res/picture/logo.jpg')
+					.then(response => response.blob())
+					.then(blob => {
+						const file = new File([blob], 'Logo_Kubstu.png', { type: blob.type });
+						const dataTransfer = new DataTransfer();
+						dataTransfer.items.add(file);
+						imageInput.files = dataTransfer.files; // Устанавливаем файлы в input
+					})
+					.catch(error => console.error('Ошибка при загрузке файла:', error));
+			}
+
+			function toggleDesign() {
+				const rows = document.querySelectorAll('.design-row');
+				const icon = document.getElementById('design-icon');
+				const gradientColorRow = document.getElementById('gradient-color-row');
+
+				// Переключаем видимость строк
+				rows.forEach(row => {
+					if (row.classList.contains('hidden')) {
+						// Если строка скрыта, показываем её
+						row.classList.remove('hidden');
+						row.style.display = ''; // Восстанавливаем display (например, table-row)
+					} else {
+						// Если строка видима, скрываем её
+						row.classList.add('hidden');
+						// Ждём завершения анимации, затем скрываем строку полностью
+						row.addEventListener('transitionend', () => {
+							if (row.classList.contains('hidden')) {
+								row.style.display = 'none';
 							}
-							
-						} else {
-							// Если чекбокс выключен, скрываем строку и меняем значение на #FFFFFF
-							gradientColorRow.style.display = 'none';
-							secondColorInput.value = document.getElementById('dark-color-input').value; // Устанавливаем значение #FFFFFF
-							if (secondColorInput.jscolor) {
-								secondColorInput.jscolor.fromString(document.getElementById('dark-color-input').value);
+						}, { once: true });
+					}
+				});
+
+
+				// Закрываем все чекбоксы
+				const checkboxes = document.querySelectorAll('.form-check-input');
+				checkboxes.forEach(checkbox => {
+					checkbox.checked = false; // Сбрасываем состояние чекбокса
+				});
+
+				// Скрываем второй цвет, если он открыт
+				gradientColorRow.style.display = 'none';
+
+				// Меняем иконку
+				if (icon.src.includes('caret-down-fill.svg')) {
+					icon.src = 'res/picture/caret-right-fill.svg'; // Меняем на caret-right-fill.svg
+
+
+				} else {
+					icon.src = 'res/picture/caret-down-fill.svg'; // Меняем обратно на caret-down-fill.svg
+				}
+			}
+
+			function toggleGradientColorRow() {
+				const gradientColorRow = document.getElementById('gradient-color-row');
+				const checkbox = document.getElementById('flexSwitchCheckDefault1');
+
+				// Если чекбокс включен, показываем второй цвет, иначе скрываем
+				gradientColorRow.style.display = checkbox.checked ? '' : 'none';
+			}
+			function toggleParams() {
+				const rows = document.querySelectorAll('.params-row');
+				const icon = document.getElementById('params-icon');
+
+				// Переключаем видимость строк
+				rows.forEach(row => {
+					if (row.classList.contains('hidden')) {
+						// Если строка скрыта, показываем её
+						row.classList.remove('hidden');
+						row.style.display = ''; // Восстанавливаем display (например, table-row)
+					} else {
+						// Если строка видима, скрываем её
+						row.classList.add('hidden');
+						// Ждём завершения анимации, затем скрываем строку полностью
+						row.addEventListener('transitionend', () => {
+							if (row.classList.contains('hidden')) {
+								row.style.display = 'none';
 							}
-						}
-					});
-					function toggleButton_Logo() {
-    const imageInput = document.getElementById('qr-image-input');
-	document.getElementById('errcorlvl-high').checked = true;
-    // Создаем объект File из URL
-    fetch('res/picture/logo.jpg')
-        .then(response => response.blob())
-        .then(blob => {
-            const file = new File([blob], 'Logo_Kubstu.png', { type: blob.type });
-            const dataTransfer = new DataTransfer();
-            dataTransfer.items.add(file);
-            imageInput.files = dataTransfer.files; // Устанавливаем файлы в input
-        })
-        .catch(error => console.error('Ошибка при загрузке файла:', error));
-}
+						}, { once: true });
+					}
+				});
 
-function toggleDesign() {
-	const rows = document.querySelectorAll('.design-row');
-        const icon = document.getElementById('design-icon');
-        const gradientColorRow = document.getElementById('gradient-color-row');
-		
-        // Переключаем видимость строк
-        rows.forEach(row => {
-        if (row.classList.contains('hidden')) {
-            // Если строка скрыта, показываем её
-            row.classList.remove('hidden');
-            row.style.display = ''; // Восстанавливаем display (например, table-row)
-        } else {
-            // Если строка видима, скрываем её
-            row.classList.add('hidden');
-            // Ждём завершения анимации, затем скрываем строку полностью
-            row.addEventListener('transitionend', () => {
-                if (row.classList.contains('hidden')) {
-                    row.style.display = 'none';
-                }
-            }, { once: true });
-        }
-    });
+				// Меняем иконку
+				if (icon.src.includes('caret-down-fill.svg')) {
+					icon.src = 'res/picture/caret-right-fill.svg'; // Меняем на caret-right-fill.svg
+				} else {
+					icon.src = 'res/picture/caret-down-fill.svg'; // Меняем обратно на caret-down-fill.svg
+				}
+			}
+			function toggleLogo() {
+				const rows = document.querySelectorAll('.logo-row');
+				const icon = document.getElementById('logo-icon');
 
+				rows.forEach(row => {
+					if (row.classList.contains('hidden')) {
+						// Если строка скрыта, показываем её
+						row.classList.remove('hidden');
+						row.style.display = ''; // Восстанавливаем display (например, table-row)
+					} else {
+						// Если строка видима, скрываем её
+						row.classList.add('hidden');
+						// Ждём завершения анимации, затем скрываем строку полностью
+						row.addEventListener('transitionend', () => {
+							if (row.classList.contains('hidden')) {
+								row.style.display = 'none';
+							}
+						}, { once: true });
+					}
+				});
 
-        // Закрываем все чекбоксы
-        const checkboxes = document.querySelectorAll('.form-check-input');
-        checkboxes.forEach(checkbox => {
-            checkbox.checked = false; // Сбрасываем состояние чекбокса
-        });
+				// Меняем иконку
+				// icon.classList.toggle('rotated');
 
-        // Скрываем второй цвет, если он открыт
-        gradientColorRow.style.display = 'none';
-		
-        // Меняем иконку
-        if (icon.src.includes('caret-down-fill.svg')) {
-            icon.src = 'res/picture/caret-right-fill.svg'; // Меняем на caret-right-fill.svg
+				// Меняем src иконки
+				if (icon.src.includes('caret-down-fill.svg')) {
+					icon.src = 'res/picture/caret-right-fill.svg';
+				} else {
+					icon.src = 'res/picture/caret-down-fill.svg';
+				}
+			}
+			document.getElementById('customRange5').addEventListener('input', function () {
+				document.getElementById('force-size').value = this.value;
+			});
 
-
-        } else {
-            icon.src = 'res/picture/caret-down-fill.svg'; // Меняем обратно на caret-down-fill.svg
-        }
-    }
-
-    function toggleGradientColorRow() {
-        const gradientColorRow = document.getElementById('gradient-color-row');
-        const checkbox = document.getElementById('flexSwitchCheckDefault1');
-
-        // Если чекбокс включен, показываем второй цвет, иначе скрываем
-        gradientColorRow.style.display = checkbox.checked ? '' : 'none';
-    }
-	function toggleParams() {
-        const rows = document.querySelectorAll('.params-row');
-        const icon = document.getElementById('params-icon');
-
-        // Переключаем видимость строк
-        rows.forEach(row => {
-        if (row.classList.contains('hidden')) {
-            // Если строка скрыта, показываем её
-            row.classList.remove('hidden');
-            row.style.display = ''; // Восстанавливаем display (например, table-row)
-        } else {
-            // Если строка видима, скрываем её
-            row.classList.add('hidden');
-            // Ждём завершения анимации, затем скрываем строку полностью
-            row.addEventListener('transitionend', () => {
-                if (row.classList.contains('hidden')) {
-                    row.style.display = 'none';
-                }
-            }, { once: true });
-        }
-    });
-
-        // Меняем иконку
-        if (icon.src.includes('caret-down-fill.svg')) {
-            icon.src = 'res/picture/caret-right-fill.svg'; // Меняем на caret-right-fill.svg
-        } else {
-            icon.src = 'res/picture/caret-down-fill.svg'; // Меняем обратно на caret-down-fill.svg
-        }
-    }
-	function toggleLogo() {
-    const rows = document.querySelectorAll('.logo-row');
-    const icon = document.getElementById('logo-icon');
-
-    rows.forEach(row => {
-        if (row.classList.contains('hidden')) {
-            // Если строка скрыта, показываем её
-            row.classList.remove('hidden');
-            row.style.display = ''; // Восстанавливаем display (например, table-row)
-        } else {
-            // Если строка видима, скрываем её
-            row.classList.add('hidden');
-            // Ждём завершения анимации, затем скрываем строку полностью
-            row.addEventListener('transitionend', () => {
-                if (row.classList.contains('hidden')) {
-                    row.style.display = 'none';
-                }
-            }, { once: true });
-        }
-    });
-
-    // Меняем иконку
-   // icon.classList.toggle('rotated');
-
-    // Меняем src иконки
-    if (icon.src.includes('caret-down-fill.svg')) {
-        icon.src = 'res/picture/caret-right-fill.svg';
-    } else {
-        icon.src = 'res/picture/caret-down-fill.svg';
-    }
-}
-  document.getElementById('customRange5').addEventListener('input', function () {
-            document.getElementById('force-size').value = this.value;
-        });
-
-        document.getElementById('force-size').addEventListener('input', function () {
-            document.getElementById('customRange5').value = this.value;
-        });
-
-
-					
+			document.getElementById('force-size').addEventListener('input', function () {
+				document.getElementById('customRange5').value = this.value;
+			});
 
 
 
-					
-					let scanner;
 
-					// Обработчик для кнопки "Сгенерировать код"
-					document.getElementById('generateButton').addEventListener('click', function () {
-						// Показываем элементы для генерации QR-кода
-						document.getElementById('Qr-code_output').style.display = 'block';
-						document.getElementById('qrcode-canvas').style.display = 'block';
-						document.getElementById('download-btn').style.display = 'block';
-						// Скрываем элементы для сканирования
-						document.getElementById('reader').style.display = 'none';
-						document.getElementById('result').style.display = 'none';
 
-						// Здесь можно добавить логику генерации QR-кода
-						// Например, установить текст в Qr-code_output
-						document.getElementById('Qr-code_output').innerText = '';
-						// Добавьте код для генерации QR-кода на canvas
-					});
 
-					// Обработчик для кнопки "Сканирование кода"
-					document.getElementById('scanButton').addEventListener('click', function () {
-						// Показываем элементы для сканирования
-						document.getElementById('reader').style.display = 'block';
-						document.getElementById('result').style.display = 'block';
 
-						// Скрываем элементы для генерации
-						document.getElementById('Qr-code_output').style.display = 'none';
-						document.getElementById('qrcode-canvas').style.display = 'none';
-						document.getElementById('download-btn').style.display = 'none';
-						// Инициализация сканера
-						scanner = new Html5QrcodeScanner('reader', {
-							qrbox: {
-								width: 250,
-								height: 250,
-							},
-							fps: 20,
-						});
+			let scanner;
 
-						// Запускаем сканер
-						scanner.render(success, error);
-					});
+			// Обработчик для кнопки "Сгенерировать код"
+			document.getElementById('generateButton').addEventListener('click', function () {
+				// Показываем элементы для генерации QR-кода
+				document.getElementById('Qr-code_output').style.display = 'block';
+				document.getElementById('qrcode-canvas').style.display = 'block';
+				document.getElementById('download-btn').style.display = 'block';
+				// Скрываем элементы для сканирования
+				document.getElementById('reader').style.display = 'none';
+				document.getElementById('result').style.display = 'none';
 
-					function success(result) {
-						document.getElementById('result').innerHTML = `
+				// Здесь можно добавить логику генерации QR-кода
+				// Например, установить текст в Qr-code_output
+				document.getElementById('Qr-code_output').innerText = '';
+				// Добавьте код для генерации QR-кода на canvas
+			});
+
+			// Обработчик для кнопки "Сканирование кода"
+			document.getElementById('scanButton').addEventListener('click', function () {
+				// Показываем элементы для сканирования
+				document.getElementById('reader').style.display = 'block';
+				document.getElementById('result').style.display = 'block';
+
+				// Скрываем элементы для генерации
+				document.getElementById('Qr-code_output').style.display = 'none';
+				document.getElementById('qrcode-canvas').style.display = 'none';
+				document.getElementById('download-btn').style.display = 'none';
+				// Инициализация сканера
+				scanner = new Html5QrcodeScanner('reader', {
+					qrbox: {
+						width: 250,
+						height: 250,
+					},
+					fps: 20,
+				});
+
+				// Запускаем сканер
+				scanner.render(success, error);
+			});
+
+			function success(result) {
+				document.getElementById('result').innerHTML = `
 		Результат: <a href="${result}" target="_blank">${result}</a>
 	`;
 
 
-						// Останавливаем сканер
-						scanner.clear();
-					}
+				// Останавливаем сканер
+				scanner.clear();
+			}
 
-					function error(err) {
-						console.error(err);
-						// Выводим ошибки в консоль
-					}
+			function error(err) {
+				console.error(err);
+				// Выводим ошибки в консоль
+			}
 
-					const canvas = document.getElementById('qrcode-canvas');
-					const ctx = canvas.getContext('2d');
+			const canvas = document.getElementById('qrcode-canvas');
+			const ctx = canvas.getContext('2d');
 
-					// Пример рисования на canvas (вы можете заменить это своим QR-кодом)
-					ctx.fillStyle = 'blue';
-					ctx.fillRect(50, 50, 200, 200);
+			// Пример рисования на canvas (вы можете заменить это своим QR-кодом)
+			ctx.fillStyle = 'blue';
+			ctx.fillRect(50, 50, 200, 200);
 
-					document.getElementById('download-btn').addEventListener('click', function () {
+			document.getElementById('download-btn').addEventListener('click', function () {
+    // Получаем элемент canvas
     const canvas = document.getElementById('qrcode-canvas');
-    const link = document.createElement('a');
 
-    // Получаем данные изображения из canvas
-    link.href = canvas.toDataURL('image/jpeg'); // или 'image/png' для PNG-формата
-    link.download = 'qr_code_d.jpg'; // Имя файла, который будет сохранён
+    // Преобразуем canvas в Data URL (изображение в формате JPEG)
+    const image = canvas.toDataURL('image/jpeg');
 
-    // Программно кликаем по ссылке для инициирования загрузки
-    link.click();
+    // Токен бота (получите его от создателя бота)
+    const botToken = '7650373965:AAFUdBo-eMpIVIn_wXngV7TUs7lWtt1Lqq8';
+
+    // chat_id пользователя (можно получить из Telegram WebApp)
+    const chatId = Telegram.WebApp.initDataUnsafe.user.id;
+
+    // Преобразуем Data URL в Blob
+    fetch(image)
+        .then(res => res.blob())
+        .then(blob => {
+            // Создаем FormData для отправки файла
+            const formData = new FormData();
+            formData.append('photo', blob, 'qr_code.jpg');
+
+            // Отправляем изображение через Telegram Bot API
+            fetch(`https://api.telegram.org/bot${botToken}/sendPhoto?chat_id=${chatId}`, {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                console.log('Изображение отправлено:', data);
+                alert('QR-код отправлен в чат с ботом! Проверьте Telegram.');
+            })
+            .catch(error => {
+                console.error('Ошибка при отправке изображения:', error);
+                alert('Ошибка при отправке QR-кода. Попробуйте ещё раз.');
+            });
+        });
 });
 
 
-					document.addEventListener('DOMContentLoaded', function () {
-						const checkbox = document.getElementById('flexSwitchCheckDefault');
-						const canvas = document.getElementById('qrcode-canvas');
+			document.addEventListener('DOMContentLoaded', function () {
+				const checkbox = document.getElementById('flexSwitchCheckDefault');
+				const canvas = document.getElementById('qrcode-canvas');
 
-						checkbox.addEventListener('change', function () {
-							if (checkbox.checked) {
-								canvas.style.padding = '1em'; // Добавляем отступ
-							} else {
-								canvas.style.padding = '0'; // Убираем отступ
-							}
-						});
-					});
-
-
-				</script>
-				<h2>Пошаговый процесс генерации QR-кода</h2>
-				<div class="accordion">
-
-					<section>
-						<h2 class="accordion-header" id="panelsStayOpen-headingOne">
-							<button class="accordion-button" type="button" data-bs-toggle="collapse"
-								data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
-								aria-controls="panelsStayOpen-collapseOne">
-								<h3>1. Анализ текста </h3>
-							</button>
-						</h2>
-						<div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
-							aria-labelledby="panelsStayOpen-headingOne">
-							<div class="accordion-body">
-								<p>Количество символов в текстовом поле<img src="res/picture/file-text.svg" alt="">: <span id="num-code-points"></span></p>
-								<p>Информация о каждом символе и его возможной кодировке:</p>
-								<table id="character-analysis" class="possibly-long table table-striped ">
-									<thead>
-										<tr>
-											<th>Индекс</th>
-											<th>Символ</th>
-											<th>Юникод</th>
-											<th>Ц</th>
-											<th>БЦ</th>
-											<th>Б</th>
-											<th>К</th>
-										</tr>
-									</thead>
-									<tbody></tbody>
-								</table>
-								<p>Может ли каждый символ быть закодирован:</p>
-								<table id="character-mode-summary" class="table table-striped">
-									<thead>
-										<tr>
-											<th>Кодирование</th>
-											<th>Возможно ли закодировать</th>
-										</tr>
-									</thead>
-									<tbody></tbody>
-								</table>
-								<p>Выбранный режим для кодирования всех символов: <b><span
-											id="chosen-segment-mode"></span></b></p>
-							</div>
-						</div>
-					</section>
+				checkbox.addEventListener('change', function () {
+					if (checkbox.checked) {
+						canvas.style.padding = '1em'; // Добавляем отступ
+					} else {
+						canvas.style.padding = '0'; // Убираем отступ
+					}
+				});
+			});
 
 
-					<section>
-						<h2 class="accordion-header" id="panelsStayOpen-headingTwo">
-							<button class="accordion-button" type="button" data-bs-toggle="collapse"
-								data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
-								aria-controls="panelsStayOpen-collapseTwo">
-								<h3>2. Создание сегмента данных</h3>
-							</button>
-						</h2>
-						<div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show"
-							aria-labelledby="panelsStayOpen-headingTwo">
-							<div class="accordion-body">
-								<p id="description">Переведем каждый символ в двоичное число. For numeric and
-									alphanumeric
-									modes, consecutive characters are grouped together before being encoded into bits.
-								</p>
-								<table id="data-segment-chars" class="possibly-long table table-striped">
-									<thead>
-										<tr>
-											<th>Индех</th>
-											<th>Символ</th>
-											<th>Юникод</th>
-											<th>Значение-1</th>
-											<th>Значение-2</th>
-											<th>Биты</th>
-										</tr>
-									</thead>
-									<tbody></tbody>
-								</table>
-								<p>Характеристики созданного сегмент:</p>
-								<ul>
-									<!--<li>Режим: <span id="segment-mode"></span></li>-->
-									<li>Количество: <span id="segment-count"></span></li>
-									<li>Данные: <span id="segment-data"></span></li>
-								</ul>
-							</div>
-						</div>
-					</section>
+		</script>
+		<h2>Пошаговый процесс генерации QR-кода</h2>
+		<div class="accordion">
 
-
-
-					<section>
-						<h2 class="accordion-header" id="panelsStayOpen-headingT">
-							<button class="accordion-button" type="button" data-bs-toggle="collapse"
-								data-bs-target="#panelsStayOpen-collapseT" aria-expanded="false"
-								aria-controls="panelsStayOpen-collapseT">
-								<h3>3. Выбор версии </h3>
-							</button>
-						</h2>
-						<div id="panelsStayOpen-collapseT" class="accordion-collapse collapse show"
-							aria-labelledby="panelsStayOpen-headingT">
-							<div class="accordion-body">
-								<p id="step_2_description">Общая длина в битах, необходимая для представления списка
-									сегментов,
-									в зависимости от версии:</p>
-
-								<table id="segment-size">
-									<thead>
-										<tr>
-											<th>Диапазон</th>
-											<th>Числовые биты</th>
-											<th>Количество байтов</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>Версии 1 ~ 9</td>
-											<td></td>
-											<td></td>
-										</tr>
-										<tr>
-											<td>Версии 10 ~ 26</td>
-											<td></td>
-											<td></td>
-										</tr>
-										<tr>
-											<td>Версии 27 ~ 40</td>
-											<td></td>
-											<td></td>
-										</tr>
-									</tbody>
-								</table>
-
-
-								<p>Ёмкость QR-кода в кодовых словах для каждой версии и уровня исправления ошибок, а
-									также
-									соответствие данных (зелёный/красный фон):</p>
-								<table id="codewords-per-version" class="possibly-long table table-striped">
-									<thead>
-										<tr>
-											<th>Версия</th>
-											<th> Low</th>
-											<th> Medium</th>
-											<th> Quartile</th>
-											<th> High</th>
-										</tr>
-									</thead>
-									<tbody></tbody>
-								</table>
-								<a id="href_vers" href="https://www.qrcode.com/en/about/version.html">Версии QR-кода:
-									https://www.qrcode.com/en/about/version.html</a>
-								<p>Выбранная версия: <span id="chosen-version"></span></p>
-							</div>
-						</div>
-					</section>
-
-					<section>
-						<h2 class="accordion-header" id="panelsStayOpen-headingF">
-							<button class="accordion-button" type="button" data-bs-toggle="collapse"
-								data-bs-target="#panelsStayOpen-collapseF" aria-expanded="false"
-								aria-controls="panelsStayOpen-collapseF">
-								<h3>4. Объединение строк </h3>
-							</button>
-						</h2>
-						<div id="panelsStayOpen-collapseF" class="accordion-collapse collapse show"
-							aria-labelledby="panelsStayOpen-headingF">
-							<div class="accordion-body">
-								<!--<p>Добавление служебной информации:</p>-->
-								<table id="segment-and-padding-bits" class="table table-striped">
-									<thead>
-										<tr>
-											<th>Поле</th>
-											<th>Биты</th>
-											<th>Кол-во бит</th>
-											<th>Сумма битов</th>
-										</tr>
-									</thead>
-									<tbody></tbody>
-								</table>
-								<!--<p>:</p>-->
-								<ul>
-									<li>
-										<p>Способ кодирования всегда состоит из 4 битов.(0001 - цифровое кодирования,
-											0010 -
-											буквенно-цифровое, 0100 - побайтовое)</p>
-									</li>
-									<li>
-										<p>Количество данных — это количество кодируемых символов, а для
-											побайтового — количество байт. <a href="" data-bs-toggle="modal"
-												data-bs-target="#exampleModal">Зависит кодировки и версии</a></p>
-									</li>
-
-									<li>
-										<p>Терминатор в QR-коде — это битовый шаблон, состоящий из нулей, используемый
-											для
-											индикации окончания двоичной строки, представляющей данные.</p>
-									</li>
-									<li>
-										<p>Дополнение битами составляет от нуля до семи «нулевых» битов для заполнения
-											всех
-											неиспользуемых битов в последнем байте.</p>
-									</li>
-									<li>
-										<p>Дополнение байтами состоит из чередующихся (в шестнадцатеричном формате)
-											<span class="binary-value">EC</span> и <span class="binary-value">11</span>
-											до
-											достижения максимальной ёмкости.
-										</p>
-									</li>
-								</ul>
-								<p id="full-bitstream">Полная последовательность битов данных: <span
-										class="binary-value"></span>
-								</p>
-								<p>Вся последовательность байтов кодовых слов данных, отображаемая в шестнадцатеричном
-									виде:
-									<span id="all-data-codewords" class="binary-value"></span>
-								</p>
-							</div>
-						</div>
-					</section>
-
-
-					<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-						aria-hidden="true">
-						<div class="modal-dialog modal-dialog-centered">
-							<div class="modal-dialog"
-								style="position: absolute;width: 350px; left: 50%;top: 30%; transform: translate(-50%, -30%);">
-								<div class="modal-content">
-									<div class="modal-header">
-										<h5 class="modal-title" id="exampleModalLabel">Длина поля количества данных</h5>
-										<button type="button" class="btn-close" data-bs-dismiss="modal"
-											aria-label="Close"></button>
-									</div>
-									<div class="modal-body">
-										<div class="table-responsive">
-											<table id="modal_table">
-												<tbody>
-													<tr>
-														<td>Кодировка</td>
-														<td>Версия 1–9</td>
-														<td>Версия 10–26</td>
-														<td>Версия 27–40</td>
-													</tr>
-													<tr>
-														<td>Цифровое</td>
-														<td>10 бит</td>
-														<td>12 бит</td>
-														<td>14 бит</td>
-													</tr>
-													<tr>
-														<td>Буквенно-цифровое</td>
-														<td>9 бит</td>
-														<td>11 бит</td>
-														<td>13 бит</td>
-													</tr>
-													<tr>
-														<td>Байтовое</td>
-														<td>8 бит</td>
-														<td>16 бит</td>
-														<td>16 бит</td>
-													</tr>
-												</tbody>
-											</table>
-										</div>
-									</div>
-
-								</div>
-							</div>
-						</div>
+			<section>
+				<h2 class="accordion-header" id="panelsStayOpen-headingOne">
+					<button class="accordion-button" type="button" data-bs-toggle="collapse"
+						data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
+						aria-controls="panelsStayOpen-collapseOne">
+						<h3>1. Анализ текста </h3>
+					</button>
+				</h2>
+				<div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show"
+					aria-labelledby="panelsStayOpen-headingOne">
+					<div class="accordion-body">
+						<p>Количество символов в текстовом поле<img src="res/picture/file-text.svg" alt="">: <span
+								id="num-code-points"></span></p>
+						<p>Информация о каждом символе и его возможной кодировке:</p>
+						<table id="character-analysis" class="possibly-long table table-striped ">
+							<thead>
+								<tr>
+									<th>Индекс</th>
+									<th>Символ</th>
+									<th>Юникод</th>
+									<th>Ц</th>
+									<th>БЦ</th>
+									<th>Б</th>
+									<th>К</th>
+								</tr>
+							</thead>
+							<tbody></tbody>
+						</table>
+						<p>Может ли каждый символ быть закодирован:</p>
+						<table id="character-mode-summary" class="table table-striped">
+							<thead>
+								<tr>
+									<th>Кодирование</th>
+									<th>Возможно ли закодировать</th>
+								</tr>
+							</thead>
+							<tbody></tbody>
+						</table>
+						<p>Выбранный режим для кодирования всех символов: <b><span id="chosen-segment-mode"></span></b>
+						</p>
 					</div>
+				</div>
+			</section>
 
-					<div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel"
-						aria-hidden="true">
-						<div class="modal-dialog"
-							style="position: absolute; left: 50%;top: 30%; transform: translate(-50%, -30%);">
-							<div class="modal-content ">
-								<div class="modal-header" ">
-		  <h5 class=" modal-title" id="exampleModalLabel">Исключающее ИЛИ:</h5>
-									<button type="button" class="btn-close" data-bs-dismiss="modal"
-										aria-label="Close"></button>
-								</div>
-								<div class="modal-body" style="display: flex; justify-content: center;">
-									<table style="text-align: center; ">
+
+			<section>
+				<h2 class="accordion-header" id="panelsStayOpen-headingTwo">
+					<button class="accordion-button" type="button" data-bs-toggle="collapse"
+						data-bs-target="#panelsStayOpen-collapseTwo" aria-expanded="false"
+						aria-controls="panelsStayOpen-collapseTwo">
+						<h3>2. Создание сегмента данных</h3>
+					</button>
+				</h2>
+				<div id="panelsStayOpen-collapseTwo" class="accordion-collapse collapse show"
+					aria-labelledby="panelsStayOpen-headingTwo">
+					<div class="accordion-body">
+						<p id="description">Переведем каждый символ в двоичное число. For numeric and
+							alphanumeric
+							modes, consecutive characters are grouped together before being encoded into bits.
+						</p>
+						<table id="data-segment-chars" class="possibly-long table table-striped">
+							<thead>
+								<tr>
+									<th>Индех</th>
+									<th>Символ</th>
+									<th>Юникод</th>
+									<th>Значение-1</th>
+									<th>Значение-2</th>
+									<th>Биты</th>
+								</tr>
+							</thead>
+							<tbody></tbody>
+						</table>
+						<p>Характеристики созданного сегмент:</p>
+						<ul>
+							<!--<li>Режим: <span id="segment-mode"></span></li>-->
+							<li>Количество: <span id="segment-count"></span></li>
+							<li>Данные: <span id="segment-data"></span></li>
+						</ul>
+					</div>
+				</div>
+			</section>
+
+
+
+			<section>
+				<h2 class="accordion-header" id="panelsStayOpen-headingT">
+					<button class="accordion-button" type="button" data-bs-toggle="collapse"
+						data-bs-target="#panelsStayOpen-collapseT" aria-expanded="false"
+						aria-controls="panelsStayOpen-collapseT">
+						<h3>3. Выбор версии </h3>
+					</button>
+				</h2>
+				<div id="panelsStayOpen-collapseT" class="accordion-collapse collapse show"
+					aria-labelledby="panelsStayOpen-headingT">
+					<div class="accordion-body">
+						<p id="step_2_description">Общая длина в битах, необходимая для представления списка
+							сегментов,
+							в зависимости от версии:</p>
+
+						<table id="segment-size">
+							<thead>
+								<tr>
+									<th>Диапазон</th>
+									<th>Числовые биты</th>
+									<th>Количество байтов</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Версии 1 ~ 9</td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>Версии 10 ~ 26</td>
+									<td></td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>Версии 27 ~ 40</td>
+									<td></td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+
+
+						<p>Ёмкость QR-кода в кодовых словах для каждой версии и уровня исправления ошибок, а
+							также
+							соответствие данных (зелёный/красный фон):</p>
+						<table id="codewords-per-version" class="possibly-long table table-striped">
+							<thead>
+								<tr>
+									<th>Версия</th>
+									<th> Low</th>
+									<th> Medium</th>
+									<th> Quartile</th>
+									<th> High</th>
+								</tr>
+							</thead>
+							<tbody></tbody>
+						</table>
+						<a id="href_vers" href="https://www.qrcode.com/en/about/version.html">Версии QR-кода:
+							https://www.qrcode.com/en/about/version.html</a>
+						<p>Выбранная версия: <span id="chosen-version"></span></p>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h2 class="accordion-header" id="panelsStayOpen-headingF">
+					<button class="accordion-button" type="button" data-bs-toggle="collapse"
+						data-bs-target="#panelsStayOpen-collapseF" aria-expanded="false"
+						aria-controls="panelsStayOpen-collapseF">
+						<h3>4. Объединение строк </h3>
+					</button>
+				</h2>
+				<div id="panelsStayOpen-collapseF" class="accordion-collapse collapse show"
+					aria-labelledby="panelsStayOpen-headingF">
+					<div class="accordion-body">
+						<!--<p>Добавление служебной информации:</p>-->
+						<table id="segment-and-padding-bits" class="table table-striped">
+							<thead>
+								<tr>
+									<th>Поле</th>
+									<th>Биты</th>
+									<th>Кол-во бит</th>
+									<th>Сумма битов</th>
+								</tr>
+							</thead>
+							<tbody></tbody>
+						</table>
+						<!--<p>:</p>-->
+						<ul>
+							<li>
+								<p>Способ кодирования всегда состоит из 4 битов.(0001 - цифровое кодирования,
+									0010 -
+									буквенно-цифровое, 0100 - побайтовое)</p>
+							</li>
+							<li>
+								<p>Количество данных — это количество кодируемых символов, а для
+									побайтового — количество байт. <a href="" data-bs-toggle="modal"
+										data-bs-target="#exampleModal">Зависит кодировки и версии</a></p>
+							</li>
+
+							<li>
+								<p>Терминатор в QR-коде — это битовый шаблон, состоящий из нулей, используемый
+									для
+									индикации окончания двоичной строки, представляющей данные.</p>
+							</li>
+							<li>
+								<p>Дополнение битами составляет от нуля до семи «нулевых» битов для заполнения
+									всех
+									неиспользуемых битов в последнем байте.</p>
+							</li>
+							<li>
+								<p>Дополнение байтами состоит из чередующихся (в шестнадцатеричном формате)
+									<span class="binary-value">EC</span> и <span class="binary-value">11</span>
+									до
+									достижения максимальной ёмкости.
+								</p>
+							</li>
+						</ul>
+						<p id="full-bitstream">Полная последовательность битов данных: <span
+								class="binary-value"></span>
+						</p>
+						<p>Вся последовательность байтов кодовых слов данных, отображаемая в шестнадцатеричном
+							виде:
+							<span id="all-data-codewords" class="binary-value"></span>
+						</p>
+					</div>
+				</div>
+			</section>
+
+
+			<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+				aria-hidden="true">
+				<div class="modal-dialog modal-dialog-centered">
+					<div class="modal-dialog"
+						style="position: absolute;width: 350px; left: 50%;top: 30%; transform: translate(-50%, -30%);">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">Длина поля количества данных</h5>
+								<button type="button" class="btn-close" data-bs-dismiss="modal"
+									aria-label="Close"></button>
+							</div>
+							<div class="modal-body">
+								<div class="table-responsive">
+									<table id="modal_table">
 										<tbody>
 											<tr>
-												<td>X</td>
-												<td>Y</td>
-												<td>X⊕Y</td>
+												<td>Кодировка</td>
+												<td>Версия 1–9</td>
+												<td>Версия 10–26</td>
+												<td>Версия 27–40</td>
 											</tr>
 											<tr>
-												<td>0</td>
-												<td>0</td>
-												<td>0</td>
+												<td>Цифровое</td>
+												<td>10 бит</td>
+												<td>12 бит</td>
+												<td>14 бит</td>
 											</tr>
 											<tr>
-												<td>0</td>
-												<td>1</td>
-												<td>1</td>
+												<td>Буквенно-цифровое</td>
+												<td>9 бит</td>
+												<td>11 бит</td>
+												<td>13 бит</td>
 											</tr>
 											<tr>
-												<td>1</td>
-												<td>0</td>
-												<td>1</td>
-											</tr>
-											<tr>
-												<td>1</td>
-												<td>1</td>
-												<td>0</td>
+												<td>Байтовое</td>
+												<td>8 бит</td>
+												<td>16 бит</td>
+												<td>16 бит</td>
 											</tr>
 										</tbody>
 									</table>
 								</div>
-
 							</div>
+
 						</div>
 					</div>
-
-					<div class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel"
-						aria-hidden="true">
-						<div class="modal-dialog">
-							<div class="modal-content" style="width: 300px;">
-								<div class="modal-header">
-									<h5 class=" modal-title" id="exampleModalLabel">Сочетание ЧБЧЧЧБЧ:</h5>
-									<button type="button" class="btn-close" data-bs-dismiss="modal"
-										aria-label="Close"></button>
-								</div>
-								<div class="modal-body">
-									<img src="res/picture/rule.jpg" alt="">
-								</div>
-
-							</div>
-						</div>
-					</div>
-
-					<section>
-						<h2 class="accordion-header" id="panelsStayOpen-headingFive">
-							<button class="accordion-button" type="button" data-bs-toggle="collapse"
-								data-bs-target="#panelsStayOpen-collapseFive" aria-expanded="false"
-								aria-controls="panelsStayOpen-collapseFive">
-								<h3>5. Разбиение на блоки</h3>
-							</button>
-						</h2>
-						<div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse show"
-							aria-labelledby="panelsStayOpen-headingFive">
-							<div class="accordion-body">
-								<p>Данные про все блоки:</p>
-								<table id="block-stats" class="table table-striped">
-									<tbody>
-										<tr>
-											<td>Блоков данных: </td>
-											<td></td>
-										</tr>
-										<tr>
-											<td>Количество блоков: </td>
-											<td></td>
-										</tr>
-										<tr>
-											<td>Кол-во данных в коротком блоке:</td>
-											<td></td>
-										</tr>
-										<tr>
-											<td>Кол-во данных в длинном блоке: </td>
-											<td></td>
-										</tr>
-										<tr>
-											<td>Блоков коррекции: </td>
-											<td></td>
-										</tr>
-										<tr>
-											<td>Коротких блоков: </td>
-											<td></td>
-										</tr>
-										<tr>
-											<td>Длинных блоков: </td>
-											<td></td>
-										</tr>
-									</tbody>
-								</table>
-								<!-- <p>Split the sequence of data codewords (green background) into short and long blocks; then for each block, compute the ECC codewords (blue) and append them to the end of the block:</p>-->
-								<div style="overflow-x:auto">
-									<table id="blocks-and-ecc" class="possibly-long">
-										<thead>
-											<tr>
-												<th rowspan="2" colspan="2"></th>
-												<th>Номер блока</th>
-											</tr>
-										</thead>
-										<tbody></tbody>
-									</table>
-
-								</div>
-
-								<p>Конечная последовательность кодовых слов, сформированная путем чередования
-									данных/кодовых
-									слов ECC из разных блоков:<span id="interleaved-codewords"
-										class="binary-value"></span></p>
-								<p>Конечная последовательность битов для рисования при сканировании зигзагом: <span
-										id="final-bit-sequence" class="binary-value"></span></p>
-							</div>
-						</div>
-					</section>
-
-
-
-					<section>
-						<h2 class="accordion-header" id="panelsStayOpen-headingSix">
-							<button class="accordion-button" type="button" data-bs-toggle="collapse"
-								data-bs-target="#panelsStayOpen-collapseSix" aria-expanded="false"
-								aria-controls="panelsStayOpen-collapseSix">
-								<h3>6. Изображение базовых элементов QR-кода </h3>
-							</button>
-						</h2>
-						<div id="panelsStayOpen-collapseSix" class="accordion-collapse collapse show"
-							aria-labelledby="panelsStayOpen-headingSix">
-							<div class="accordion-body">
-								<p> Нарисуем горизонтальные и вертикальные <strong>полосы синхронизации</strong> (в
-									строке 6 и
-									столбце 6, начиная с 0 в левом верхнем углу):</p>
-								<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="timing-patterns"
-									class="qrcode"></svg>
-								<p>Выделим <strong>поисковые
-										узоры</strong> в трех углах, каждый из которых имеет размер 8×8, включая
-									разделительное поле:</p>
-								<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="finder-patterns"
-									class="qrcode"></svg>
-								<div id="alignment-patterns-container">
-									<p>Нарисуем сетку
-										<strong>выравнивающих узоров</strong>, каждый из которых имеет размер
-										5×5. Они
-										помогают исправлять искажения, возникающие при сканировании кода под углом или
-										на
-										неровной поверхности<span id="alignment-patterns-overlap-timing"></span>:
-									</p>
-									<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="alignment-patterns"
-										class="qrcode"></svg>
-								</div>
-								<p>Разместим пустые поля (рядом с поисковыми узорами) для указания <strong>кода маски и
-										уровня
-										коррекции</strong>:</p>
-								<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="dummy-format-bits"
-									class="qrcode"></svg>
-								<div id="version-information-container">
-									<p>Нарисуйте два блока 6×3 (рядом с поисковыми узорами), которые содержат
-										<strong>информацию
-											о версии</strong>:
-									</p>
-									<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="version-information"
-										class="qrcode"></svg>
-								</div>
-							</div>
-						</div>
-					</section>
-
-					<section>
-						<h2 class="accordion-header" id="panelsStayOpen-headingSeven">
-							<button class="accordion-button" type="button" data-bs-toggle="collapse"
-								data-bs-target="#panelsStayOpen-collapseSeven" aria-expanded="false"
-								aria-controls="panelsStayOpen-collapseSeven">
-								<h3>7. Рисование данных QR-кода</h3>
-							</button>
-						</h2>
-						<div id="panelsStayOpen-collapseSeven" class="accordion-collapse collapse show"
-							aria-labelledby="panelsStayOpen-headingSeven">
-							<div class="accordion-body">
-								<p>Нарисуем модули данных в соответствии с порядком зигзагообразного сканирования(с
-									правого
-									нижнего угла) и значениями битов из окончательной последовательности кодовых слов::
-								</p>
-								<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="zigzag-scan"
-									class="qrcode"></svg>
-								<p>1-темный модуль, 0-светлый модуль: <span id="final-bit-sequence1"
-										class="binary-value"></span>
-								</p>
-
-								<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="codewords-and-remainder"
-									class="qrcode"></svg>
-							</div>
-						</div>
-					</section>
-
-
-
-					<section>
-						<h2 class="accordion-header" id="panelsStayOpen-headingEi">
-							<button class="accordion-button" type="button" data-bs-toggle="collapse"
-								data-bs-target="#panelsStayOpen-collapseEi" aria-expanded="false"
-								aria-controls="panelsStayOpen-collapseEi">
-								<h3>8. Применение маски</h3>
-							</button>
-						</h2>
-						<div id="panelsStayOpen-collapseEi" class="accordion-collapse collapse show"
-							aria-labelledby="panelsStayOpen-headingEi">
-							<div class="accordion-body">
-								<p>Показать:
-									<select id="show-mask" class="form-control">
-										<option selected="selected" >Шаблон маски 0</option>
-										<option>Шаблон маски 1</option>
-										<option>Шаблон маски 2</option>
-										<option>Шаблон маски 3</option>
-										<option>Шаблон маски 4</option>
-										<option>Шаблон маски 5</option>
-										<option>Шаблон маски 6</option>
-										<option>Шаблон маски 7</option>
-									</select>
-								</p>
-								<p> <strong>Шаблон маски</strong> (влияет только на нефункциональные модули):</p>
-
-								<p>Если модуль маски черный, то при наложение темный модуль QR-кода становиться белым,
-									белый
-									модуль - черным.<a href="" data-bs-toggle="modal" data-bs-target="#exampleModal3">
-										Операция
-										XOR </a>:</p>
-								<table id="mask_table" class="table table-striped">
-									<tr>
-										<th style="text-align: center; vertical-align: middle;">Шаблон маски:</th>
-										<th><svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="mask-pattern"
-												class="qrcode"></svg></th>
-									</tr>
-									<tr>
-										<th style="text-align: center; vertical-align: middle;">Без наложения маски:
-										</th>
-										<th><svg xmlns="http://www.w3.org/2000/svg" version="1.1"
-												id="codewords-and-remainder1" class="qrcode"></svg></th>
-									</tr>
-									<tr>
-										<th style="text-align: center; vertical-align:middle;">С наложением маски:</th>
-										<th><svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="masked-qr-code"
-												class="qrcode"></svg></th>
-									</tr>
-									<tr>
-										<th style="text-align: center; vertical-align: middle;">
-											<p>Биты формата<strong> </strong>:</p>
-										</th>
-										<th><svg xmlns="http://www.w3.org/2000/svg" version="1.1"
-												id="masked-qr-with-format" class="qrcode"></svg></th>
-									</tr>
-								</table>
-
-							</div>
-						</div>
-					</section>
-
-					<section>
-						<h2 class="accordion-header" id="panelsStayOpen-headingNi">
-							<button class="accordion-button" type="button" data-bs-toggle="collapse"
-								data-bs-target="#panelsStayOpen-collapseNi" aria-expanded="false"
-								aria-controls="panelsStayOpen-collapseNi">
-								<h3>9. Расчёт штрафных очков маски</h3>
-							</button>
-						</h2>
-						<div id="panelsStayOpen-collapseNi" class="accordion-collapse collapse show"
-							aria-labelledby="panelsStayOpen-headingNi">
-							<div class="accordion-body">
-								<p>По горизонтали и вертикали за каждые 5 и более идущих подряд модулей одного цвета
-									начисляются штрафные очки: длина повторяющихся модулей - 2.</p>
-								<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="horizontal-runs"
-									class="qrcode"></svg>
-								<p>Вертикаль:</p>
-								<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="vertical-runs"
-									class="qrcode"></svg>
-								<p>За каждый квадрат модулей одного цвета размером 2 на 2 начисляется по 3 штрафных
-									очка:</p>
-								<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="two-by-two-boxes"
-									class="qrcode"></svg>
-								<p>Горизонтальные последовательности<a href="" data-bs-toggle="modal"
-										data-bs-target="#exampleModal4">
-										ЧБЧЧЧБЧ</a>:</p>
-								<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="horizontal-false-finders"
-									class="qrcode"></svg>
-								<p>Вертикальные последовательности<a href="" data-bs-toggle="modal"
-										data-bs-target="#exampleModal4">
-										ЧБЧЧЧБЧ</a>:</p>
-								<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="vertical-false-finders"
-									class="qrcode"></svg>
-								<p>Характеристика маски:</p>
-								<table id="dark-light-balance" class="section-bottom table table-striped">
-									<tbody>
-										<tr>
-											<td>Длина стороны: </td>
-											<td></td>
-										</tr>
-										<tr>
-											<td>Общее количество модулей: </td>
-											<td></td>
-										</tr>
-										<tr>
-											<td>Светлые модули: </td>
-											<td></td>
-										</tr>
-										<tr>
-											<td>Темные модули: </td>
-											<td></td>
-										</tr>
-										<tr>
-											<td>Пропорция: </td>
-											<td></td>
-										</tr>
-										<tr>
-											<td>Отклонение от 50%:</td>
-											<td></td>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-						</div>
-					</section>
-
-					<section>
-						<h2 class="accordion-header" id="panelsStayOpen-headingTen">
-							<button class="accordion-button" type="button" data-bs-toggle="collapse"
-								data-bs-target="#panelsStayOpen-collapseTen" aria-expanded="false"
-								aria-controls="panelsStayOpen-collapseTen">
-								<h3>10. Выбор лучшей маски</h3>
-							</button>
-						</h2>
-						<div id="panelsStayOpen-collapseTen" class="accordion-collapse collapse show"
-							aria-labelledby="panelsStayOpen-headingTen">
-							<div class="accordion-body">
-								<table id="mask_compare_table" class="table table-striped">
-									<thead>
-										<tr>
-											<th>№ Маски</th>
-											<th>ЧЧЧЧЧ / БББББ</th>
-											<th>Квадрат</th>
-											<th>ЧБЧЧЧБЧ</th>
-											<th>Соотн.</th>
-											<th>Всего штр. очков</th>
-										</tr>
-									</thead>
-									<tbody id="select-best-mask"></tbody>
-								</table>
-								<p>Наименьшее количество штрафных очков у шаблона маски <span
-										id="lowest-penalty-mask"></span>
-								</p>
-								<p>Как высчитываются штрафные очки:</p>
-								<ul>
-									<li>
-										<p>Правило 1. По горизонтали и вертикали за каждые 5 и больше идущих подряд
-											модулей
-											одного цвета начисляется количество очков, равное длине этого участка минус
-											2</p>
-									</li>
-									<li>
-										<p>Правило 2. За каждый квадрат модулей одного цвета размером 2 на 2 начисляется
-											по 3
-											очка.</p>
-									</li>
-									<li>Правило 3. За каждую последовательность модулей .<a href=""
-											data-bs-toggle="modal" data-bs-target="#exampleModal4">
-											ЧБЧЧЧБЧ:</a>, с 4-мя белыми
-										модулями с
-										одной из сторон (или с 2-х сразу), добавляется 40 очков (по вертикали или
-										горизонтали)
-									</li>
-									<li class="section-bottom">
-										<p class="section-bottom">Правило 4. Соотношение: 0 очков, если доля тёмных
-											модулей
-											находится в диапазоне [45%, 55%]; 10 очков, если в диапазоне [40%, 60%]; 20
-											очков,
-											если в диапазоне [35%, 65%]; 30 очков, если в диапазоне [30%, 70%]</p>
-									</li>
-								</ul>
-							</div>
-						</div>
-					</section>
 				</div>
+			</div>
+
+			<div class="modal fade" id="exampleModal3" tabindex="-1" aria-labelledby="exampleModalLabel"
+				aria-hidden="true">
+				<div class="modal-dialog"
+					style="position: absolute; left: 50%;top: 30%; transform: translate(-50%, -30%);">
+					<div class="modal-content ">
+						<div class="modal-header" ">
+		  <h5 class=" modal-title" id="exampleModalLabel">Исключающее ИЛИ:</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body" style="display: flex; justify-content: center;">
+							<table style="text-align: center; ">
+								<tbody>
+									<tr>
+										<td>X</td>
+										<td>Y</td>
+										<td>X⊕Y</td>
+									</tr>
+									<tr>
+										<td>0</td>
+										<td>0</td>
+										<td>0</td>
+									</tr>
+									<tr>
+										<td>0</td>
+										<td>1</td>
+										<td>1</td>
+									</tr>
+									<tr>
+										<td>1</td>
+										<td>0</td>
+										<td>1</td>
+									</tr>
+									<tr>
+										<td>1</td>
+										<td>1</td>
+										<td>0</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			<div class="modal fade" id="exampleModal4" tabindex="-1" aria-labelledby="exampleModalLabel"
+				aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content" style="width: 300px;">
+						<div class="modal-header">
+							<h5 class=" modal-title" id="exampleModalLabel">Сочетание ЧБЧЧЧБЧ:</h5>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
+						<div class="modal-body">
+							<img src="res/picture/rule.jpg" alt="">
+						</div>
+
+					</div>
+				</div>
+			</div>
+
+			<section>
+				<h2 class="accordion-header" id="panelsStayOpen-headingFive">
+					<button class="accordion-button" type="button" data-bs-toggle="collapse"
+						data-bs-target="#panelsStayOpen-collapseFive" aria-expanded="false"
+						aria-controls="panelsStayOpen-collapseFive">
+						<h3>5. Разбиение на блоки</h3>
+					</button>
+				</h2>
+				<div id="panelsStayOpen-collapseFive" class="accordion-collapse collapse show"
+					aria-labelledby="panelsStayOpen-headingFive">
+					<div class="accordion-body">
+						<p>Данные про все блоки:</p>
+						<table id="block-stats" class="table table-striped">
+							<tbody>
+								<tr>
+									<td>Блоков данных: </td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>Количество блоков: </td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>Кол-во данных в коротком блоке:</td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>Кол-во данных в длинном блоке: </td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>Блоков коррекции: </td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>Коротких блоков: </td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>Длинных блоков: </td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+						<!-- <p>Split the sequence of data codewords (green background) into short and long blocks; then for each block, compute the ECC codewords (blue) and append them to the end of the block:</p>-->
+						<div style="overflow-x:auto">
+							<table id="blocks-and-ecc" class="possibly-long">
+								<thead>
+									<tr>
+										<th rowspan="2" colspan="2"></th>
+										<th>Номер блока</th>
+									</tr>
+								</thead>
+								<tbody></tbody>
+							</table>
+
+						</div>
+
+						<p>Конечная последовательность кодовых слов, сформированная путем чередования
+							данных/кодовых
+							слов ECC из разных блоков:<span id="interleaved-codewords" class="binary-value"></span></p>
+						<p>Конечная последовательность битов для рисования при сканировании зигзагом: <span
+								id="final-bit-sequence" class="binary-value"></span></p>
+					</div>
+				</div>
+			</section>
 
 
+
+			<section>
+				<h2 class="accordion-header" id="panelsStayOpen-headingSix">
+					<button class="accordion-button" type="button" data-bs-toggle="collapse"
+						data-bs-target="#panelsStayOpen-collapseSix" aria-expanded="false"
+						aria-controls="panelsStayOpen-collapseSix">
+						<h3>6. Изображение базовых элементов QR-кода </h3>
+					</button>
+				</h2>
+				<div id="panelsStayOpen-collapseSix" class="accordion-collapse collapse show"
+					aria-labelledby="panelsStayOpen-headingSix">
+					<div class="accordion-body">
+						<p> Нарисуем горизонтальные и вертикальные <strong>полосы синхронизации</strong> (в
+							строке 6 и
+							столбце 6, начиная с 0 в левом верхнем углу):</p>
+						<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="timing-patterns" class="qrcode"></svg>
+						<p>Выделим <strong>поисковые
+								узоры</strong> в трех углах, каждый из которых имеет размер 8×8, включая
+							разделительное поле:</p>
+						<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="finder-patterns" class="qrcode"></svg>
+						<div id="alignment-patterns-container">
+							<p>Нарисуем сетку
+								<strong>выравнивающих узоров</strong>, каждый из которых имеет размер
+								5×5. Они
+								помогают исправлять искажения, возникающие при сканировании кода под углом или
+								на
+								неровной поверхности<span id="alignment-patterns-overlap-timing"></span>:
+							</p>
+							<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="alignment-patterns"
+								class="qrcode"></svg>
+						</div>
+						<p>Разместим пустые поля (рядом с поисковыми узорами) для указания <strong>кода маски и
+								уровня
+								коррекции</strong>:</p>
+						<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="dummy-format-bits"
+							class="qrcode"></svg>
+						<div id="version-information-container">
+							<p>Нарисуйте два блока 6×3 (рядом с поисковыми узорами), которые содержат
+								<strong>информацию
+									о версии</strong>:
+							</p>
+							<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="version-information"
+								class="qrcode"></svg>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h2 class="accordion-header" id="panelsStayOpen-headingSeven">
+					<button class="accordion-button" type="button" data-bs-toggle="collapse"
+						data-bs-target="#panelsStayOpen-collapseSeven" aria-expanded="false"
+						aria-controls="panelsStayOpen-collapseSeven">
+						<h3>7. Рисование данных QR-кода</h3>
+					</button>
+				</h2>
+				<div id="panelsStayOpen-collapseSeven" class="accordion-collapse collapse show"
+					aria-labelledby="panelsStayOpen-headingSeven">
+					<div class="accordion-body">
+						<p>Нарисуем модули данных в соответствии с порядком зигзагообразного сканирования(с
+							правого
+							нижнего угла) и значениями битов из окончательной последовательности кодовых слов::
+						</p>
+						<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="zigzag-scan" class="qrcode"></svg>
+						<p>1-темный модуль, 0-светлый модуль: <span id="final-bit-sequence1"
+								class="binary-value"></span>
+						</p>
+
+						<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="codewords-and-remainder"
+							class="qrcode"></svg>
+					</div>
+				</div>
+			</section>
+
+
+
+			<section>
+				<h2 class="accordion-header" id="panelsStayOpen-headingEi">
+					<button class="accordion-button" type="button" data-bs-toggle="collapse"
+						data-bs-target="#panelsStayOpen-collapseEi" aria-expanded="false"
+						aria-controls="panelsStayOpen-collapseEi">
+						<h3>8. Применение маски</h3>
+					</button>
+				</h2>
+				<div id="panelsStayOpen-collapseEi" class="accordion-collapse collapse show"
+					aria-labelledby="panelsStayOpen-headingEi">
+					<div class="accordion-body">
+						<p>Показать:
+							<select id="show-mask" class="form-control">
+								<option selected="selected">Шаблон маски 0</option>
+								<option>Шаблон маски 1</option>
+								<option>Шаблон маски 2</option>
+								<option>Шаблон маски 3</option>
+								<option>Шаблон маски 4</option>
+								<option>Шаблон маски 5</option>
+								<option>Шаблон маски 6</option>
+								<option>Шаблон маски 7</option>
+							</select>
+						</p>
+						<p> <strong>Шаблон маски</strong> (влияет только на нефункциональные модули):</p>
+
+						<p>Если модуль маски черный, то при наложение темный модуль QR-кода становиться белым,
+							белый
+							модуль - черным.<a href="" data-bs-toggle="modal" data-bs-target="#exampleModal3">
+								Операция
+								XOR </a>:</p>
+						<table id="mask_table" class="table table-striped">
+							<tr>
+								<th style="text-align: center; vertical-align: middle;">Шаблон маски:</th>
+								<th><svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="mask-pattern"
+										class="qrcode"></svg></th>
+							</tr>
+							<tr>
+								<th style="text-align: center; vertical-align: middle;">Без наложения маски:
+								</th>
+								<th><svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="codewords-and-remainder1"
+										class="qrcode"></svg></th>
+							</tr>
+							<tr>
+								<th style="text-align: center; vertical-align:middle;">С наложением маски:</th>
+								<th><svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="masked-qr-code"
+										class="qrcode"></svg></th>
+							</tr>
+							<tr>
+								<th style="text-align: center; vertical-align: middle;">
+									<p>Биты формата<strong> </strong>:</p>
+								</th>
+								<th><svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="masked-qr-with-format"
+										class="qrcode"></svg></th>
+							</tr>
+						</table>
+
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h2 class="accordion-header" id="panelsStayOpen-headingNi">
+					<button class="accordion-button" type="button" data-bs-toggle="collapse"
+						data-bs-target="#panelsStayOpen-collapseNi" aria-expanded="false"
+						aria-controls="panelsStayOpen-collapseNi">
+						<h3>9. Расчёт штрафных очков маски</h3>
+					</button>
+				</h2>
+				<div id="panelsStayOpen-collapseNi" class="accordion-collapse collapse show"
+					aria-labelledby="panelsStayOpen-headingNi">
+					<div class="accordion-body">
+						<p>По горизонтали и вертикали за каждые 5 и более идущих подряд модулей одного цвета
+							начисляются штрафные очки: длина повторяющихся модулей - 2.</p>
+						<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="horizontal-runs" class="qrcode"></svg>
+						<p>Вертикаль:</p>
+						<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="vertical-runs" class="qrcode"></svg>
+						<p>За каждый квадрат модулей одного цвета размером 2 на 2 начисляется по 3 штрафных
+							очка:</p>
+						<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="two-by-two-boxes"
+							class="qrcode"></svg>
+						<p>Горизонтальные последовательности<a href="" data-bs-toggle="modal"
+								data-bs-target="#exampleModal4">
+								ЧБЧЧЧБЧ</a>:</p>
+						<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="horizontal-false-finders"
+							class="qrcode"></svg>
+						<p>Вертикальные последовательности<a href="" data-bs-toggle="modal"
+								data-bs-target="#exampleModal4">
+								ЧБЧЧЧБЧ</a>:</p>
+						<svg xmlns="http://www.w3.org/2000/svg" version="1.1" id="vertical-false-finders"
+							class="qrcode"></svg>
+						<p>Характеристика маски:</p>
+						<table id="dark-light-balance" class="section-bottom table table-striped">
+							<tbody>
+								<tr>
+									<td>Длина стороны: </td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>Общее количество модулей: </td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>Светлые модули: </td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>Темные модули: </td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>Пропорция: </td>
+									<td></td>
+								</tr>
+								<tr>
+									<td>Отклонение от 50%:</td>
+									<td></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h2 class="accordion-header" id="panelsStayOpen-headingTen">
+					<button class="accordion-button" type="button" data-bs-toggle="collapse"
+						data-bs-target="#panelsStayOpen-collapseTen" aria-expanded="false"
+						aria-controls="panelsStayOpen-collapseTen">
+						<h3>10. Выбор лучшей маски</h3>
+					</button>
+				</h2>
+				<div id="panelsStayOpen-collapseTen" class="accordion-collapse collapse show"
+					aria-labelledby="panelsStayOpen-headingTen">
+					<div class="accordion-body">
+						<table id="mask_compare_table" class="table table-striped">
+							<thead>
+								<tr>
+									<th>№ Маски</th>
+									<th>ЧЧЧЧЧ / БББББ</th>
+									<th>Квадрат</th>
+									<th>ЧБЧЧЧБЧ</th>
+									<th>Соотн.</th>
+									<th>Всего штр. очков</th>
+								</tr>
+							</thead>
+							<tbody id="select-best-mask"></tbody>
+						</table>
+						<p>Наименьшее количество штрафных очков у шаблона маски <span id="lowest-penalty-mask"></span>
+						</p>
+						<p>Как высчитываются штрафные очки:</p>
+						<ul>
+							<li>
+								<p>Правило 1. По горизонтали и вертикали за каждые 5 и больше идущих подряд
+									модулей
+									одного цвета начисляется количество очков, равное длине этого участка минус
+									2</p>
+							</li>
+							<li>
+								<p>Правило 2. За каждый квадрат модулей одного цвета размером 2 на 2 начисляется
+									по 3
+									очка.</p>
+							</li>
+							<li>Правило 3. За каждую последовательность модулей .<a href="" data-bs-toggle="modal"
+									data-bs-target="#exampleModal4">
+									ЧБЧЧЧБЧ:</a>, с 4-мя белыми
+								модулями с
+								одной из сторон (или с 2-х сразу), добавляется 40 очков (по вертикали или
+								горизонтали)
+							</li>
+							<li class="section-bottom">
+								<p class="section-bottom">Правило 4. Соотношение: 0 очков, если доля тёмных
+									модулей
+									находится в диапазоне [45%, 55%]; 10 очков, если в диапазоне [40%, 60%]; 20
+									очков,
+									если в диапазоне [35%, 65%]; 30 очков, если в диапазоне [30%, 70%]</p>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</section>
 		</div>
 
 
-		<script src="res/js/jscolor.min.js"></script>
-		<script src="res/js/main.min.js" async="async"></script>
-		<script src="res/js/qrcodegen.min.js"></script>
-		<script src="res/js/qr_generate.min.js"></script>
+	</div>
 
-		<script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag("js", new Date()); gtag("config", "UA-23532931-1");</script>
+
+	<script src="res/js/jscolor.min.js"></script>
+	<script src="res/js/main.min.js" async="async"></script>
+	<script src="res/js/qrcodegen.min.js"></script>
+	<script src="res/js/qr_generate.min.js"></script>
+
+	<script>window.dataLayer = window.dataLayer || []; function gtag() { dataLayer.push(arguments); } gtag("js", new Date()); gtag("config", "UA-23532931-1");</script>
 </body>
 
 </html>
