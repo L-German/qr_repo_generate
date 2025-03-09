@@ -929,14 +929,14 @@
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-        botToken: '7650373965:AAFUdBo-eMpIVIn_wXngV7TUs7lWtt1Lqq8YOUR_BOT_TOKEN',
-        chatId: Telegram.WebApp.initDataUnsafe.user?.id || 'CHAT_ID', // Проверьте, что chatId корректен
-        image: canvas.toDataURL('image/jpeg') // Преобразуем canvas в base64
+        botToken: 'YOUR_BOT_TOKEN',
+        chatId: Telegram.WebApp.initDataUnsafe.user?.id || 'CHAT_ID',
+        image: canvas.toDataURL('image/jpeg')
     })
 })
 .then(response => response.json())
-.then(data => alert('Ответ от прокси:', data))
-.catch(error => alert('Ошибка:', error));
+.then(data => console.log('Ответ от прокси:', data))
+.catch(error => alert('Ошибка: ' + error.message)); // Исправлено
         });
 
 
