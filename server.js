@@ -1,13 +1,20 @@
 const express = require('express');
 const fetch = require('node-fetch');
 const FormData = require('form-data');
-const app2 = express();
+const app = express();
 
 // Разрешаем обработку JSON
-app2.use(express.json());
+app.use(express.json());
+
+// Разрешаем CORS
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Content-Type');
+    next();
+});
 
 // Маршрут для отправки фото
-app2.post('/send-photo', async (req, res) => {
+app.post('/send-photo', async (req, res) => {
     const { botToken, chatId, image } = req.body;
 
     // Преобразуем base64 в Buffer
@@ -22,7 +29,7 @@ app2.post('/send-photo', async (req, res) => {
         const response = await fetch(`https://api.telegram.org/bot${botToken}/sendPhoto?chat_id=${chatId}`, {
             method: 'POST',
             body: formData,
-            headers: formData.getHeaders() // Добавляем заголовки FormData
+            headers: formData.getHeaders()
         });
 
         const data = await response.json();
@@ -33,4 +40,4 @@ app2.post('/send-photo', async (req, res) => {
 });
 
 // Запуск сервера
-app2.listen(3000, () => console.log('Сервер запущен на http://localhost:3000'));
+app.listen(3000, () => console.log('Сервер запущен на http://localhost:3000'));
