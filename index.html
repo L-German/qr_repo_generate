@@ -913,7 +913,7 @@
 			function sendImageToTelegram(dataURL) {
     const token = '7650373965:AAFUdBo-eMpIVIn_wXngV7TUs7lWtt1Lqq8'; // Замените на ваш токен бота
     const chatId = '1685702823'; // Замените на ID чата, куда отправлять
-
+	alert('*')
     // Преобразуем data URL в Blob
     fetch(dataURL)
         .then(res => res.blob())
@@ -941,12 +941,12 @@
 
 
 
-			document.getElementById('send-btn').addEventListener('click', function() {
+document.getElementById('send-btn').addEventListener('click', function() {
     const canvas = document.getElementById('qrcode-canvas');
     const dataURL = canvas.toDataURL('image/jpeg'); // Получаем изображение в формате JPEG
-				alert('Кнопка нажата')
-    // Здесь вы можете отправить dataURL на сервер или в бота
-    sendToTelegramBot(dataURL);
+
+    // Отправляем изображение в Telegram-бота
+    sendImageToTelegram(dataURL);
 });
 
 
