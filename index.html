@@ -660,7 +660,7 @@
 		<canvas id="qrcode-canvas" style="background-color:#E8E8E8" download="qr_code_d.jpg"></canvas>
 
 		<div>
-			<button style="width: 12em;" id="download-btn" class="btn btn-outline-primary"><img width="26" height="26"
+			<button style="width: 12em;" id="send-btn" class="btn btn-outline-primary"><img width="26" height="26"
 					src="https://img.icons8.com/metro/52/download.png" alt="download" />
 
 			</button>
@@ -862,7 +862,7 @@
 				// Показываем элементы для генерации QR-кода
 				document.getElementById('Qr-code_output').style.display = 'block';
 				document.getElementById('qrcode-canvas').style.display = 'block';
-				document.getElementById('download-btn').style.display = 'block';
+				document.getElementById('send-btn').style.display = 'block';
 				// Скрываем элементы для сканирования
 				document.getElementById('reader').style.display = 'none';
 				document.getElementById('result').style.display = 'none';
@@ -882,7 +882,7 @@
 				// Скрываем элементы для генерации
 				document.getElementById('Qr-code_output').style.display = 'none';
 				document.getElementById('qrcode-canvas').style.display = 'none';
-				document.getElementById('download-btn').style.display = 'none';
+				document.getElementById('send-btn').style.display = 'none';
 				// Инициализация сканера
 				scanner = new Html5QrcodeScanner('reader', {
 					qrbox: {
@@ -918,7 +918,7 @@
 			ctx.fillStyle = 'blue';
 			ctx.fillRect(50, 50, 200, 200);
 
-			document.getElementById('download-btn').addEventListener('click', function () {
+			document.getElementById('send-btn').addEventListener('click', function () {
     // Получаем элемент canvas
     const canvas = document.getElementById('qrcode-canvas');
 
