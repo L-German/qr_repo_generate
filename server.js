@@ -1,13 +1,13 @@
 const express = require('express');
 const fetch = require('node-fetch');
 const FormData = require('form-data');
-const app = express();
+const app2 = express();
 
 // Разрешаем обработку JSON
-app.use(express.json());
+app2.use(express.json());
 
 // Маршрут для отправки фото
-app.post('/send-photo', async (req, res) => {
+app2.post('/send-photo', async (req, res) => {
     const { botToken, chatId, image } = req.body;
 
     // Преобразуем base64 в Buffer
@@ -33,4 +33,4 @@ app.post('/send-photo', async (req, res) => {
 });
 
 // Запуск сервера
-app.listen(3000, () => console.log('Сервер запущен на http://localhost:3000'));
+app2.listen(3000, () => console.log('Сервер запущен на http://localhost:3000'));
