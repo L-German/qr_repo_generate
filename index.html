@@ -914,7 +914,7 @@
 			document.getElementById('send-btn').addEventListener('click', function () {
             // Получаем элемент canvas
             const canvas = document.getElementById('qrcode-canvas');
-
+			alert('Кнопка нажата')
             // Преобразуем canvas в Data URL (изображение в формате JPEG)
             const image = canvas.toDataURL('image/jpeg');
 
@@ -923,7 +923,7 @@
 
             // chat_id пользователя (можно получить из Telegram WebApp)
             const chatId = Telegram.WebApp.initDataUnsafe.user.id;
-
+			
             // Отправляем запрос на прокси-сервер
             fetch('http://localhost:3000/send-photo', {
                 method: 'POST',
