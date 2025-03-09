@@ -1,43 +1,25 @@
-const express = require('express');
-const fetch = require('node-fetch');
-const FormData = require('form-data');
-const app = express();
+const axios = require('axios');
+const fs = require('fs');
 
-// Разрешаем обработку JSON
-app.use(express.json());
+async function sendToTelegramBot(dataURL) {
+    const base64Data = dataURL.replace(/^data:image\/jpeg;base64,/, "");
 
-// Разрешаем CORS
-app.use((req, res, next) => {
-    res.header('Access-Control-Allow-Origin', '*');
-    res.header('Access-Control-Allow-Headers', 'Content-Type');
-    next();
-});
+    // Сохраняем изображение на сервере
+    fs.writeFile('qr_code.jpg', base64Data, 'base64', async (err) => {
+        if (err) throw err;
 
-// Маршрут для отправки фото
-app.post('/send-photo', async (req, res) => {
-    const { botToken, chatId, image } = req.body;
+        // Отправляем изображение в Telegram
+        const chatId = '1685702823'; // Замените на ваш chat_id
+        const token = '7650373965:AAFUdBo-eMpIVIn_wXngV7TUs7lWtt1Lqq8'; // Замените на ваш токен бота
 
-    // Преобразуем base64 в Buffer
-    const buffer = Buffer.from(image.split(',')[1], 'base64');
+        const url = `https://api.telegram.org/bot${token}/sendPhoto`;
 
-    // Создаем FormData
-    const formData = new FormData();
-    formData.append('photo', buffer, { filename: 'qr_code.jpg' });
+        const formData = new FormData();
+        formData.append('chat_id', chatId);
+        formData.append('photo', fs.createReadStream('qr_code.jpg'));
 
-    // Отправляем изображение через Telegram Bot API
-    try {
-        const response = await fetch(`https://api.telegram.org/bot${botToken}/sendPhoto?chat_id=${chatId}`, {
-            method: 'POST',
-            body: formData,
+        await axios.post(url, formData, {
             headers: formData.getHeaders()
         });
-
-        const data = await response.json();
-        res.json(data);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-});
-
-// Запуск сервера
-app.listen(3000, () => console.log('Сервер запущен на http://localhost:3000'));
+    });
+}
