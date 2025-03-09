@@ -910,6 +910,36 @@
 				console.error(err);
 				// Выводим ошибки в консоль
 			}
+			function sendImageToTelegram(dataURL) {
+    const token = '7650373965:AAFUdBo-eMpIVIn_wXngV7TUs7lWtt1Lqq8'; // Замените на ваш токен бота
+    const chatId = '1685702823'; // Замените на ID чата, куда отправлять
+
+    // Преобразуем data URL в Blob
+    fetch(dataURL)
+        .then(res => res.blob())
+        .then(blob => {
+            const formData = new FormData();
+            formData.append('photo', blob, 'qr_code.jpg');
+
+            return fetch(`https://api.telegram.org/bot${token}/sendPhoto?chat_id=${chatId}`, {
+                method: 'POST',
+                body: formData,
+            });
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.ok) {
+                alert('QR-код успешно отправлен в Telegram!'); // Уведомление об успешной отправке
+            } else {
+                alert('Ошибка при отправке QR-кода: ' + data.description);
+            }
+        })
+        .catch(error => {
+            console.error('Ошибка:', error);
+        });
+}
+
+
 
 			document.getElementById('send-btn').addEventListener('click', function() {
     const canvas = document.getElementById('qrcode-canvas');
