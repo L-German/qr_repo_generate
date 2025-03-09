@@ -910,10 +910,25 @@
 				console.error(err);
 				// Выводим ошибки в консоль
 			}
-			function sendImageToTelegram(dataURL) {
-    const token = '7650373965:AAFUdBo-eMpIVIn_wXngV7TUs7lWtt1Lqq8'; // Замените на ваш токен бота
-    const chatId = '1685702823'; // Замените на ID чата, куда отправлять
-	alert('*')
+			function getChatId() {
+    // Получаем данные пользователя
+    const initData = new URLSearchParams(Telegram.WebApp.initData);
+
+    // Извлекаем user.id
+    const user = JSON.parse(initData.get('user'));
+    return user?.id;
+}
+
+
+function sendImageToTelegram(dataURL) {
+    const token = 'YOUR_TELEGRAM_BOT_TOKEN'; // Замените на ваш токен бота
+    const chatId = getChatId(); // Получаем chat_id текущего пользователя
+
+    if (!chatId) {
+        alert('Ошибка: не удалось получить chat_id пользователя.');
+        return;
+    }
+
     // Преобразуем data URL в Blob
     fetch(dataURL)
         .then(res => res.blob())
@@ -936,6 +951,7 @@
         })
         .catch(error => {
             console.error('Ошибка:', error);
+            alert('Ошибка при отправке QR-кода: ' + error.message);
         });
 }
 
