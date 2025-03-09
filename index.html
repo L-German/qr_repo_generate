@@ -669,6 +669,20 @@
 		<div id="result"></div>
 		<hr />
 		<script>
+document.getElementById('flexSwitchCheckDefault').addEventListener('change', function() {
+        const canvas = document.getElementById('qrcode-canvas');
+        if (this.checked) {
+            // Если чекбокс выбран, добавляем padding
+            canvas.style.padding = '10px'; // Устанавливаем желаемый padding
+            
+        } else {
+            // Если чекбокс не выбран, убираем padding и рамку
+            canvas.style.padding = '0';
+           
+        }
+    });
+
+
 			 document.getElementById('qr-image-input').addEventListener('change', function() {
         if (this.files.length > 0) {
             // Если файл загружен, выбираем радиокнопку "High"
