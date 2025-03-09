@@ -669,7 +669,12 @@
 		<div id="result"></div>
 		<hr />
 		<script>
-
+			 document.getElementById('qr-image-input').addEventListener('change', function() {
+        if (this.files.length > 0) {
+            // Если файл загружен, выбираем радиокнопку "High"
+            document.getElementById('errcorlvl-high').checked = true;
+        }
+    });
 			document.addEventListener("DOMContentLoaded", function () {
 				const darkColorInput = document.getElementById('dark-color-input');
 				const lightColorInput = document.getElementById('s_light-color-input');
