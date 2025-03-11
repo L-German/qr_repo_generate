@@ -465,8 +465,6 @@
 </head>
 
 <body>
-
-
 	<div class="vert-main">
 		<div class="horz-main">
 			<article>
@@ -511,8 +509,6 @@
 								</td>
 
 							</tr>
-
-
 
 							<tr class="params-row">
 								<td><label for="force-min-version">Версия:</label></td>
@@ -677,11 +673,11 @@
 			document.getElementById('flexSwitchCheckDefault').addEventListener('change', function () {
 				const canvas = document.getElementById('qrcode-canvas');
 				if (this.checked) {
-					// Если чекбокс выбран, добавляем padding
-					canvas.style.padding = '10px'; // Устанавливаем желаемый padding
+					// Рамка
+					canvas.style.padding = '10px'; 
 
 				} else {
-					// Если чекбокс не выбран, убираем padding и рамку
+					
 					canvas.style.padding = '0';
 
 				}
@@ -690,7 +686,7 @@
 
 			document.getElementById('qr-image-input').addEventListener('change', function () {
 				if (this.files.length > 0) {
-					// Если файл загружен, выбираем радиокнопку "High"
+					// Если файл загружен, выбираем радиокнопку "High", для лучшего сканирования кода
 					document.getElementById('errcorlvl-high').checked = true;
 				}
 			});
@@ -699,7 +695,7 @@
 				const lightColorInput = document.getElementById('s_light-color-input');
 				const gradientColorRow = document.getElementById('gradient-color-row');
 
-				// Функция для обновления второго цвета
+				// Функция для изменения второго цвета, если он отключен
 				function updateLightColor() {
 					if (gradientColorRow.style.display === "none") {
 						lightColorInput.value = darkColorInput.value; // Устанавливаем значение второго цвета равным первому
@@ -721,20 +717,21 @@
 				if (this.checked) {
 					// Если чекбокс включен, показываем строку и устанавливаем значение по умолчанию
 					gradientColorRow.style.display = 'table-row';
-					secondColorInput.value = '#000000'; // Устанавливаем значение по умолчанию
+					secondColorInput.value = '#000000'; 
 					if (secondColorInput.jscolor) {
 						secondColorInput.jscolor.fromString('#000000');
 					}
 
 				} else {
-					// Если чекбокс выключен, скрываем строку и меняем значение на #FFFFFF
+					
 					gradientColorRow.style.display = 'none';
-					secondColorInput.value = document.getElementById('dark-color-input').value; // Устанавливаем значение #FFFFFF
+					secondColorInput.value = document.getElementById('dark-color-input').value; 
 					if (secondColorInput.jscolor) {
 						secondColorInput.jscolor.fromString(document.getElementById('dark-color-input').value);
 					}
 				}
 			});
+			//Параметры, дизайн, логотип - закрытие и открытие элементов
 			function toggleButton_Logo() {
 				const imageInput = document.getElementById('qr-image-input');
 				document.getElementById('errcorlvl-high').checked = true;
@@ -745,7 +742,7 @@
 						const file = new File([blob], 'tg_logo.png', { type: blob.type });
 						const dataTransfer = new DataTransfer();
 						dataTransfer.items.add(file);
-						imageInput.files = dataTransfer.files; // Устанавливаем файлы в input
+						imageInput.files = dataTransfer.files; 
 					})
 					.catch(error => console.error('Ошибка при загрузке файла:', error));
 			}
@@ -773,8 +770,6 @@
 					}
 				});
 
-
-				// Закрываем все чекбоксы
 				const checkboxes = document.querySelectorAll('.form-check-input');
 				checkboxes.forEach(checkbox => {
 					checkbox.checked = false; // Сбрасываем состояние чекбокса
@@ -783,13 +778,13 @@
 				// Скрываем второй цвет, если он открыт
 				gradientColorRow.style.display = 'none';
 
-				// Меняем иконку
+				// Анимация с иконками
 				if (icon.src.includes('caret-down-fill.svg')) {
-					icon.src = 'res/picture/caret-right-fill.svg'; // Меняем на caret-right-fill.svg
+					icon.src = 'res/picture/caret-right-fill.svg'; 
 
 
 				} else {
-					icon.src = 'res/picture/caret-down-fill.svg'; // Меняем обратно на caret-down-fill.svg
+					icon.src = 'res/picture/caret-down-fill.svg'; 
 				}
 			}
 
@@ -800,20 +795,19 @@
 				// Если чекбокс включен, показываем второй цвет, иначе скрываем
 				gradientColorRow.style.display = checkbox.checked ? '' : 'none';
 			}
+			//Параметры
 			function toggleParams() {
 				const rows = document.querySelectorAll('.params-row');
 				const icon = document.getElementById('params-icon');
 
-				// Переключаем видимость строк
+				
 				rows.forEach(row => {
 					if (row.classList.contains('hidden')) {
-						// Если строка скрыта, показываем её
+						
 						row.classList.remove('hidden');
-						row.style.display = ''; // Восстанавливаем display (например, table-row)
+						row.style.display = ''; 
 					} else {
-						// Если строка видима, скрываем её
 						row.classList.add('hidden');
-						// Ждём завершения анимации, затем скрываем строку полностью
 						row.addEventListener('transitionend', () => {
 							if (row.classList.contains('hidden')) {
 								row.style.display = 'none';
@@ -822,11 +816,10 @@
 					}
 				});
 
-				// Меняем иконку
 				if (icon.src.includes('caret-down-fill.svg')) {
-					icon.src = 'res/picture/caret-right-fill.svg'; // Меняем на caret-right-fill.svg
+					icon.src = 'res/picture/caret-right-fill.svg'; 
 				} else {
-					icon.src = 'res/picture/caret-down-fill.svg'; // Меняем обратно на caret-down-fill.svg
+					icon.src = 'res/picture/caret-down-fill.svg'; 
 				}
 			}
 			function toggleLogo() {
@@ -835,13 +828,11 @@
 
 				rows.forEach(row => {
 					if (row.classList.contains('hidden')) {
-						// Если строка скрыта, показываем её
+						
 						row.classList.remove('hidden');
-						row.style.display = ''; // Восстанавливаем display (например, table-row)
+						row.style.display = ''; 
 					} else {
-						// Если строка видима, скрываем её
 						row.classList.add('hidden');
-						// Ждём завершения анимации, затем скрываем строку полностью
 						row.addEventListener('transitionend', () => {
 							if (row.classList.contains('hidden')) {
 								row.style.display = 'none';
@@ -850,10 +841,6 @@
 					}
 				});
 
-				// Меняем иконку
-				// icon.classList.toggle('rotated');
-
-				// Меняем src иконки
 				if (icon.src.includes('caret-down-fill.svg')) {
 					icon.src = 'res/picture/caret-right-fill.svg';
 				} else {
@@ -868,15 +855,10 @@
 				document.getElementById('customRange5').value = this.value;
 			});
 
-
-
-
-
-
-
 			let scanner;
 
-			// Обработчик для кнопки "Сгенерировать код"
+			//Выбор: сканирование и генерация
+			//Если выбрана Генерация
 			document.getElementById('generateButton').addEventListener('click', function () {
 				// Показываем элементы для генерации QR-кода
 				document.getElementById('Qr-code_output').style.display = 'block';
@@ -886,13 +868,11 @@
 				document.getElementById('reader').style.display = 'none';
 				document.getElementById('result').style.display = 'none';
 
-				// Здесь можно добавить логику генерации QR-кода
-				// Например, установить текст в Qr-code_output
+				
 				document.getElementById('Qr-code_output').innerText = '';
-				// Добавьте код для генерации QR-кода на canvas
 			});
 
-			// Обработчик для кнопки "Сканирование кода"
+			//Если выбрано Сканирование
 			document.getElementById('scanButton').addEventListener('click', function () {
 				// Показываем элементы для сканирования
 				document.getElementById('reader').style.display = 'block';
@@ -917,22 +897,13 @@
 
 			function success(result) {
 				document.getElementById('result').innerHTML = `
-		Результат: <a href="${result}" target="_blank">${result}</a>
-	`;
-
-
-				// Останавливаем сканер
+		Результат: <a href="${result}" target="_blank">${result}</a>`;
 				scanner.clear();
 			}
 
 			function error(err) {
 				console.error(err);
-				// Выводим ошибки в консоль
 			}
-
-
-
-
 		</script>
 		<h2>Пошаговый процесс генерации QR-кода</h2>
 		<div class="accordion">
