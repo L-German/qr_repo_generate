@@ -470,10 +470,10 @@
 	<div class="vert-main">
 		<div class="horz-main">
 			<article>
-				
+
 				<h1><img src="res/picture/qr-logo.png" /> Генерация QR-кода </h1>
-				
-				
+
+
 				<h2>Ввод данных:</h2>
 				<form onsubmit="event.preventDefault(); app.doGenerate();">
 
@@ -666,33 +666,34 @@
 
 			</button>
 		</div>
-		
+
 		<div id="reader"></div>
 		<div id="result"></div>
-		<h2><a href="https://t.me/qrcodekubstu_bot" target="_blank"><i style="font-size: 0.8em;">Телеграм бот </i></a><img style="box-shadow: none;" src="res/picture/telegram.svg" alt=""></h2>
+		<h2><a href="https://t.me/qrcodekubstu_bot" target="_blank"><i style="font-size: 0.8em;">Телеграм бот
+				</i></a><img style="box-shadow: none;" src="res/picture/telegram.svg" alt=""></h2>
 		<hr />
 
 		<script>
-document.getElementById('flexSwitchCheckDefault').addEventListener('change', function() {
-        const canvas = document.getElementById('qrcode-canvas');
-        if (this.checked) {
-            // Если чекбокс выбран, добавляем padding
-            canvas.style.padding = '10px'; // Устанавливаем желаемый padding
-            
-        } else {
-            // Если чекбокс не выбран, убираем padding и рамку
-            canvas.style.padding = '0';
-           
-        }
-    });
+			document.getElementById('flexSwitchCheckDefault').addEventListener('change', function () {
+				const canvas = document.getElementById('qrcode-canvas');
+				if (this.checked) {
+					// Если чекбокс выбран, добавляем padding
+					canvas.style.padding = '10px'; // Устанавливаем желаемый padding
+
+				} else {
+					// Если чекбокс не выбран, убираем padding и рамку
+					canvas.style.padding = '0';
+
+				}
+			});
 
 
-			 document.getElementById('qr-image-input').addEventListener('change', function() {
-        if (this.files.length > 0) {
-            // Если файл загружен, выбираем радиокнопку "High"
-            document.getElementById('errcorlvl-high').checked = true;
-        }
-    });
+			document.getElementById('qr-image-input').addEventListener('change', function () {
+				if (this.files.length > 0) {
+					// Если файл загружен, выбираем радиокнопку "High"
+					document.getElementById('errcorlvl-high').checked = true;
+				}
+			});
 			document.addEventListener("DOMContentLoaded", function () {
 				const darkColorInput = document.getElementById('dark-color-input');
 				const lightColorInput = document.getElementById('s_light-color-input');
@@ -928,7 +929,7 @@ document.getElementById('flexSwitchCheckDefault').addEventListener('change', fun
 				console.error(err);
 				// Выводим ошибки в консоль
 			}
-			
+
 
 
 
@@ -1583,15 +1584,16 @@ document.getElementById('flexSwitchCheckDefault').addEventListener('change', fun
 									если в диапазоне [35%, 65%]; 30 очков, если в диапазоне [30%, 70%]</p>
 							</li>
 						</ul>
-						<a href="https://github.com/nayuki/QR-Code-generator">Пошаговая генерация QR-кода выполнена с использованием библиотеки QR-Code-generator от nayuki</a>
+						<a href="https://github.com/nayuki/QR-Code-generator">Пошаговая генерация QR-кода выполнена с
+							использованием библиотеки QR-Code-generator от nayuki</a>
 					</div>
 				</div>
 			</section>
 		</div>
 
-		
+
 	</div>
-	
+
 	<script src="https://telegram.org/js/telegram-web-app.js"></script>
 	<script src="res/js/jscolor.min.js"></script>
 	<script src="res/js/main.min.js" async="async"></script>
