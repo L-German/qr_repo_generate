@@ -470,8 +470,10 @@
 	<div class="vert-main">
 		<div class="horz-main">
 			<article>
-				<h1><img src="res/picture/qr-logo.png" /> Генерация QR-кода</h1>
-
+				
+				<h1><img src="res/picture/qr-logo.png" /> Генерация QR-кода </h1>
+				
+				
 				<h2>Ввод данных:</h2>
 				<form onsubmit="event.preventDefault(); app.doGenerate();">
 
@@ -659,15 +661,17 @@
 		<canvas id="qrcode-canvas" style="background-color:#E8E8E8" download="qr_code_d.jpg"></canvas>
 
 		<div>
-			<button style="width: 12em; font-size: 0.9em;" id="send-btn" class="btn btn-outline-primary">Получить
-				изображение <img src="res/picture/send.svg" alt="download" />
+			<button style="width: 12em; font-size: 0.9em;" id="send-btn" class="btn btn-outline-primary">Сохранить
+				изображение <img src="res/picture/download.svg" alt="download" />
 
 			</button>
 		</div>
-
+		
 		<div id="reader"></div>
 		<div id="result"></div>
+		<h1><a href="https://t.me/qrcodekubstu_bot" target="_blank"><i style="font-size: 0.6em;">Телеграм бот </i></a><img style="box-shadow: none;" src="res/picture/telegram.svg" alt=""></h1>
 		<hr />
+
 		<script>
 document.getElementById('flexSwitchCheckDefault').addEventListener('change', function() {
         const canvas = document.getElementById('qrcode-canvas');
