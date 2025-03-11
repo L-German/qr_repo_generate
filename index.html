@@ -623,7 +623,7 @@
 								<td>
 									<button class="btn btn-outline-primary" onclick="toggleButton_Logo()"
 										id="logo_button">
-										<img src="res/picture/logo.jpg" alt=""
+										<img src="res/picture/tg_logo.png" alt=""
 											style="width: 50px; height: 50px;"></button>
 								</td>
 							</tr>
@@ -738,10 +738,10 @@ document.getElementById('flexSwitchCheckDefault').addEventListener('change', fun
 				const imageInput = document.getElementById('qr-image-input');
 				document.getElementById('errcorlvl-high').checked = true;
 				// Создаем объект File из URL
-				fetch('res/picture/logo.jpg')
+				fetch('res/picture/tg_logo.png')
 					.then(response => response.blob())
 					.then(blob => {
-						const file = new File([blob], 'Logo_Kubstu.png', { type: blob.type });
+						const file = new File([blob], 'tg_logo.png', { type: blob.type });
 						const dataTransfer = new DataTransfer();
 						dataTransfer.items.add(file);
 						imageInput.files = dataTransfer.files; // Устанавливаем файлы в input
