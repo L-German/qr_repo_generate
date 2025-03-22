@@ -617,10 +617,22 @@
 							<tr class="logo-row">
 								<td></td>
 								<td>
-									<button class="btn btn-outline-primary" onclick="toggleButton_Logo()"
-										id="logo_button">
+									
+
+									<button class="btn btn-outline-primary" onclick="toggleButton_Logo_2()"
+										id="logo_button_2">
+										<img src="res/picture/qr-logo.png" alt=""
+											style="width: 50px; height: 50px;"></button>
+											<button class="btn btn-outline-primary" onclick="toggleButton_Logo()"
+											id="logo_button">
+											<img src="res/picture/kubstu_logo.jpg" alt=""
+												style="width: 50px; height: 50px;"></button>
+
+									<button class="btn btn-outline-primary" onclick="toggleButton_Logo_3()"
+										id="logo_button_3">
 										<img src="res/picture/tg_logo.png" alt=""
 											style="width: 50px; height: 50px;"></button>
+
 								</td>
 							</tr>
 							<tr class="logo-row">
@@ -674,10 +686,10 @@
 				const canvas = document.getElementById('qrcode-canvas');
 				if (this.checked) {
 					// Рамка
-					canvas.style.padding = '10px'; 
+					canvas.style.padding = '10px';
 
 				} else {
-					
+
 					canvas.style.padding = '0';
 
 				}
@@ -717,15 +729,15 @@
 				if (this.checked) {
 					// Если чекбокс включен, показываем строку и устанавливаем значение по умолчанию
 					gradientColorRow.style.display = 'table-row';
-					secondColorInput.value = '#000000'; 
+					secondColorInput.value = '#000000';
 					if (secondColorInput.jscolor) {
 						secondColorInput.jscolor.fromString('#000000');
 					}
 
 				} else {
-					
+
 					gradientColorRow.style.display = 'none';
-					secondColorInput.value = document.getElementById('dark-color-input').value; 
+					secondColorInput.value = document.getElementById('dark-color-input').value;
 					if (secondColorInput.jscolor) {
 						secondColorInput.jscolor.fromString(document.getElementById('dark-color-input').value);
 					}
@@ -736,13 +748,43 @@
 				const imageInput = document.getElementById('qr-image-input');
 				document.getElementById('errcorlvl-high').checked = true;
 				// Создаем объект File из URL
+				fetch('res/picture/kubstu_logo.jpg')
+					.then(response => response.blob())
+					.then(blob => {
+						const file = new File([blob], 'kubstu_logo.jpg', { type: blob.type });
+						const dataTransfer = new DataTransfer();
+						dataTransfer.items.add(file);
+						imageInput.files = dataTransfer.files;
+					})
+					.catch(error => console.error('Ошибка при загрузке файла:', error));
+			}
+			
+			function toggleButton_Logo_2() {
+				const imageInput = document.getElementById('qr-image-input');
+				document.getElementById('errcorlvl-high').checked = true;
+				// Создаем объект File из URL
+				fetch('res/picture/qr-logo.png')
+					.then(response => response.blob())
+					.then(blob => {
+						const file = new File([blob], 'qr-logo.png', { type: blob.type });
+						const dataTransfer = new DataTransfer();
+						dataTransfer.items.add(file);
+						imageInput.files = dataTransfer.files;
+					})
+					.catch(error => console.error('Ошибка при загрузке файла:', error));
+			}
+			
+			function toggleButton_Logo_3() {
+				const imageInput = document.getElementById('qr-image-input');
+				document.getElementById('errcorlvl-high').checked = true;
+				// Создаем объект File из URL
 				fetch('res/picture/tg_logo.png')
 					.then(response => response.blob())
 					.then(blob => {
 						const file = new File([blob], 'tg_logo.png', { type: blob.type });
 						const dataTransfer = new DataTransfer();
 						dataTransfer.items.add(file);
-						imageInput.files = dataTransfer.files; 
+						imageInput.files = dataTransfer.files;
 					})
 					.catch(error => console.error('Ошибка при загрузке файла:', error));
 			}
@@ -780,11 +822,11 @@
 
 				// Анимация с иконками
 				if (icon.src.includes('caret-down-fill.svg')) {
-					icon.src = 'res/picture/caret-right-fill.svg'; 
+					icon.src = 'res/picture/caret-right-fill.svg';
 
 
 				} else {
-					icon.src = 'res/picture/caret-down-fill.svg'; 
+					icon.src = 'res/picture/caret-down-fill.svg';
 				}
 			}
 
@@ -800,12 +842,12 @@
 				const rows = document.querySelectorAll('.params-row');
 				const icon = document.getElementById('params-icon');
 
-				
+
 				rows.forEach(row => {
 					if (row.classList.contains('hidden')) {
-						
+
 						row.classList.remove('hidden');
-						row.style.display = ''; 
+						row.style.display = '';
 					} else {
 						row.classList.add('hidden');
 						row.addEventListener('transitionend', () => {
@@ -817,9 +859,9 @@
 				});
 
 				if (icon.src.includes('caret-down-fill.svg')) {
-					icon.src = 'res/picture/caret-right-fill.svg'; 
+					icon.src = 'res/picture/caret-right-fill.svg';
 				} else {
-					icon.src = 'res/picture/caret-down-fill.svg'; 
+					icon.src = 'res/picture/caret-down-fill.svg';
 				}
 			}
 			function toggleLogo() {
@@ -828,9 +870,9 @@
 
 				rows.forEach(row => {
 					if (row.classList.contains('hidden')) {
-						
+
 						row.classList.remove('hidden');
-						row.style.display = ''; 
+						row.style.display = '';
 					} else {
 						row.classList.add('hidden');
 						row.addEventListener('transitionend', () => {
@@ -868,7 +910,7 @@
 				document.getElementById('reader').style.display = 'none';
 				document.getElementById('result').style.display = 'none';
 
-				
+
 				document.getElementById('Qr-code_output').innerText = '';
 			});
 
@@ -1555,8 +1597,8 @@
 									если в диапазоне [35%, 65%]; 30 очков, если в диапазоне [30%, 70%]</p>
 							</li>
 						</ul>
-						<a href="https://github.com/nayuki/QR-Code-generator">Пошаговая генерация QR-кода выполнена с
-							использованием библиотеки QR-Code-generator от nayuki</a>
+						<!--	<a href="https://github.com/nayuki/QR-Code-generator">Пошаговая генерация QR-кода выполнена с
+							использованием библиотеки QR-Code-generator от nayuki</a>-->
 					</div>
 				</div>
 			</section>
