@@ -10,6 +10,7 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1" />
 	<link rel="stylesheet" href="res/style/bootstrap.min.css">
 	<link rel="stylesheet" href="res/style/style.css" type="text/css" />
+	<link rel='icon' href='res/picture/qr-logo.png' type='image/x-icon'>
 	<script src="res/js/html5-qrcode-scan.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 	<script src="res/js/bootstrap.bundle.min.js"></script>
@@ -335,12 +336,10 @@
 			text-align: right;
 		}
 
-		#reader {
-			width: 400px;
-		}
+		
 
 		#result {
-			text-align: center;
+			
 			font-size: 1.5rem;
 		}
 
@@ -461,6 +460,27 @@
 
 			background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='currentColor' class='bi bi-plus' viewBox='0 0 16 16'%3E%3Cpath d='M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z'/%3E%3C/svg%3E");
 		}
+
+		#reader {
+  border: 2px dashed #5e78c1 ;
+  border-radius: 12px;
+  
+  max-width: 500px;
+}
+
+
+#reader__dashboard_section_swaplink {
+  display: none; /* Скрыть кнопку смены камеры */
+}
+
+#html5-qrcode-button-camera-permission {
+  background: #5e78c1 ;
+  color: white ;
+}
+
+#html5-qrcode-button-torch {
+  background: #333 ;
+}
 	</style>
 </head>
 
@@ -656,7 +676,7 @@
 		<tr>
 			<td></td>
 			<td>
-				<button type="button" class="btn btn-primary" id="scanButton" style=" font-size: 1rem;">Сканировать код
+				<button type="button" class="btn btn-primary" id="scanButton" style=" font-size: 1rem; ">Сканировать код
 				</button>
 			</td>
 		</tr>
@@ -675,8 +695,8 @@
 			</button>
 		</div>
 
-		<div id="reader"></div>
-		<div id="result"></div>
+		<div id="reader" style="display: none;" ></div>
+		<div id="result" ></div>
 		<h2><a href="https://t.me/qrcodekubstu_bot" target="_blank"><i style="font-size: 0.8em;">Телеграм бот
 				</i></a><img style="box-shadow: none;" src="res/picture/telegram.svg" alt=""></h2>
 		<hr />
@@ -909,7 +929,7 @@
 				// Скрываем элементы для сканирования
 				document.getElementById('reader').style.display = 'none';
 				document.getElementById('result').style.display = 'none';
-
+				
 
 				document.getElementById('Qr-code_output').innerText = '';
 			});
@@ -931,6 +951,7 @@
 						height: 250,
 					},
 					fps: 20,
+					showTorchButtonIfSupported: true
 				});
 
 				// Запускаем сканер
