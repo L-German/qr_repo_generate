@@ -563,6 +563,11 @@
         font-size: 14px;
     }
 }
+@media (hover: none) and (pointer: coarse) {
+        .telegram-preview-hide {
+            display: none !important;
+        }
+    }
 	</style>
 </head>
 
@@ -657,11 +662,11 @@
 										<div class="style-options-wrapper">
 											<div class="style-option active" data-value="square">
 												<img src="res/picture/standart_qr.png" alt="Квадраты">
-												<span>Квадраты</span>
+												<span>Обычный</span>
 											</div>
 											<div class="style-option" data-value="circle">
 												<img src="res/picture/GO.png" alt="Круги (GO)">
-												<span>Круги (GO)</span>
+												<span>Игра go</span>
 											</div>
 										</div>
 										<input type="hidden" id="module-style" name="module-style" value="square">
@@ -815,9 +820,12 @@
 
 		<div id="reader" style="display: none;"></div>
 		<div id="result"></div>
-		<h2><a href="https://t.me/qrcodekubstu_bot" target="_blank"><i style="font-size: 0.8em;">Телеграм бот
-				</i></a><img style="box-shadow: none;" src="res/picture/telegram.svg" alt=""></h2>
-		<hr />
+		<h2 class="telegram-preview-hide">
+			<a href="https://t.me/qrcodekubstu_bot" target="_blank">
+				<i style="font-size: 0.8em;">Телеграм бот</i>
+			</a>
+			<img style="box-shadow: none;" src="res/picture/telegram.svg" alt="">
+		</h2>
 
 		<script>
 			document.querySelectorAll('.style-option').forEach(option => {
