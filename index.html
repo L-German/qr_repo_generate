@@ -354,7 +354,7 @@
 		}
 
 		@media (max-width: 768px) {
-
+			
 			#character-analysis th:nth-child(1),
 			#character-analysis td:nth-child(1) {
 				display: none;
@@ -526,6 +526,43 @@
     height: 40px;
     object-fit: contain;
 }
+.style-preview-container {
+    width: 100%;
+}
+
+.style-options-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.style-option {
+    flex: 1 1 calc(50% - 10px);
+    max-width: 200px;
+    min-width: 140px;
+    box-sizing: border-box;
+}
+
+@media (max-width: 480px) {
+    .style-options-wrapper {
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .style-option {
+        flex: 1 1 auto;
+        max-width: 100%;
+    }
+    
+    .style-option img {
+        width: 35px;
+        height: 35px;
+    }
+    
+    .style-option span {
+        font-size: 14px;
+    }
+}
 	</style>
 </head>
 
@@ -617,15 +654,16 @@
 								<td>Стиль модулей:</td>
 								<td>
 									<div class="style-preview-container">
-										<div class="style-option active" data-value="square">
-											<img src="res/picture/standart_qr.png" alt="Квадраты">
-											<span>Квадраты</span>
+										<div class="style-options-wrapper">
+											<div class="style-option active" data-value="square">
+												<img src="res/picture/standart_qr.png" alt="Квадраты">
+												<span>Квадраты</span>
+											</div>
+											<div class="style-option" data-value="circle">
+												<img src="res/picture/GO.png" alt="Круги (GO)">
+												<span>Круги (GO)</span>
+											</div>
 										</div>
-										<div class="style-option" data-value="circle">
-											<img src="res/picture/GO.png" alt="Круги (GO)">
-											<span>Круги (GO)</span>
-										</div>
-										<!-- Скрытый инпут для хранения значения -->
 										<input type="hidden" id="module-style" name="module-style" value="square">
 									</div>
 								</td>
