@@ -1127,7 +1127,7 @@ document.addEventListener("DOMContentLoaded", function() {
 						const decryptedText = decryptText(encryptedData, key);
 						if (decryptedText) {
 							document.getElementById("result").innerHTML = `
-                <a href="${decryptedText}"<strong>Расшифрованный текст:</strong> ${decryptedText}</a>`;
+                "<strong>Расшифрованный текст:</strong><a href="${decryptedText} ${decryptedText}</a>`;
 						} else {
 							document.getElementById("result").innerHTML = `
                 Результат: <a href="${result}" target="_blank">${result}</a>`;
