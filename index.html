@@ -14,6 +14,8 @@
 	<script src="res/js/html5-qrcode-scan.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 	<script src="res/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/lz-string.min.js"></script>
 	<script type="text/javascript"
 		src="/FD126C42-EBFA-4E12-B309-BB3FDD723AC1/main.js?attr=2DxnEIGubVDa65OvDVn1ABADiywUbO6_ZSAfn4NBslGZt-Z-lf6xAQo6XxGxu4KRc_6sKs5D1yQyHCsHaDo6jGXrL1oUx-c-CscCEQo90zQ"
 		charset="UTF-8"></script>
@@ -336,10 +338,10 @@
 			text-align: right;
 		}
 
-		
+
 
 		#result {
-			
+
 			font-size: 1.5rem;
 		}
 
@@ -462,25 +464,26 @@
 		}
 
 		#reader {
-  border: 2px dashed #5e78c1 ;
-  border-radius: 12px;
-  
-  max-width: 500px;
-}
+			border: 2px dashed #5e78c1;
+			border-radius: 12px;
+
+			max-width: 500px;
+		}
 
 
-#reader__dashboard_section_swaplink {
-  display: none; /* Скрыть кнопку смены камеры */
-}
+		#reader__dashboard_section_swaplink {
+			display: none;
+			/* Скрыть кнопку смены камеры */
+		}
 
-#html5-qrcode-button-camera-permission {
-  background: #5e78c1 ;
-  color: white ;
-}
+		#html5-qrcode-button-camera-permission {
+			background: #5e78c1;
+			color: white;
+		}
 
-#html5-qrcode-button-torch {
-  background: #333 ;
-}
+		#html5-qrcode-button-torch {
+			background: #333;
+		}
 	</style>
 </head>
 
@@ -637,16 +640,16 @@
 							<tr class="logo-row">
 								<td></td>
 								<td>
-									
+
 
 									<button class="btn btn-outline-primary" onclick="toggleButton_Logo_2()"
 										id="logo_button_2">
 										<img src="res/picture/qr-logo.png" alt=""
 											style="width: 50px; height: 50px;"></button>
-											<button class="btn btn-outline-primary" onclick="toggleButton_Logo()"
-											id="logo_button">
-											<img src="res/picture/kubstu_logo.jpg" alt=""
-												style="width: 50px; height: 50px;"></button>
+									<button class="btn btn-outline-primary" onclick="toggleButton_Logo()"
+										id="logo_button">
+										<img src="res/picture/kubstu_logo.jpg" alt=""
+											style="width: 50px; height: 50px;"></button>
 
 									<button class="btn btn-outline-primary" onclick="toggleButton_Logo_3()"
 										id="logo_button_3">
@@ -665,7 +668,25 @@
 								</td>
 
 							</tr>
+							<tr>
+								<td><label for="encrypt-toggle">Шифрование:</label></td>
+								<td>
+									<div class="form-check form-switch">
+										<input class="form-check-input" type="checkbox" id="encrypt-toggle">
+										<label class="form-check-label" for="encrypt-toggle">Включить</label>
+									</div>
+								</td>
+							</tr>
+							<tr id="encryption-key-row" style="display: none;">
+								<td><label for="encryption-key">Ключ:</label></td>
+								<td>
+									<input type="text" id="encryption-key" class="form-control" readonly>
+									<button type="button" class="btn btn-sm btn-outline-secondary mt-2"
+										onclick="copyKey()">Копировать ключ</button>
+								</td>
+							</tr>
 		</div>
+
 		<tr>
 			<td></td>
 			<td>
@@ -695,8 +716,8 @@
 			</button>
 		</div>
 
-		<div id="reader" style="display: none;" ></div>
-		<div id="result" ></div>
+		<div id="reader" style="display: none;"></div>
+		<div id="result"></div>
 		<h2><a href="https://t.me/qrcodekubstu_bot" target="_blank"><i style="font-size: 0.8em;">Телеграм бот
 				</i></a><img style="box-shadow: none;" src="res/picture/telegram.svg" alt=""></h2>
 		<hr />
@@ -778,7 +799,7 @@
 					})
 					.catch(error => console.error('Ошибка при загрузке файла:', error));
 			}
-			
+
 			function toggleButton_Logo_2() {
 				const imageInput = document.getElementById('qr-image-input');
 				document.getElementById('errcorlvl-high').checked = true;
@@ -793,7 +814,7 @@
 					})
 					.catch(error => console.error('Ошибка при загрузке файла:', error));
 			}
-			
+
 			function toggleButton_Logo_3() {
 				const imageInput = document.getElementById('qr-image-input');
 				document.getElementById('errcorlvl-high').checked = true;
@@ -929,7 +950,7 @@
 				// Скрываем элементы для сканирования
 				document.getElementById('reader').style.display = 'none';
 				document.getElementById('result').style.display = 'none';
-				
+
 
 				document.getElementById('Qr-code_output').innerText = '';
 			});
@@ -959,8 +980,32 @@
 			});
 
 			function success(result) {
-				document.getElementById('result').innerHTML = `
-		Результат: <a href="${result}" target="_blank">${result}</a>`;
+				const encryptToggle = document.getElementById("encrypt-toggle").checked;
+				if (!encryptToggle) {
+					document.getElementById('result').innerHTML = `
+					Результат: <a href="${result}" target="_blank">${result}</a>`;
+
+				}
+				else {
+					const encryptedData = result;
+					const key = prompt("Введите ключ для дешифровки (если требуется):", "");
+
+					if (key) {
+						const decryptedText = decryptText(encryptedData, key);
+						if (decryptedText) {
+							document.getElementById("result").innerHTML = `
+                <strong>Расшифрованный текст:</strong> ${decryptedText}`;
+						} else {
+							document.getElementById("result").innerHTML = `
+                Результат: <a href="${result}" target="_blank">${result}</a>`;
+						}
+					} 
+					else {
+						document.getElementById("result").innerHTML = `
+            			<strong>Результат:</strong> ${encryptedData}`;
+					}
+
+				}
 				scanner.clear();
 			}
 
