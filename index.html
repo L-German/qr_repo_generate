@@ -48,6 +48,7 @@
 		article #input-table input[type=submit] {
 			padding: 0.2em 0.6em;
 		}
+		
 
 		article #input-table label>input[type=radio] {
 			margin-right: 0.2em;
@@ -484,6 +485,47 @@
 		#html5-qrcode-button-torch {
 			background: #333;
 		}
+		#qrcode-canvas {
+  background: white;
+  border-radius: 12px;
+  padding: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  margin: 20px 0;
+}
+.logo-row, .params-row {
+  transition: all 0.3s ease-out;
+  overflow: hidden;
+}
+.style-preview-container {
+    display: flex;
+    gap: 15px;
+}
+
+.style-option {
+    cursor: pointer;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    padding: 8px;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.style-option:hover {
+    border-color: #5e78c1;
+}
+
+.style-option.active {
+    border-color: #5e78c1;
+    background: #f0f4ff;
+}
+
+.style-option img {
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+}
 	</style>
 </head>
 
@@ -570,15 +612,23 @@
 
 								</td>
 							</tr>
+							
 							<tr class="design-row">
-								<td>Рамка:</td>
+								<td>Стиль модулей:</td>
 								<td>
-									<div class="form-check form-switch">
-										<input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault">
-										<label class="form-check-label" for="flexSwitchCheckDefault">Включить</label>
+									<div class="style-preview-container">
+										<div class="style-option active" data-value="square">
+											<img src="res/picture/standart_qr.png" alt="Квадраты">
+											<span>Квадраты</span>
+										</div>
+										<div class="style-option" data-value="circle">
+											<img src="res/picture/GO.png" alt="Круги (GO)">
+											<span>Круги (GO)</span>
+										</div>
+										<!-- Скрытый инпут для хранения значения -->
+										<input type="hidden" id="module-style" name="module-style" value="square">
 									</div>
 								</td>
-
 							</tr>
 							<tr class="design-row">
 								<td>Градиент:</td>
@@ -668,7 +718,16 @@
 								</td>
 
 							</tr>
-							<tr>
+							<tr class="cipher-header">
+								<td><button onclick="togglecipher()" class="btn btn-outline-primary"> <img
+									id="cipher-icon" src="res/picture/caret-down-fill.svg">Шифрование <img
+									id="img_icons1" src="res/picture/key.svg">:</button></td>
+
+						<td>
+								</td>
+							</tr>
+							
+							<tr class="cipher-row">
 								<td><label for="encrypt-toggle">Шифрование:</label></td>
 								<td>
 									<div class="form-check form-switch">
@@ -723,19 +782,22 @@
 		<hr />
 
 		<script>
-			document.getElementById('flexSwitchCheckDefault').addEventListener('change', function () {
-				const canvas = document.getElementById('qrcode-canvas');
-				if (this.checked) {
-					// Рамка
-					canvas.style.padding = '10px';
-
-				} else {
-
-					canvas.style.padding = '0';
-
-				}
-			});
-
+			document.querySelectorAll('.style-option').forEach(option => {
+    option.addEventListener('click', function() {
+        // Удаляем активный класс у всех
+        document.querySelectorAll('.style-option').forEach(el => el.classList.remove('active'));
+        
+        // Добавляем активный класс выбранному
+        this.classList.add('active');
+        
+        // Обновляем скрытое поле
+        document.getElementById('module-style').value = this.dataset.value;
+        
+        // Перегенерируем QR-код
+        generateQRCode();
+    });
+});
+			
 
 			document.getElementById('qr-image-input').addEventListener('change', function () {
 				if (this.files.length > 0) {
@@ -763,27 +825,38 @@
 			});
 
 
-			document.getElementById('flexSwitchCheckDefault1').addEventListener('change', function () {
+			document.getElementById('flexSwitchCheckDefault1').addEventListener('change', function() {
+			
+    const gradientColorRow = document.getElementById('gradient-color-row');
+    const secondColorInput = document.getElementById('s_light-color-input');
+    const darkColorInput = document.getElementById('dark-color-input');
+    
+    if (this.checked) {
+		gradientColorRow.style.display = 'table-row';
+        secondColorInput.value = darkColorInput.value;
+        if (secondColorInput.jscolor) {
+            secondColorInput.jscolor.fromString(darkColorInput.value);
+        }
+       
+    } else {
+		gradientColorRow.style.display = 'none';
+		document.getElementById('s_light-color-input').value=document.getElementById('dark-color-input').value
+    }
+    
+});
+function toggleGradientColorRow() {
 				const gradientColorRow = document.getElementById('gradient-color-row');
-				const secondColorInput = document.getElementById('s_light-color-input');
+				const checkbox = document.getElementById('flexSwitchCheckDefault1');
 
-				if (this.checked) {
-					// Если чекбокс включен, показываем строку и устанавливаем значение по умолчанию
-					gradientColorRow.style.display = 'table-row';
-					secondColorInput.value = '#000000';
-					if (secondColorInput.jscolor) {
-						secondColorInput.jscolor.fromString('#000000');
-					}
-
-				} else {
-
-					gradientColorRow.style.display = 'none';
-					secondColorInput.value = document.getElementById('dark-color-input').value;
-					if (secondColorInput.jscolor) {
-						secondColorInput.jscolor.fromString(document.getElementById('dark-color-input').value);
-					}
-				}
-			});
+				// Если чекбокс включен, показываем второй цвет, иначе скрываем
+				gradientColorRow.style.display = checkbox.checked ? '' : 'none';
+			}
+// Инициализация при загрузке страницы
+document.addEventListener("DOMContentLoaded", function() {
+    /*const gradientCheckbox = document.getElementById('flexSwitchCheckDefault1');
+    const gradientColorRow = document.getElementById('gradient-color-row');
+    gradientColorRow.style.display = gradientCheckbox.checked ? 'table-row' : 'none';*/
+});
 			//Параметры, дизайн, логотип - закрытие и открытие элементов
 			function toggleButton_Logo() {
 				const imageInput = document.getElementById('qr-image-input');
@@ -871,13 +944,7 @@
 				}
 			}
 
-			function toggleGradientColorRow() {
-				const gradientColorRow = document.getElementById('gradient-color-row');
-				const checkbox = document.getElementById('flexSwitchCheckDefault1');
-
-				// Если чекбокс включен, показываем второй цвет, иначе скрываем
-				gradientColorRow.style.display = checkbox.checked ? '' : 'none';
-			}
+			
 			//Параметры
 			function toggleParams() {
 				const rows = document.querySelectorAll('.params-row');
@@ -905,6 +972,38 @@
 					icon.src = 'res/picture/caret-down-fill.svg';
 				}
 			}
+
+			function togglecipher() {
+    const rows = document.querySelectorAll('.cipher-row');
+    const icon = document.getElementById('cipher-icon');
+
+    rows.forEach(row => {
+        if (row.classList.contains('hidden')) {
+            // Показываем строки
+            row.classList.remove('hidden');
+            row.style.display = 'table-row';
+            setTimeout(() => {
+                row.style.opacity = '1';
+                row.style.maxHeight = '1000px';
+            }, 10);
+        } else {
+            // Скрываем строки
+            row.style.opacity = '0';
+            row.style.maxHeight = '0';
+            setTimeout(() => {
+                row.classList.add('hidden');
+                row.style.display = 'none';
+            }, 300); // Должно совпадать с временем transition
+        }
+    });
+
+    // Меняем иконку
+    icon.src = icon.src.includes('caret-down-fill.svg') 
+        ? 'res/picture/caret-right-fill.svg' 
+        : 'res/picture/caret-down-fill.svg';
+}
+
+
 			function toggleLogo() {
 				const rows = document.querySelectorAll('.logo-row');
 				const icon = document.getElementById('logo-icon');
@@ -930,13 +1029,7 @@
 					icon.src = 'res/picture/caret-down-fill.svg';
 				}
 			}
-			document.getElementById('customRange5').addEventListener('input', function () {
-				document.getElementById('force-size').value = this.value;
-			});
-
-			document.getElementById('force-size').addEventListener('input', function () {
-				document.getElementById('customRange5').value = this.value;
-			});
+			
 
 			let scanner;
 
