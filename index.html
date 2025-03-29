@@ -14,6 +14,7 @@
 	<script src="res/js/html5-qrcode-scan.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 	<script src="res/js/bootstrap.bundle.min.js"></script>
+	<script src="res/js/stego.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/lz-string.min.js"></script>
 	<script type="text/javascript"
@@ -563,7 +564,25 @@
         font-size: 14px;
     }
 }
+.stego-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+}
 
+@media (max-width: 768px) {
+    .stego-buttons {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    
+    .stego-buttons button {
+        margin-bottom: 0.5rem;
+    }
+}
+.cipher-row, .stego-row {
+    display: none;
+}
 	</style>
 </head>
 
@@ -762,12 +781,13 @@
 									id="cipher-icon" src="res/picture/caret-down-fill.svg">Шифрование <img
 									id="img_icons1" src="res/picture/key.svg">:</button></td>
 
-						<td>
+									<td>
 								</td>
 							</tr>
 							
 							<tr class="cipher-row">
-								<td><label for="encrypt-toggle" style='border-bottom: 1px dashed rgb(83, 33, 175);' title="Если вы хотите расшифровать сообщение, этот шифрование должно быть активировано"> Шифрование AES</label></td>
+								<td>Шифрование <label  style='border-bottom: 1px dashed rgb(83, 33, 175);' >AES <a href="" data-bs-toggle="modal"
+									data-bs-target="#exampleModal5"><img src="res/picture/question-octagon.svg"  alt=""></a></label></td>
 								<td>
 									<div class="form-check form-switch">
 										<input class="form-check-input" type="checkbox" id="encrypt-toggle">
@@ -783,30 +803,70 @@
 										onclick="copyKey()">Копировать ключ</button>
 								</td>
 							</tr>
+							
+							<tr class="stego-header">
+								<td><button onclick="toggleStego()" class="btn btn-outline-primary"> <img
+									id="stego-icon" src="res/picture/caret-down-fill.svg">Стеганография <img
+									id="img_icons1" src="res/picture/stegano.svg">:</button></td>
+
+									<td>
+								</td>
+							</tr>
+							
+							<tr class="stego-row">
+								<td>Изображение (PNG):</td>
+								<td>
+									<input type="file" class="form-control" id="stego-image-input" accept="image/png">
+								</td>
+							</tr>
+							
+							<tr class="stego-row">
+								<td>Действие:</td>
+								<td>
+									<button onclick="hideQRInImage()" class="btn btn-primary">Спрятать</button>
+								</td>
+							</tr>
+							
+							<tr class="stego-row">
+								<td></td>
+								<td>
+									<button onclick="extractQRFromImage()" class="btn btn-primary">Извлечь</button>
+								</td>
+							</tr>
+							
+							<tr class="stego-row">
+								<td></td>
+								<td>
+									<div id="stego-status" class="mt-2 text-muted">-</div>
+									<a id="stego-download" class="btn btn-success" style="display: none;">
+										Скачать изображение
+									</a>
+								</td>
+							</tr>
 		</div>
 
 		<tr>
 			<td></td>
 			<td>
-				<button type="submit" class="btn btn-primary" id="generateButton"
+				<button type="submit" class="btn btn-primary active" id="generateButton"
 					style=" font-size: 1rem;">Сгенерировать код </button>
 			</td>
 		</tr>
 		<tr>
 			<td></td>
 			<td>
-				<button type="button" class="btn btn-primary" id="scanButton" style=" font-size: 1rem; ">Сканировать код
+				<button type="button" class="btn btn-primary active" id="scanButton" style=" font-size: 1rem; ">Сканировать код
 				</button>
 			</td>
 		</tr>
 		</tbody>
 		</table>
 		</form>
-
+		
 		<h2 id="Qr-code_output"></h2>
 
 		<canvas id="qrcode-canvas" style="background-color:#E8E8E8" download="qr_code_d.jpg"></canvas>
-
+		
 		<div>
 			<button style="width: 12em; font-size: 0.9em;" id="send-btn" class="btn btn-outline-primary">Сохранить
 				изображение <img src="res/picture/download.svg" alt="download" />
@@ -822,7 +882,26 @@
 
 		<script>
 
+document.addEventListener("DOMContentLoaded", function() {
+	togglecipher(); // Скрыть шифрование
+    toggleStego();
+    /*const gradientCheckbox = document.getElementById('flexSwitchCheckDefault1');
+    const gradientColorRow = document.getElementById('gradient-color-row');
+    gradientColorRow.style.display = gradientCheckbox.checked ? 'table-row' : 'none';*/
+});
 
+document.addEventListener('touchstart', function(e) {
+    if (e.target.closest('.tooltip')) {
+        const tooltip = e.target.closest('.tooltip').querySelector('.tooltiptext');
+        tooltip.style.visibility = 'visible';
+        tooltip.style.opacity = '1';
+        
+        setTimeout(() => {
+            tooltip.style.visibility = 'hidden';
+            tooltip.style.opacity = '0';
+        }, 2000);
+    }
+}, false);
 			document.querySelectorAll('.style-option').forEach(option => {
     option.addEventListener('click', function() {
         // Удаляем активный класс у всех
@@ -835,7 +914,7 @@
         document.getElementById('module-style').value = this.dataset.value;
         
         // Перегенерируем QR-код
-        generateQRCode();
+        
     });
 });
 			
@@ -893,11 +972,7 @@ function toggleGradientColorRow() {
 				gradientColorRow.style.display = checkbox.checked ? '' : 'none';
 			}
 // Инициализация при загрузке страницы
-document.addEventListener("DOMContentLoaded", function() {
-    /*const gradientCheckbox = document.getElementById('flexSwitchCheckDefault1');
-    const gradientColorRow = document.getElementById('gradient-color-row');
-    gradientColorRow.style.display = gradientCheckbox.checked ? 'table-row' : 'none';*/
-});
+
 			//Параметры, дизайн, логотип - закрытие и открытие элементов
 			function toggleButton_Logo() {
 				const imageInput = document.getElementById('qr-image-input');
@@ -986,6 +1061,19 @@ document.addEventListener("DOMContentLoaded", function() {
 			}
 
 			
+// Показать/скрыть секцию стеганографии
+function toggleStego() {
+    const rows = document.querySelectorAll('.stego-row');
+    const icon = document.getElementById('stego-icon');
+    
+    rows.forEach(row => {
+        row.style.display = row.style.display === 'none' ? 'table-row' : 'none';
+    });
+    
+    icon.src = icon.src.includes('caret-down-fill.svg') 
+        ? 'res/picture/caret-right-fill.svg' 
+        : 'res/picture/caret-down-fill.svg';
+}
 			//Параметры
 			function toggleParams() {
 				const rows = document.querySelectorAll('.params-row');
@@ -1037,7 +1125,7 @@ document.addEventListener("DOMContentLoaded", function() {
             }, 300); // Должно совпадать с временем transition
         }
     });
-
+	
     // Меняем иконку
     icon.src = icon.src.includes('caret-down-fill.svg') 
         ? 'res/picture/caret-right-fill.svg' 
@@ -1472,6 +1560,18 @@ document.addEventListener("DOMContentLoaded", function() {
 							<img src="res/picture/rule.jpg" alt="">
 						</div>
 
+					</div>
+				</div>
+			</div>
+
+			<div class="modal fade" id="exampleModal5" tabindex="-1" aria-labelledby="exampleModalLabel"
+				aria-hidden="true">
+				<div class="modal-dialog">
+					<div class="modal-content" style="width: 300px;">
+						<div class="modal-header">
+							<p style="font-size: 0.9em;" class=" modal-title" id="exampleModalLabel">Для расшифровки сообщения, этот параметр должен быть включен.</p>
+							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+						</div>
 					</div>
 				</div>
 			</div>
