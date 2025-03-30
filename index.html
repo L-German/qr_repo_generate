@@ -15,8 +15,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
 	<script src="res/js/bootstrap.bundle.min.js"></script>
 	<script src="res/js/stego.js"></script>
-	<script data-goatcounter="https://generate.goatcounter.com/count"
-        async src="//gc.zgo.at/count.js"></script>
+	<script data-goatcounter="https://generate.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/lz-string/1.4.4/lz-string.min.js"></script>
 	<script type="text/javascript"
@@ -51,7 +50,7 @@
 		article #input-table input[type=submit] {
 			padding: 0.2em 0.6em;
 		}
-		
+
 
 		article #input-table label>input[type=radio] {
 			margin-right: 0.2em;
@@ -357,7 +356,7 @@
 		}
 
 		@media (max-width: 768px) {
-			
+
 			#character-analysis th:nth-child(1),
 			#character-analysis td:nth-child(1) {
 				display: none;
@@ -488,103 +487,111 @@
 		#html5-qrcode-button-torch {
 			background: #333;
 		}
+
 		#qrcode-canvas {
-  background: white;
-  border-radius: 12px;
-  padding: 10px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  margin: 20px 0;
-}
-.logo-row, .params-row {
-  transition: all 0.3s ease-out;
-  overflow: hidden;
-}
-.style-preview-container {
-    display: flex;
-    gap: 15px;
-}
+			background: white;
+			border-radius: 12px;
+			padding: 10px;
+			box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+			margin: 20px 0;
+		}
 
-.style-option {
-    cursor: pointer;
-    border: 2px solid #ddd;
-    border-radius: 8px;
-    padding: 8px;
-    transition: all 0.3s;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-}
+		.logo-row,
+		.params-row {
+			transition: all 0.3s ease-out;
+			overflow: hidden;
+		}
 
-.style-option:hover {
-    border-color: #5e78c1;
-}
+		.style-preview-container {
+			display: flex;
+			gap: 15px;
+		}
 
-.style-option.active {
-    border-color: #5e78c1;
-    background: #f0f4ff;
-}
+		.style-option {
+			cursor: pointer;
+			border: 2px solid #ddd;
+			border-radius: 8px;
+			padding: 8px;
+			transition: all 0.3s;
+			display: flex;
+			align-items: center;
+			gap: 8px;
+		}
 
-.style-option img {
-    width: 40px;
-    height: 40px;
-    object-fit: contain;
-}
-.style-preview-container {
-    width: 100%;
-}
+		.style-option:hover {
+			border-color: #5e78c1;
+		}
 
-.style-options-wrapper {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
+		.style-option.active {
+			border-color: #5e78c1;
+			background: #f0f4ff;
+		}
 
-.style-option {
-    flex: 1 1 calc(50% - 10px);
-    max-width: 200px;
-    min-width: 140px;
-    box-sizing: border-box;
-}
+		.style-option img {
+			width: 40px;
+			height: 40px;
+			object-fit: contain;
+		}
 
-@media (max-width: 480px) {
-    .style-options-wrapper {
-        flex-direction: column;
-        gap: 8px;
-    }
-    
-    .style-option {
-        flex: 1 1 auto;
-        max-width: 100%;
-    }
-    
-    .style-option img {
-        width: 35px;
-        height: 35px;
-    }
-    
-    .style-option span {
-        font-size: 14px;
-    }
-}
-.stego-buttons {
-    display: flex;
-    gap: 1rem;
-    margin-top: 1rem;
-}
+		.style-preview-container {
+			width: 100%;
+		}
 
-@media (max-width: 768px) {
-    .stego-buttons {
-        flex-direction: column;
-        gap: 0.75rem;
-    }
-    
-    .stego-buttons button {
-        margin-bottom: 0.5rem;
-    }
-}
-.cipher-row, .stego-row {
-    display: none;
-}
+		.style-options-wrapper {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 10px;
+		}
+
+		.style-option {
+			flex: 1 1 calc(50% - 10px);
+			max-width: 200px;
+			min-width: 140px;
+			box-sizing: border-box;
+		}
+
+		@media (max-width: 480px) {
+			.style-options-wrapper {
+				flex-direction: column;
+				gap: 8px;
+			}
+
+			.style-option {
+				flex: 1 1 auto;
+				max-width: 100%;
+			}
+
+			.style-option img {
+				width: 35px;
+				height: 35px;
+			}
+
+			.style-option span {
+				font-size: 14px;
+			}
+		}
+
+		.stego-buttons {
+			display: flex;
+			gap: 1rem;
+			margin-top: 1rem;
+		}
+
+		@media (max-width: 768px) {
+			.stego-buttons {
+				flex-direction: column;
+				gap: 0.75rem;
+			}
+
+			.stego-buttons button {
+				margin-bottom: 0.5rem;
+			}
+		}
+
+		.cipher-row,
+		.stego-row {
+			display: none;
+		}
 	</style>
 </head>
 
@@ -671,7 +678,7 @@
 
 								</td>
 							</tr>
-							
+
 							<tr class="design-row">
 								<td>Стиль модулей:</td>
 								<td>
@@ -780,16 +787,17 @@
 							</tr>
 							<tr class="cipher-header">
 								<td><button onclick="togglecipher()" class="btn btn-outline-primary"> <img
-									id="cipher-icon" src="res/picture/caret-down-fill.svg">Шифрование <img
-									id="img_icons1" src="res/picture/key.svg">:</button></td>
+											id="cipher-icon" src="res/picture/caret-down-fill.svg">Шифрование <img
+											id="img_icons1" src="res/picture/key.svg">:</button></td>
 
-									<td>
+								<td>
 								</td>
 							</tr>
-							
+
 							<tr class="cipher-row">
-								<td>Шифрование <label  style='border-bottom: 1px dashed rgb(83, 33, 175);' >AES <a href="" data-bs-toggle="modal"
-									data-bs-target="#exampleModal5"><img src="res/picture/question-octagon.svg"  alt=""></a></label></td>
+								<td>Шифрование <label style='border-bottom: 1px dashed rgb(83, 33, 175);'>AES <a href=""
+											data-bs-toggle="modal" data-bs-target="#exampleModal5"><img
+												src="res/picture/question-octagon.svg" alt=""></a></label></td>
 								<td>
 									<div class="form-check form-switch">
 										<input class="form-check-input" type="checkbox" id="encrypt-toggle">
@@ -805,37 +813,37 @@
 										onclick="copyKey()">Копировать ключ</button>
 								</td>
 							</tr>
-							
+
 							<tr class="stego-header">
 								<td><button onclick="toggleStego()" class="btn btn-outline-primary"> <img
-									id="stego-icon" src="res/picture/caret-down-fill.svg">Стеганография <img
-									id="img_icons1" src="res/picture/stegano.svg">:</button></td>
+											id="stego-icon" src="res/picture/caret-down-fill.svg">Стеганография <img
+											id="img_icons1" src="res/picture/stegano.svg">:</button></td>
 
-									<td>
+								<td>
 								</td>
 							</tr>
-							
+
 							<tr class="stego-row">
 								<td>Изображение (PNG):</td>
 								<td>
 									<input type="file" class="form-control" id="stego-image-input" accept="image/png">
 								</td>
 							</tr>
-							
+
 							<tr class="stego-row">
 								<td>Действие:</td>
 								<td>
 									<button onclick="hideQRInImage()" class="btn btn-primary">Спрятать</button>
 								</td>
 							</tr>
-							
+
 							<tr class="stego-row">
 								<td></td>
 								<td>
 									<button onclick="extractQRFromImage()" class="btn btn-primary">Извлечь</button>
 								</td>
 							</tr>
-							
+
 							<tr class="stego-row">
 								<td></td>
 								<td>
@@ -857,18 +865,19 @@
 		<tr>
 			<td></td>
 			<td>
-				<button type="button" class="btn btn-primary active" id="scanButton" style=" font-size: 1rem; ">Сканировать код
+				<button type="button" class="btn btn-primary active" id="scanButton"
+					style=" font-size: 1rem; ">Сканировать код
 				</button>
 			</td>
 		</tr>
 		</tbody>
 		</table>
 		</form>
-		
+
 		<h2 id="Qr-code_output"></h2>
 
 		<canvas id="qrcode-canvas" style="background-color:#E8E8E8" download="qr_code_d.jpg"></canvas>
-		
+
 		<div>
 			<button style="width: 12em; font-size: 0.9em;" id="send-btn" class="btn btn-outline-primary">Сохранить
 				изображение <img src="res/picture/download.svg" alt="download" />
@@ -885,60 +894,60 @@
 			<img src="res/picture/arrow-up-circle.svg" alt="Наверх">
 		</button>
 		<script>
-window.addEventListener('scroll', function() {
-    const scrollBtn = document.getElementById('scrollTopBtn');
-    const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
-    
-    if (scrollPosition > 100) {
-        scrollBtn.classList.add('visible');
-    } else {
-        scrollBtn.classList.remove('visible');
-    }
-});
+			window.addEventListener('scroll', function () {
+				const scrollBtn = document.getElementById('scrollTopBtn');
+				const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
 
-document.getElementById('scrollTopBtn').addEventListener('click', function() {
-    window.scrollTo({
-        top: 0,
-        behavior: 'smooth'
-    });
-});
+				if (scrollPosition > 100) {
+					scrollBtn.classList.add('visible');
+				} else {
+					scrollBtn.classList.remove('visible');
+				}
+			});
 
-document.addEventListener("DOMContentLoaded", function() {
-	togglecipher(); // Скрыть шифрование
-    toggleStego();
-    /*const gradientCheckbox = document.getElementById('flexSwitchCheckDefault1');
-    const gradientColorRow = document.getElementById('gradient-color-row');
-    gradientColorRow.style.display = gradientCheckbox.checked ? 'table-row' : 'none';*/
-});
+			document.getElementById('scrollTopBtn').addEventListener('click', function () {
+				window.scrollTo({
+					top: 0,
+					behavior: 'smooth'
+				});
+			});
 
-document.addEventListener('touchstart', function(e) {
-    if (e.target.closest('.tooltip')) {
-        const tooltip = e.target.closest('.tooltip').querySelector('.tooltiptext');
-        tooltip.style.visibility = 'visible';
-        tooltip.style.opacity = '1';
-        
-        setTimeout(() => {
-            tooltip.style.visibility = 'hidden';
-            tooltip.style.opacity = '0';
-        }, 2000);
-    }
-}, false);
+			document.addEventListener("DOMContentLoaded", function () {
+				togglecipher(); // Скрыть шифрование
+				toggleStego();
+				/*const gradientCheckbox = document.getElementById('flexSwitchCheckDefault1');
+				const gradientColorRow = document.getElementById('gradient-color-row');
+				gradientColorRow.style.display = gradientCheckbox.checked ? 'table-row' : 'none';*/
+			});
+
+			document.addEventListener('touchstart', function (e) {
+				if (e.target.closest('.tooltip')) {
+					const tooltip = e.target.closest('.tooltip').querySelector('.tooltiptext');
+					tooltip.style.visibility = 'visible';
+					tooltip.style.opacity = '1';
+
+					setTimeout(() => {
+						tooltip.style.visibility = 'hidden';
+						tooltip.style.opacity = '0';
+					}, 2000);
+				}
+			}, false);
 			document.querySelectorAll('.style-option').forEach(option => {
-    option.addEventListener('click', function() {
-        // Удаляем активный класс у всех
-        document.querySelectorAll('.style-option').forEach(el => el.classList.remove('active'));
-        
-        // Добавляем активный класс выбранному
-        this.classList.add('active');
-        
-        // Обновляем скрытое поле
-        document.getElementById('module-style').value = this.dataset.value;
-        
-        // Перегенерируем QR-код
-        
-    });
-});
-			
+				option.addEventListener('click', function () {
+					// Удаляем активный класс у всех
+					document.querySelectorAll('.style-option').forEach(el => el.classList.remove('active'));
+
+					// Добавляем активный класс выбранному
+					this.classList.add('active');
+
+					// Обновляем скрытое поле
+					document.getElementById('module-style').value = this.dataset.value;
+
+					// Перегенерируем QR-код
+
+				});
+			});
+
 
 			document.getElementById('qr-image-input').addEventListener('change', function () {
 				if (this.files.length > 0) {
@@ -966,33 +975,33 @@ document.addEventListener('touchstart', function(e) {
 			});
 
 
-			document.getElementById('flexSwitchCheckDefault1').addEventListener('change', function() {
-			
-    const gradientColorRow = document.getElementById('gradient-color-row');
-    const secondColorInput = document.getElementById('s_light-color-input');
-    const darkColorInput = document.getElementById('dark-color-input');
-    
-    if (this.checked) {
-		gradientColorRow.style.display = 'table-row';
-        secondColorInput.value = darkColorInput.value;
-        if (secondColorInput.jscolor) {
-            secondColorInput.jscolor.fromString(darkColorInput.value);
-        }
-       
-    } else {
-		gradientColorRow.style.display = 'none';
-		document.getElementById('s_light-color-input').value=document.getElementById('dark-color-input').value
-    }
-    
-});
-function toggleGradientColorRow() {
+			document.getElementById('flexSwitchCheckDefault1').addEventListener('change', function () {
+
+				const gradientColorRow = document.getElementById('gradient-color-row');
+				const secondColorInput = document.getElementById('s_light-color-input');
+				const darkColorInput = document.getElementById('dark-color-input');
+
+				if (this.checked) {
+					gradientColorRow.style.display = 'table-row';
+					secondColorInput.value = darkColorInput.value;
+					if (secondColorInput.jscolor) {
+						secondColorInput.jscolor.fromString(darkColorInput.value);
+					}
+
+				} else {
+					gradientColorRow.style.display = 'none';
+					document.getElementById('s_light-color-input').value = document.getElementById('dark-color-input').value
+				}
+
+			});
+			function toggleGradientColorRow() {
 				const gradientColorRow = document.getElementById('gradient-color-row');
 				const checkbox = document.getElementById('flexSwitchCheckDefault1');
 
 				// Если чекбокс включен, показываем второй цвет, иначе скрываем
 				gradientColorRow.style.display = checkbox.checked ? '' : 'none';
 			}
-// Инициализация при загрузке страницы
+			// Инициализация при загрузке страницы
 
 			//Параметры, дизайн, логотип - закрытие и открытие элементов
 			function toggleButton_Logo() {
@@ -1081,20 +1090,20 @@ function toggleGradientColorRow() {
 				}
 			}
 
-			
-// Показать/скрыть секцию стеганографии
-function toggleStego() {
-    const rows = document.querySelectorAll('.stego-row');
-    const icon = document.getElementById('stego-icon');
-    
-    rows.forEach(row => {
-        row.style.display = row.style.display === 'none' ? 'table-row' : 'none';
-    });
-    
-    icon.src = icon.src.includes('caret-down-fill.svg') 
-        ? 'res/picture/caret-right-fill.svg' 
-        : 'res/picture/caret-down-fill.svg';
-}
+
+			// Показать/скрыть секцию стеганографии
+			function toggleStego() {
+				const rows = document.querySelectorAll('.stego-row');
+				const icon = document.getElementById('stego-icon');
+
+				rows.forEach(row => {
+					row.style.display = row.style.display === 'none' ? 'table-row' : 'none';
+				});
+
+				icon.src = icon.src.includes('caret-down-fill.svg')
+					? 'res/picture/caret-right-fill.svg'
+					: 'res/picture/caret-down-fill.svg';
+			}
 			//Параметры
 			function toggleParams() {
 				const rows = document.querySelectorAll('.params-row');
@@ -1124,34 +1133,34 @@ function toggleStego() {
 			}
 
 			function togglecipher() {
-    const rows = document.querySelectorAll('.cipher-row');
-    const icon = document.getElementById('cipher-icon');
+				const rows = document.querySelectorAll('.cipher-row');
+				const icon = document.getElementById('cipher-icon');
 
-    rows.forEach(row => {
-        if (row.classList.contains('hidden')) {
-            // Показываем строки
-            row.classList.remove('hidden');
-            row.style.display = 'table-row';
-            setTimeout(() => {
-                row.style.opacity = '1';
-                row.style.maxHeight = '1000px';
-            }, 10);
-        } else {
-            // Скрываем строки
-            row.style.opacity = '0';
-            row.style.maxHeight = '0';
-            setTimeout(() => {
-                row.classList.add('hidden');
-                row.style.display = 'none';
-            }, 300); // Должно совпадать с временем transition
-        }
-    });
-	
-    // Меняем иконку
-    icon.src = icon.src.includes('caret-down-fill.svg') 
-        ? 'res/picture/caret-right-fill.svg' 
-        : 'res/picture/caret-down-fill.svg';
-}
+				rows.forEach(row => {
+					if (row.classList.contains('hidden')) {
+						// Показываем строки
+						row.classList.remove('hidden');
+						row.style.display = 'table-row';
+						setTimeout(() => {
+							row.style.opacity = '1';
+							row.style.maxHeight = '1000px';
+						}, 10);
+					} else {
+						// Скрываем строки
+						row.style.opacity = '0';
+						row.style.maxHeight = '0';
+						setTimeout(() => {
+							row.classList.add('hidden');
+							row.style.display = 'none';
+						}, 300); // Должно совпадать с временем transition
+					}
+				});
+
+				// Меняем иконку
+				icon.src = icon.src.includes('caret-down-fill.svg')
+					? 'res/picture/caret-right-fill.svg'
+					: 'res/picture/caret-down-fill.svg';
+			}
 
 
 			function toggleLogo() {
@@ -1179,7 +1188,7 @@ function toggleStego() {
 					icon.src = 'res/picture/caret-down-fill.svg';
 				}
 			}
-			
+
 
 			let scanner;
 
@@ -1226,28 +1235,25 @@ function toggleStego() {
 				const encryptToggle = document.getElementById("encrypt-toggle").checked;
 				if (!encryptToggle) {
 					document.getElementById('result').innerHTML = `
-					Результат: <a href="${result}" target="_blank">${result}</a>`;
-
-				}
-				else {
+            Результат: <a href="${result}" target="_blank">${result}</a>`;
+				} else {
 					const encryptedData = result;
-					const key = prompt("Введите ключ для дешифровки (если требуется):", "");
+					const key = prompt("Введите ключ для дешифровки:", "");
 
 					if (key) {
 						const decryptedText = decryptText(encryptedData, key);
 						if (decryptedText) {
+							// Исправленная строка: убрана лишняя кавычка и корректное отображение
 							document.getElementById("result").innerHTML = `
-                "Результат:<a href="${decryptedText} ${decryptedText}</a>`;
+                    Результат: <a href="${decryptedText}" target="_blank">${decryptedText}</a>`;
 						} else {
-							document.getElementById("result").innerHTML = `
-                Результат: <a href="${result}" target="_blank">${result}</a>`;
+							document.getElementById('result').innerHTML = `
+            Результат: <a href="${result}" target="_blank">${result}</a>`;
 						}
-					} 
-					else {
+					} else {
 						document.getElementById("result").innerHTML = `
-            			<strong>Результат:</strong> ${encryptedData}`;
+                <strong>Результат:</strong> ${encryptedData}`;
 					}
-
 				}
 				scanner.clear();
 			}
@@ -1590,7 +1596,8 @@ function toggleStego() {
 				<div class="modal-dialog">
 					<div class="modal-content" style="width: 300px;">
 						<div class="modal-header">
-							<p style="font-size: 0.9em;" class=" modal-title" id="exampleModalLabel">Для расшифровки сообщения, этот параметр должен быть включен.</p>
+							<p style="font-size: 0.9em;" class=" modal-title" id="exampleModalLabel">Для расшифровки
+								сообщения, этот параметр должен быть включен.</p>
 							<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 						</div>
 					</div>
