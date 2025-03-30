@@ -27,8 +27,8 @@
     position: fixed;
     bottom: -60px; /* Начальное положение за экраном */
     right: 20px;
-    width: 40px;
-    height: 40px;
+    width: 60px;
+    height: 60px;
     border: none;
     border-radius: 8px;
     background: #ffffff;
@@ -61,8 +61,8 @@
     .scroll-top-btn {
         right: 10px;
         bottom: -60px;
-        width: 36px;
-        height: 36px;
+        width: 45px;
+        height: 45px;
     }
     .scroll-top-btn.visible {
         bottom: 10px;
