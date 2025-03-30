@@ -881,8 +881,27 @@
 		<h2><a href="https://t.me/qrcodekubstu_bot" target="_blank"><i style="font-size: 0.8em;">Телеграм бот
 				</i></a><img style="box-shadow: none;" src="res/picture/telegram.svg" alt=""></h2>
 		<hr />
-
+		<button id="scrollTopBtn" class="scroll-top-btn">
+			<img src="res/picture/arrow-up-circle.svg" alt="Наверх">
+		</button>
 		<script>
+window.addEventListener('scroll', function() {
+    const scrollBtn = document.getElementById('scrollTopBtn');
+    const scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+    
+    if (scrollPosition > 100) {
+        scrollBtn.classList.add('visible');
+    } else {
+        scrollBtn.classList.remove('visible');
+    }
+});
+
+document.getElementById('scrollTopBtn').addEventListener('click', function() {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
 
 document.addEventListener("DOMContentLoaded", function() {
 	togglecipher(); // Скрыть шифрование
@@ -1313,7 +1332,7 @@ function toggleStego() {
 							</thead>
 							<tbody></tbody>
 						</table>
-						<p>Характеристики созданного сегмент:</p>
+						<p>Характеристики созданного сегмента:</p>
 						<ul>
 							<!--<li>Режим: <span id="segment-mode"></span></li>-->
 							<li>Количество: <span id="segment-count"></span></li>
